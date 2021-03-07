@@ -11,7 +11,8 @@ body{
 }
 /* will remove later */
 nav{
-    background-color: cornflowerblue;
+    color: white;
+    background-color: rgb(71, 71, 255);
     padding: 15px;
     display: flex;
     justify-content: space-between;
@@ -77,7 +78,8 @@ nav .logo{
   font-size: 15px;
 }
 .upload-btn{
-    background-color: cornflowerblue;
+    color: white;
+    background-color: rgb(71, 71, 255);
     text-align: center;
     padding: 8px 10px;
     font-size: 18px;
@@ -139,13 +141,14 @@ nav .logo{
 }
 
 .dots-container .dot.active {
-  border: 2px solid cornflowerblue;
+  border: 2px solid rgb(71, 71, 255);
 }
 
 .add-item-btn{
     display: flex;
-    background-color: cornflowerblue;
+    background-color: rgb(71, 71, 255);
     padding: 8px 25px;
+    color: white;
     font-size: 18px;
     border-radius: 40px;
     align-items: center;
