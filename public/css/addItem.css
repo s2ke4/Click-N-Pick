@@ -34,6 +34,7 @@ nav .logo{
     margin: 20px;
 }
 label{
+    font-weight: bold;
     margin: 10px 0;
 }
 label,input{
@@ -41,9 +42,11 @@ label,input{
     font-size: 18px;
 }
 input{
+    outline: none;
     padding: 2px;
 }
 textarea{
+    outline: none;
     height: 150px;
     font-size: 18px;
     padding: 2px;
@@ -52,8 +55,10 @@ textarea{
 .upload-btn{
     background-color: cornflowerblue;
     text-align: center;
-    padding: 4px 0;
+    padding: 8px 0;
     cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    border-radius: 40px;
 }
 .uploadImage{
     margin: auto;
@@ -143,12 +148,13 @@ textarea{
 .add-item-btn{
     display: flex;
     background-color: cornflowerblue;
-    padding: 10px;
-    font-size: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 40px;
     align-items: center;
     margin:20px auto;
     border: none;
-    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
     outline: none;
     cursor: pointer;
     text-align: center;
