@@ -1,25 +1,10 @@
-*{
-    margin:0;
-    padding: 0;
+.nav-elements {
+    position: absolute;
+    right: 1rem;
 }
-nav{
-    background-color: cornflowerblue;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
+.nav-element {
+    color: white;
 }
-nav .logo{
-    font-size: 25px;
-}
-nav .option ul{
-    list-style-type: none;
-    display: flex;
-}
-nav .option ul li{
-    padding: 0 15px;
-    cursor: pointer;
-}
-a{
-    text-decoration: none;
-    color: black;
+.nav-element:hover {
+    color: orange;
 }

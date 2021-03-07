@@ -141,7 +141,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-	color: #cornflowerblue;
+	color: cornflowerblue;
 }
 
 .input-div > div > input{
