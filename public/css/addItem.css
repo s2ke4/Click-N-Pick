@@ -1,0 +1,160 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins',sans-serif;
+    color: #323232;
+    height: 100%;
+}
+/* will remove later */
+nav{
+    background-color: cornflowerblue;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+nav .logo{
+    font-size: 25px;
+}
+
+/* original one */
+.add-Item{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    /* height: 80vh; */
+}
+.product-info{
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    margin: 20px;
+}
+label{
+    margin: 10px 0;
+}
+label,input{
+    display: block;
+    font-size: 18px;
+}
+input{
+    padding: 2px;
+}
+textarea{
+    height: 150px;
+    font-size: 18px;
+    padding: 2px;
+    resize: vertical;
+}
+.upload-btn{
+    background-color: cornflowerblue;
+    text-align: center;
+    padding: 4px 0;
+    cursor: pointer;
+}
+.uploadImage{
+    margin: auto;
+}
+
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+/* container for uploaded image */
+.slide-container{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+}
+.slide-container .slide {
+    display: none;
+    width: 100%;
+  }
+  
+  .slide-container .slide.fade {
+    animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  }
+  
+  .slide-container .slide img {
+    width: 100%;
+  }
+
+  .slide-container .prev,
+.slide-container .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  transition: all 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.slide-container .prev:hover,
+.slide-container .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.slide-container .prev {
+  left: 2px;
+}
+
+.slide-container .next {
+  right: 2px;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.dots-container .dot {
+  cursor: pointer;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  color: #333;
+  border-radius: 50%;
+  background-color: #dfd6ce;
+}
+
+.dots-container .dot.active {
+  border: 2px solid cornflowerblue;
+}
+
+.add-item-btn{
+    display: flex;
+    background-color: cornflowerblue;
+    padding: 10px;
+    font-size: 20px;
+    align-items: center;
+    margin:20px auto;
+    border: none;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.8);
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+}
+@media screen and (max-width: 1100px) {
+    .add-Item{
+        flex-direction: column;
+    }
+  }
