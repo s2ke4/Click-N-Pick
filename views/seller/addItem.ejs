@@ -13,30 +13,61 @@
     <div class="add-Item">
         <div class="uploadImage">
             <div class="slide-container">
-                <p class="prev">&#10094</p>
-                <p class="next">&#10095</p>
             </div>
             <div class="dots-container">
             </div>
             <label for="files" class="upload-btn">Upload Images of Product</label>
-            <input id="files" name="image" accept="image/*" style="visibility:hidden;" type="file" multiple>
+            <input id="files" name="image" accept="image/*" style="display:none;" type="file" multiple>
         </div>
         <div class="product-info">
-            <label for="productName">Product Name</label>
-            <input type="text" name="productName" id="productName" placeholder="Enter Product Name">
-            <label for="brandName">Brand Name</label>
-            <input type="text" name="brandName" id="brandName" placeholder="Enter Brand Name">
-            <label for="price">Price (Rs.)</label>
-            <input type="number" min="1" name="price" id="price" placeholder="Enter price of product in Rs">
-            <label for="numberOfItems">Number of Items</label>
-            <input type="number" min="1" name="numberOfItems" id="numberOfItems" placeholder="Enter Total Number of Product">
-            <label for="productColour">Product Colour</label>
-            <input type="text" name="productColour" id="productColour" placeholder="Enter Product Color">
-            <label for="description">Product Description</label>
-            <textarea name="description" id="description" placeholder="Enter Description About the product"></textarea>
+            <div class="input-box">
+                <input type="text" name="productName" id="productName" required>
+                <label for="productName">Product Name</label>
+            </div>
+            <div class="input-box">
+                <input type="text" name="brandName" id="brandName" required>
+                <label for="brandName">Brand Name</label>
+            </div>
+            <div class="input-box">
+                <input type="number" min="1" name="price" id="price" required>
+                <label for="price">Price (Rs.)</label>
+            </div>
+            <div class="input-box">
+                <input type="number" min="0" name="discount" id="discount" required>
+                <label for="discount">Discount (%)</label>
+            </div>
+            <div class="input-box">
+                <input type="number" min="1" name="numberOfItems" id="numberOfItems" required >
+                <label for="numberOfItems">Number of Items</label>
+            </div>
+            <div class="input-box">
+                <input type="text" name="productColour" id="productColour" required>
+                <label for="productColour">Product Colour</label>
+            </div>
+            <div class="inp-box">
+                <label for="cars">Category</label>
+                <select name="category" id="cars">
+                    <option value="grocery">Grocerry</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="footwear">Footwear</option>
+                    <option value="stationary">Stationary</option>
+                    <option value="novels">Novels</option>
+                    <option value="luggage">Luggage</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="cosmetics">Cosmetics</option>
+                    <option value="medicine">Health And Medicine</option>
+                    <option value="games">Games</option>
+                    <option value="kitchen">Home And Kitchen</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <textarea name="description" id="description" rows="1" required></textarea>
+                <label for="description">Product Description</label>
+            </div>
         </div>
     </div>
-    <button class="add-item-btn">ADD Item</button>
+    <button class="add-item-btn">Add Item</button>
     <script>
         
         var currentSlide = 0;
@@ -46,7 +77,7 @@
         const dots_container = document.getElementsByClassName("dots-container")[0];
         document.getElementById("description").addEventListener("input",function(){
             this.style.height = 'auto';
-            this.style.height = Math.max(150,(this.scrollHeight)+4) + 'px';
+            this.style.height = ((this.scrollHeight)+4) + 'px';
         })
 
         // code for uploading image
@@ -100,8 +131,6 @@
         }
 
         const updateListener = ()=>{
-            document.getElementsByClassName("prev")[0].addEventListener("click",prev);
-            document.getElementsByClassName("next")[0].addEventListener("click",next);
 
             dots.forEach((dot, index) => {
                 dot.addEventListener("click", () => {

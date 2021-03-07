@@ -22,40 +22,65 @@ nav .logo{
 
 /* original one */
 .add-Item{
-    width: 100vw;
+    margin-top: 50px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    /* height: 80vh; */
+    box-sizing: border-box;
 }
 .product-info{
     display: flex;
     width: 50vw;
     flex-direction: column;
-    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
 }
-label{
+.input-box,.inp-box {
+    position: relative;
+}
+  
+.input-box input,textarea,select {
+    width: 100%;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    margin-bottom: 35px;
+    border: none;
+    border-bottom: 1px solid #323232;
+    outline: none;
+    background: transparent;
+}
+.inp-box label{
     font-weight: bold;
-    margin: 10px 0;
+    top:0;
+    left: 0;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    pointer-events: none;
 }
-label,input{
-    display: block;
-    font-size: 18px;
+.input-box label {
+    font-weight: bold;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
 }
-input{
-    outline: none;
-    padding: 2px;
-}
-textarea{
-    outline: none;
-    height: 150px;
-    font-size: 18px;
-    padding: 2px;
-    resize: vertical;
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label {
+  top: -25px;
+  left: 0;
+  color: #323232;
+  font-size: 15px;
 }
 .upload-btn{
     background-color: cornflowerblue;
     text-align: center;
-    padding: 8px 0;
+    padding: 8px 10px;
+    font-size: 18px;
     cursor: pointer;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
     border-radius: 40px;
@@ -78,6 +103,7 @@ textarea{
     justify-content: center;
     align-items: center;
     max-width: 500px;
+    max-height: 500px;
     margin: auto;
     position: relative;
 }
@@ -94,35 +120,6 @@ textarea{
     width: 100%;
   }
 
-  .slide-container .prev,
-.slide-container .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: black;
-  font-weight: bold;
-  font-size: 20px;
-  transition: all 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-.slide-container .prev:hover,
-.slide-container .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-}
-
-.slide-container .prev {
-  left: 2px;
-}
-
-.slide-container .next {
-  right: 2px;
-}
 
 .dots-container {
   display: flex;
@@ -148,7 +145,7 @@ textarea{
 .add-item-btn{
     display: flex;
     background-color: cornflowerblue;
-    padding: 10px 20px;
+    padding: 8px 25px;
     font-size: 18px;
     border-radius: 40px;
     align-items: center;
@@ -164,6 +161,9 @@ textarea{
         flex-direction: column;
     }
     .product-info{
-        width: 90vw;
+        width: 95vw;
+    }
+    .upload-btn{
+
     }
   }
