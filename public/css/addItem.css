@@ -157,4 +157,7 @@ textarea{
     .add-Item{
         flex-direction: column;
     }
+    .product-info{
+        width: 90vw;
+    }
   }
