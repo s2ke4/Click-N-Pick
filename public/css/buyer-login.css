@@ -141,7 +141,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-	color: #38d39f;
+	color: #cornflowerblue;
 }
 
 .input-div > div > input{
@@ -185,7 +185,7 @@ a:hover{
 	border-radius: 50px;
 	outline: none;
 	border: none;
-	background-color:#32be8f;
+	background-color: cornflowerblue;
 	font-size: 1.2rem;
 	color: #fff;
 	font-family: 'Poppins', sans-serif;
@@ -194,7 +194,7 @@ a:hover{
 	transition: .5s;
 }
 .btn:hover{
-	background-color: rgb(50, 190, 143, .9) ;
+	background-color: rgb(100, 149, 237. .8) ;
     font-size: 1.5rem;
 }
 
