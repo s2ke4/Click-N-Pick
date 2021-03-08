@@ -123,7 +123,7 @@ form{
 	bottom: -2px;
 	width: 0%;
 	height: 2   px;
-	background-color: #38d39f;
+	background-color: rgb(71,71,255);
 	transition: .5s;
 }
 
@@ -145,7 +145,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-	color: cornflowerblue;
+	color: rgb(71,71,255);
 }
 
 .input-div > div > input{
@@ -178,7 +178,7 @@ a{
 }
 
 a:hover{
-	color:  rgb(100, 149, 237) ;
+	color:  rgb(71,71,255);
     font-size: 1.1rem;
 }
 
@@ -189,7 +189,7 @@ a:hover{
 	border-radius: 50px;
 	outline: none;
 	border: none;
-	background-color: cornflowerblue;
+	background-color: rgb(71,71,255);
 	font-size: 1.2rem;
 	color: #fff;
 	font-family: 'Poppins', sans-serif;
@@ -198,7 +198,7 @@ a:hover{
 	transition: .5s;
 }
 .btn:hover{
-	background-color: rgb(100, 149, 237. .8) ;
+	background-color: rgb(71,71,255,.8);
     font-size: 1.5rem;
 }
 
