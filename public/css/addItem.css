@@ -9,18 +9,6 @@ body{
     color: #323232;
     height: 100%;
 }
-/* will remove later */
-nav{
-    color: white;
-    background-color: rgb(71, 71, 255);
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-nav .logo{
-    font-size: 25px;
-}
-
 /* original one */
 .add-Item{
     margin-top: 50px;
