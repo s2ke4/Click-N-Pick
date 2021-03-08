@@ -154,7 +154,9 @@ body{
     .product-info{
         width: 95vw;
     }
-    .upload-btn{
+  }
 
-    }
+  .add-item-btn:hover{
+      transform: scale(1.2);
+      transition: all 1s;
   }
