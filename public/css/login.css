@@ -48,6 +48,10 @@ body{
     
 }
 
+.hlink {
+	text-align: center;
+}
+
 .avtar {
     transform: scale(1.6);
     transition: .5s;
@@ -174,8 +178,8 @@ a{
 }
 
 a:hover{
-	color: #38d39f;
-    font-size: 1.2rem;
+	color:  rgb(100, 149, 237) ;
+    font-size: 1.1rem;
 }
 
 .btn{
