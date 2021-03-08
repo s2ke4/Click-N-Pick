@@ -77,8 +77,14 @@ body{
 }
 .uploadImage{
     margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
-
+.upload-btn:hover{
+    transform: scale(1.1);
+    transition: all 1s;
+}
 @keyframes fade{
     0%{
         opacity: 0;
@@ -153,6 +159,9 @@ body{
     }
     .product-info{
         width: 95vw;
+    }
+    .uploadImage{
+        margin-bottom: 30px;
     }
   }
 
