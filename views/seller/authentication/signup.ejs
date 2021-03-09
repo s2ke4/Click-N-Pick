@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/login.css">
-        <title>Customer Login</title>
+        <title>Seller Register</title>
     </head>
 
 
@@ -18,18 +18,20 @@
             </div>
             
             <div class="login-content">
-                <form action="index.html">
+                <form action="/sellerAuth/register" method="POST">
 
                     <a href="/" class="hlink"> <img class ="avtar" src="/asset/avatar.png"> </a>
                     <h2 class="heading">Welcome</h2>
-
+                    <% if(locals.msg){%>
+                        <div class="error"><%= msg%></div>
+                    <% } %>
                     <div class="input-div one">
                         <div class="i">
                                 <i class="fas fa-user"></i>
                         </div>
                         <div class="div">
                                 <h5>Email Address</h5>
-                                <input name="email" type="text" class="input">
+                                <input name="email" type="text" class="input" required>
                         </div>
                     </div>
 
@@ -39,7 +41,7 @@
                         </div>
                         <div class="div">
                                 <h5>Password</h5>
-                                <input name="password" type="password" class="input">
+                                <input name="password" type="password" class="input" required>
                         </div>
                     </div>  
                     
@@ -49,7 +51,7 @@
                         </div>
                         <div class="div">
                                 <h5>Re-enter Password</h5>
-                                <input name="repassword" type="text" class="input">
+                                <input name="repassword" type="password" class="input" required>
                         </div>
                     </div>
 
@@ -59,7 +61,7 @@
                         </div>
                         <div class="div">
                                 <h5>Phone Number</h5>
-                                <input name="phoneno" type="text" class="input">
+                                <input name="phoneno" type="text" class="input" required>
                         </div>
                     </div>
 
@@ -69,7 +71,7 @@
                         </div>
                         <div class="div">
                                 <h5>Shop Name</h5>
-                                <input name="shopname" type="text" class="input">
+                                <input name="shopname" type="text" class="input" required>
                         </div>
                     </div>
 
@@ -79,11 +81,10 @@
                         </div>
                         <div class="div">
                                 <h5>Address</h5>
-                                <input name="address" type="text" class="input">
+                                <input name="address" type="text" class="input" required>
                         </div>
                     </div>
-
-                    <input name="signup" type="submit" class="btn" value="SIGN-UP">
+                    <button class="btn">SIGN-UP</button>
 
                     <div class="create"><a href="/sellerAuth/login">Already a Seller - Login</a></div>
                 

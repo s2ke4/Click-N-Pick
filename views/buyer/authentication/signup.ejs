@@ -18,10 +18,23 @@
             </div>
             
             <div class="login-content">
-                <form action="index.html">
+                <form action="./register" method="POST">
 
                     <a href="/" class="hlink"> <img class ="avtar" src="/asset/avatar.png"> </a>
                     <h2 class="heading">Welcome</h2>
+                    <% if(locals.msg){ %>
+                        <div class="error"><%=msg%></div>
+                    <% } %>
+
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                                <h5>Name</h5>
+                                <input name="name" type="text" class="input" required>
+                        </div>
+                    </div>
 
                     <div class="input-div one">
                         <div class="i">
@@ -49,17 +62,7 @@
                         </div>
                         <div class="div">
                                 <h5>Re-enter Password</h5>
-                                <input name="repassword" type="text" class="input">
-                        </div>
-                    </div>
-
-                    <div class="input-div one">
-                        <div class="i">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div class="div">
-                                <h5>Phone Number</h5>
-                                <input name="phoneno" type="text" class="input">
+                                <input name="repassword" type="password" class="input">
                         </div>
                     </div>
 

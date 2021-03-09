@@ -16,29 +16,35 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  LogIn
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/buyerAuth/login">Buyer</a></li>
-                  <li><a class="dropdown-item" href="/sellerAuth/login">Seller</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  SignUp
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/buyerAuth/register">Buyer</a></li>
-                  <li><a class="dropdown-item" href="/sellerAuth/register">Seller</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">🛒Cart</a>
-              </li>
-            </ul>
+            <% if(user==null){ %>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LogIn
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/buyerAuth/login">Buyer</a></li>
+                    <li><a class="dropdown-item" href="/sellerAuth/login">Seller</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    SignUp
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/buyerAuth/register">Buyer</a></li>
+                    <li><a class="dropdown-item" href="/sellerAuth/register">Seller</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">🛒Cart</a>
+                </li>
+              </ul>
+            <% }else{ %>
+              <a class="nav-link" href="/buyerAuth/logout"  role="button" aria-expanded="false">
+                LogOut
+              </a>
+            <% } %>
             <form class="d-flex flex-grow-1 search-bar">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>

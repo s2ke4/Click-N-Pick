@@ -6,7 +6,7 @@
  
 body{
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .wave{
@@ -249,4 +249,8 @@ a:hover{
 	.login-content{
 		justify-content: center;
 	}
+}
+.error{
+	color: rgb(245, 49, 49);
+	margin-bottom: 10px;
 }
