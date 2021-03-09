@@ -6,7 +6,7 @@ use `npm i` to install all the dependencies then run the command `nodemon index`
 
 create a database with name `ecommercedatabase`
 
-create `.env` file in root folder and write the below line in that file
+create `.env` file in `E-Commerce` Directory and write the below lines in that file
 ```
 DATABASE = ecommercedatabase
 
