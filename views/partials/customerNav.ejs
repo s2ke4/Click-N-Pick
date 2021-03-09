@@ -41,14 +41,25 @@
                 </li>
               </ul>
             <% }else{ %>
-              <a class="nav-link" href="/buyerAuth/logout"  role="button" aria-expanded="false">
-                LogOut
-              </a>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="asset/user.png" alt="" height="20" width="20">
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Your Account</a></li>
+                    <li><a class="dropdown-item" href="#">Your Orders</a></li>
+                    <li><a class="dropdown-item" href="#">Your Wishlist</a></li>
+                    <li><a class="dropdown-item" href="/buyerAuth/logout">Log Out</a></ul></li>
+                <a class="nav-link" href="#"  role="button" aria-expanded="false">
+                  🛒Cart
+                </a>
+              </ul>
+              <form class="d-flex flex-grow-1 search-bar">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
+              </form>
             <% } %>
-            <form class="d-flex flex-grow-1 search-bar">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
