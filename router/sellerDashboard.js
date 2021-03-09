@@ -13,4 +13,9 @@ router.get("/addItem",(req,res)=>{
     res.render("seller/addItem");
 })
 
+//Orders route to view the orders received by the seller
+router.get("/orders",(req,res)=>{
+    res.render("seller/orders");
+})
+
 module.exports = router;
