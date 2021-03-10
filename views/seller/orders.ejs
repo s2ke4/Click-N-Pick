@@ -1,5 +1,86 @@
 <link rel="stylesheet" href="/css/orders.css">
 <title>Orders</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <body>
     <%- include("../partials/sellerNav.ejs") %>
+
+    <h2 class="heading">Orders Received by you</h2>
+
+    <div class="inp-box">
+      <select name="Filter" class="dropbtn">
+          <option value="">Filter</option>
+          <option value="Order Number">Order Number</option>
+          <option value="Customer Name">Customer Name</option>
+          <option value="Order Date">Order Date</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Total Price">Total Price</option>
+      </select>
+    </div>
+
+    <div class="search">
+      <form class="d-flex flex-grow-1 search-bar">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary btn-outline-primary search-btn" type="submit">Search</button>
+      </form>
+    </div>
+
+    <table>
+        <tr>
+          <th class="orderNum">Order No.</th>  
+          <th class="customerName">Customer's Name</th>
+          <th class="orderDate">Order Date</th>
+          <th class="dispatch">Dispatched</th>
+          <th class="price">Total Price</th>
+          <th class="details">View Details</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Alfreds Futterkiste</td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+          <td>Centro comercial Moctezuma</td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+          <td>Ernst Handel</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+        <tr>
+            <td>4</td>
+          <td>Island Trading</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+        <tr>
+            <td>5</td>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+        <tr>
+            <td>6</td>
+          <td>Magazzini Alimentari Riuniti</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><button class="button">Order Details</button></td>
+        </tr>
+      </table>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
