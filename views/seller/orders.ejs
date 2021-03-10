@@ -19,7 +19,7 @@
 
     <div class="search">
       <form class="d-flex flex-grow-1 search-bar sbar">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="search-bar-box form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-primary btn-outline-primary search-btn" type="submit">Search</button>
       </form>
     </div>
@@ -66,7 +66,7 @@
           <td><a href="#" class="btn btn-outline-primary btn-sm">Order Details</a></td>
         </tr>
         <tr>
-            <td>5</td>
+          <td>5</td>
           <td>Laughing Bacchus Winecellars</td>
           <td>31/02/2020</td>
           <td>✔️</td>
@@ -74,7 +74,7 @@
           <td><a href="#" class="btn btn-outline-primary btn-sm">Order Details</a></td>
         </tr>
         <tr>
-            <td>6</td>
+          <td>6</td>
           <td>Magazzini Alimentari Riuniti</td>
           <td>31/02/2020</td>
           <td>⏳</td>
@@ -83,4 +83,12 @@
         </tr>
       </table>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+      <script>
+         const selectBox = document.getElementsByClassName("dropbtn")[0];
+         const search = document.getElementsByClassName("search-bar-box")[0];
+         const placeholders = ["Search","Enter Order Number","Enter Customer Name","Enter Order Date","Enter Yes For Dispatched otherwise No","Enter Total Price"];
+         selectBox.addEventListener("change",(e)=>{
+          search.placeholder = placeholders[selectBox.selectedIndex]
+         })
+      </script>
 </body>
