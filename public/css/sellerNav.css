@@ -18,7 +18,7 @@ ul.topnav {
   ul.topnav li a {
     display: block;
     color: white;
-    text-align: center;
+    text-align: left;
     padding: 14px 16px;
     text-decoration: none;
   }
