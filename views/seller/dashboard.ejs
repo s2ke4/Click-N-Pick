@@ -1,17 +1,67 @@
-<!doctype html>
+<!-- <!doctype html> -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/seller.css">
+        <link rel="stylesheet" href="/css/sellerDashboard.css">
         <title>Dashboard</title>
         <%- include("../partials/sellerNav.ejs") %>
     </head>
 
 
     <body>
-        <h2>Attention</h2>
-        <h3>Work In Progress</h3>
-        All the user item will shown here.
+
+        <div class="wrapper">
+            <div class="card">
+                <div class="in-card">
+                    <img src="https://assets.vogue.com/photos/5f341f6f4721c86585cbb800/1:1/w_1079,h_1079,c_limit/fullsizeoutput_6bcd_1_1080x.jpg" alt={title} class="img"></img>
+                    <h3>Product 1</h3>
+                    <h3>₹ price</h3>
+                    <h3>Quantity sold- 2500</h3>
+                    <h3>quantity left- 233</h3>
+                </div>
+                <div class="for-btn">
+                    <button class="cart-btn" > EDIT </button>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="in-card">
+                    <img src="https://cdn.tobi.com/product_images/lg/1/plum-maddie-asymmetrical-bodycon-dress.jpg" alt={title} class="img"></img>
+                    <h3>Product 1</h3>
+                    <h3>₹ price</h3>
+                    <h3>Quantity sold- 250</h3>
+                    <h3>quantity left- 233</h3>
+                </div>
+                <div class="for-btn">
+                    <button class="cart-btn" > EDIT </button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="in-card">
+                    <img src="https://i0.wp.com/www.society19.com/uk/wp-content/uploads/sites/5/2018/06/clubing-dress.jpg?fit=1600%2C1200&ssl=1" alt={title} class="img"></img>
+                    <h3>Product 1</h3>
+                    <h3>₹ price</h3>
+                    <h3>Quantity sold- 250</h3>
+                    <h3>quantity left- 233</h3>
+                </div>
+                <div class="for-btn">
+                    <button class="cart-btn" > EDIT </button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="in-card">
+                    <img src="https://cdn.shopclues.com/images1/thumbnails/97181/640/1/143857162-97181151-1551202706.jpg" alt={title} class="img"></img>
+                    <h3>Product 1</h3>
+                    <h3>₹ price</h3>
+                    <h3>Quantity sold- 250</h3>
+                    <h3>quantity left- 233</h3>
+                </div>
+                <div class="for-btn">
+                    <button class="cart-btn" > EDIT </button>
+                </div>
+            </div>
+        </div> 
     </body>
 </html>
