@@ -50,9 +50,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 .heading {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    margin-left: 1.5rem;
+    margin: 1.5rem;
 }
 .order-details {
     padding-left: 0.5rem;
@@ -66,5 +64,11 @@ tr:nth-child(even) {
 }
 .order-details:hover {
     color: rgb(248, 168, 19);
+}
+
+/*order details styling*/
+.dispatch {
+    margin: 1.5rem;
+    font-size: 1.1rem;
 }
 

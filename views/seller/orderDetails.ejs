@@ -1,0 +1,78 @@
+<title>Order Details</title>
+<link rel="stylesheet" href="/css/orders.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+<%- include("../partials/sellerNav.ejs") %>
+
+<body>
+    <h4 class="heading">Order Number : 23873</h4>
+    <h4 class="heading">Customer's Name : Wolf Gupta aka Chintu</h4>
+    <table>
+        <tr>
+          <th>Item Name</th>
+          <th>Item Quantity</th>
+          <th>Price per Item</th>
+          <th>Total Price</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Ernst Handel</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Island Trading</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Magazzini Alimentari Riuniti</td>
+          <td>9</td>
+          <td>10</td>
+          <td>90</td>
+        </tr>
+      </table>
+      <h4 class="heading">Total Price to be paid : 540</h4>
+      <div class="dispatch">Dispatch Status :
+        <input type="checkbox" style="height: 1rem; width: 1rem;" id="myCheck" onclick="myFunction()">
+        <p id="text" style="display:none;">Once dispatch status is confirmed, you will not be able to undo it.</p>
+      </div> 
+
+      <a class="btn btn-outline-primary" style="margin: 1.5rem;" href="/seller/orders">Confirm</a>
+      <script>
+        function myFunction() {
+            // Get the checkbox
+            var checkBox = document.getElementById("myCheck");
+            // Get the output text
+            var text = document.getElementById("text");
+
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true){
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>

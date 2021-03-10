@@ -18,4 +18,8 @@ router.get("/orders",(req,res)=>{
     res.render("seller/orders");
 })
 
+//To view the details of an order
+router.get("/orders/order-details",(req,res)=>{
+    res.render("seller/orderDetails");
+})
 module.exports = router;
