@@ -1,14 +1,12 @@
 /*dropdown button*/
 .dropbtn {
-    padding: 0.7rem;
+    padding: 0.5rem;
     margin: 1.5rem;
     font-size: 0.9rem;
-    border: none;
     cursor: pointer;
     border-radius: 0.5rem;
-    border-width: 0;
-    color: white;
-    background-color: rgb(71, 71, 245);
+    border-width: 0.1rem;
+    background-color: white;
     float: left; 
   }
 
@@ -17,11 +15,11 @@
     margin: 1.5rem;
     float: left;
 }
-
-.search-btn {
-    position: absolute;
-    right: 1.5rem;
+.sbar {
+    max-width: 400px;
+    width: 450%;
 }
+
 
 /*table*/
 table {
@@ -55,7 +53,7 @@ tr:nth-child(even) {
     margin-bottom: 1.5rem;
     margin-left: 1.5rem;
 }
-.button {
+.order-details {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-top: 0.5rem;
@@ -63,9 +61,9 @@ tr:nth-child(even) {
     border-radius: 0.5rem;
     border-width: 0;
     color:white;
-    background-color: rgb(156, 156, 245);
+    background-color: rgb(208, 208, 247);
 }
-.button:hover {
-    background-color: rgb(248, 168, 19);
+.order-details:hover {
+    color: rgb(248, 168, 19);
 }
 
