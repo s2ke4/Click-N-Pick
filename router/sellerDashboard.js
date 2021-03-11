@@ -25,4 +25,8 @@ router.post("/addItem",upload.array('photos', 12),(req,res)=>{
     res.send("HELLO")
 })
 
+//To view the details of an order
+router.get("/orders/order-details",(req,res)=>{
+    res.render("seller/orderDetails");
+})
 module.exports = router;
