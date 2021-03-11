@@ -2,66 +2,68 @@
 <title>Add Items</title>
 <body>
     <%- include("../partials/sellerNav.ejs") %>
-    <div class="add-Item">
-        <div class="uploadImage">
-            <div class="slide-container">
+    <form action="./addItem" method="POST" enctype="multipart/form-data">
+        <div class="add-Item">
+            <div class="uploadImage">
+                <div class="slide-container">
+                </div>
+                <div class="dots-container">
+                </div>
+                <label for="files" class="upload-btn">Upload Images of Product</label>
+                <input required id="files" name="photos" accept="image/*" style="display:none;" type="file" multiple>
             </div>
-            <div class="dots-container">
+            <div class="product-info">
+                <div class="input-box">
+                    <input required type="text" name="productName" id="productName" required>
+                    <label for="productName">Product Name</label>
+                </div>
+                <div class="input-box">
+                    <input required type="text" name="brandName" id="brandName" required>
+                    <label for="brandName">Brand Name</label>
+                </div>
+                <div class="input-box">
+                    <input required type="number" min="1" name="price" id="price" required>
+                    <label for="price">Price (Rs.)</label>
+                </div>
+                <div class="input-box">
+                    <input required type="number" min="0" name="discount" id="discount" required>
+                    <label for="discount">Discount (%)</label>
+                </div>
+                <div class="input-box">
+                    <input required type="number" min="1" name="numberOfItems" id="numberOfItems" required >
+                    <label for="numberOfItems">Number of Items</label>
+                </div>
+                <div class="input-box">
+                    <input required type="text" name="productColour" id="productColour" required>
+                    <label for="productColour">Product Colour</label>
+                </div>
+                <div class="inp-box">
+                    <label for="cars">Category</label>
+                    <select name="category" id="cars">
+                        <option value="grocery">Grocerry</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="stationary">Stationary</option>
+                        <option value="novels">Novels</option>
+                        <option value="luggage">Luggage</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="cosmetics">Cosmetics</option>
+                        <option value="medicine">Health And Medicine</option>
+                        <option value="games">Games</option>
+                        <option value="kitchen">Home And Kitchen</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <textarea required name="description" id="description" rows="1" required></textarea>
+                    <label for="description">Product Description</label>
+                </div>
             </div>
-            <label for="files" class="upload-btn">Upload Images of Product</label>
-            <input id="files" name="image" accept="image/*" style="display:none;" type="file" multiple>
         </div>
-        <div class="product-info">
-            <div class="input-box">
-                <input type="text" name="productName" id="productName" required>
-                <label for="productName">Product Name</label>
-            </div>
-            <div class="input-box">
-                <input type="text" name="brandName" id="brandName" required>
-                <label for="brandName">Brand Name</label>
-            </div>
-            <div class="input-box">
-                <input type="number" min="1" name="price" id="price" required>
-                <label for="price">Price (Rs.)</label>
-            </div>
-            <div class="input-box">
-                <input type="number" min="0" name="discount" id="discount" required>
-                <label for="discount">Discount (%)</label>
-            </div>
-            <div class="input-box">
-                <input type="number" min="1" name="numberOfItems" id="numberOfItems" required >
-                <label for="numberOfItems">Number of Items</label>
-            </div>
-            <div class="input-box">
-                <input type="text" name="productColour" id="productColour" required>
-                <label for="productColour">Product Colour</label>
-            </div>
-            <div class="inp-box">
-                <label for="cars">Category</label>
-                <select name="category" id="cars">
-                    <option value="grocery">Grocerry</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="footwear">Footwear</option>
-                    <option value="stationary">Stationary</option>
-                    <option value="novels">Novels</option>
-                    <option value="luggage">Luggage</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="cosmetics">Cosmetics</option>
-                    <option value="medicine">Health And Medicine</option>
-                    <option value="games">Games</option>
-                    <option value="kitchen">Home And Kitchen</option>
-                </select>
-            </div>
-            <div class="input-box">
-                <textarea name="description" id="description" rows="1" required></textarea>
-                <label for="description">Product Description</label>
-            </div>
-        </div>
-    </div>
-    <button class="add-item-btn">Add Item</button>
+        <button class="add-item-btn">Add Item</button>
+    </form>
     <script>
-        
+        let uploadedPicture = [];
         var currentSlide = 0;
         let slides = document.querySelectorAll(".slide")
         let dots = document.querySelectorAll('.dot')

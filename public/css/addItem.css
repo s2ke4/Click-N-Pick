@@ -99,9 +99,11 @@ body{
     justify-content: center;
     align-items: center;
     max-width: 500px;
-    max-height: 500px;
     margin: auto;
     position: relative;
+}
+img{
+    max-height: 500px;
 }
 .slide-container .slide {
     display: none;
