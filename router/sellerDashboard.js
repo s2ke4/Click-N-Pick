@@ -1,8 +1,31 @@
 const express = require("express");
 const router = express.Router();
-var multer  = require('multer')
-var upload = multer({ dest: '/uploads/' })
-// all the routes will came here
+const multer = require("multer");
+const conn = require("../connection");
+const util = require('util');
+const db = util.promisify(conn.query).bind(conn);
+let seller;
+
+//multer options
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null,"public/uploads/")      //you tell where to upload the files,
+    },
+    filename: function (req, file, cb) {
+      var regex = new RegExp('[^.]+$');
+      let extension = file.originalname.match(regex);
+      var x = Math.floor((Math.random() * 1000) + 1);
+      if (!Date.now) {
+        Date.now = function() { return new Date().getTime(); }
+      }
+      let name = x + Date.now()
+      cb(null, name+'.'+extension)
+    }
+  })
+
+var upload = multer({
+    storage: storage,
+});
 
 //seller dashboard route
 router.get("/",(req,res)=>{
@@ -11,7 +34,9 @@ router.get("/",(req,res)=>{
 
 //Add items route for dashboard
 router.get("/addItem",(req,res)=>{
+    seller = res.locals.user;
     res.render("seller/addItem");
+    
 })
 
 //Orders route to view the orders received by the seller
@@ -20,9 +45,23 @@ router.get("/orders",(req,res)=>{
 })
 
 //router for adding item
-router.post("/addItem",upload.array('photos', 12),(req,res)=>{
-    console.log(req.files[0])
-    res.send("HELLO")
+router.post("/addItem",upload.array("photos",100),async(req,res)=>{
+    // console.log(req.files)
+    try {
+        const {productName,brandName,price,discount,numberOfItems,productColour,category,description} = req.body;
+        let query = `INSERT INTO items(product_name,brand_name,price,discount,num_of_items,product_color,category,prod_description,seller_id) VALUES("${productName}","${brandName}",${price},${discount},${numberOfItems},"${productColour}","${category}","${description}",${seller.id});`;
+        let result = await db(query);
+        let itemId = result.insertId;
+        for(let i=0;i<req.files.length;i++){
+            query = `INSERT INTO attachment(item_id,imgPath) VALUES(${itemId},"${req.files[i].filename}");`
+            await db(query);
+        }
+        console.log("ITEM ADDED successfully")
+        res.redirect("/")
+    } catch (error) {
+        console.log("Error while adding item",error);
+        res.send("Error");
+    }
 })
 
 //To view the details of an order

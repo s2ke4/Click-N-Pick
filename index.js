@@ -38,6 +38,26 @@ conn.connect((err)=>{
         }
         console.log("seller table created successfully");
     })
+
+    //creating item table
+    query1 = "CREATE TABLE IF NOT EXISTS items(id INT PRIMARY KEY AUTO_INCREMENT,product_name TEXT,brand_name TEXT,price INT,discount INT,num_of_items INT,product_color TEXT,category TEXT,prod_description TEXT,seller_id INT,FOREIGN KEY(seller_id) REFERENCES seller(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error While Creating items table");
+            throw error;
+        }
+        console.log("items table created successfully");
+    })
+
+    //creating attachemnt table
+    query1 = "CREATE TABLE IF NOT EXISTS attachment(id INT PRIMARY KEY AUTO_INCREMENT,item_id INT,imgPath TEXT,FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error While Creating attachment table");
+            throw error;
+        }
+        console.log("attachment table created successfully");
+    })
 })
 
 app.use(express.static("./public/"));

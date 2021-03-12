@@ -14,7 +14,11 @@
         <div class="wrapper">
             <div class="card">
                 <div class="in-card">
-                    <img src="/images/img1.png" alt={title} class="img"></img>
+                    <% if(locals.img){%>
+                        <img src="data:image/png;charset=utf8;base64,<%=locals.img%>" alt={title} class="img"></img>
+                    <% }else{ %>
+                        <img src="/images/img1.png" alt={title} class="img"></img>
+                    <% } %>
                     <h3>Product 1</h3>
                     <h3>₹ price</h3>
                     <h3>Quantity sold- 2500</h3>

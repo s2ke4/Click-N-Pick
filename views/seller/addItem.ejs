@@ -14,27 +14,27 @@
             </div>
             <div class="product-info">
                 <div class="input-box">
-                    <input required type="text" name="productName" id="productName" required>
+                    <input type="text" name="productName" id="productName" required>
                     <label for="productName">Product Name</label>
                 </div>
                 <div class="input-box">
-                    <input required type="text" name="brandName" id="brandName" required>
+                    <input type="text" name="brandName" id="brandName" required>
                     <label for="brandName">Brand Name</label>
                 </div>
                 <div class="input-box">
-                    <input required type="number" min="1" name="price" id="price" required>
+                    <input type="number" min="1" name="price" id="price" required>
                     <label for="price">Price (Rs.)</label>
                 </div>
                 <div class="input-box">
-                    <input required type="number" min="0" name="discount" id="discount" required>
+                    <input type="number" min="0" name="discount" id="discount" required>
                     <label for="discount">Discount (%)</label>
                 </div>
                 <div class="input-box">
-                    <input required type="number" min="1" name="numberOfItems" id="numberOfItems" required >
+                    <input type="number" min="1" name="numberOfItems" id="numberOfItems" required >
                     <label for="numberOfItems">Number of Items</label>
                 </div>
                 <div class="input-box">
-                    <input required type="text" name="productColour" id="productColour" required>
+                    <input type="text" name="productColour" id="productColour" required>
                     <label for="productColour">Product Colour</label>
                 </div>
                 <div class="inp-box">
@@ -55,7 +55,7 @@
                     </select>
                 </div>
                 <div class="input-box">
-                    <textarea required name="description" id="description" rows="1" required></textarea>
+                    <textarea name="description" id="description" rows="1" required></textarea>
                     <label for="description">Product Description</label>
                 </div>
             </div>
@@ -63,7 +63,6 @@
         <button class="add-item-btn">Add Item</button>
     </form>
     <script>
-        let uploadedPicture = [];
         var currentSlide = 0;
         let slides = document.querySelectorAll(".slide")
         let dots = document.querySelectorAll('.dot')
@@ -76,6 +75,14 @@
 
         // code for uploading image
         document.getElementById("files").addEventListener('change',function(){
+            let obj = document.getElementsByClassName("slide fade");
+            let dot_obj = document.getElementsByClassName("dot");
+            let len = obj.length;
+            for(let i=0;i<len;i++){
+                obj[0].remove();
+                console.log(dot_obj.length);
+                dot_obj[0].remove();
+            }
             if(this.files && this.files[0]){
                 let l = this.files.length;
                 for (var i = 0; i < l; i++) {
