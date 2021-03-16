@@ -69,13 +69,13 @@ router.get("/edit/:id",async(req,res)=>{
         let query = `SELECT * FROM items WHERE items.id=${req.params.id} LIMIT 1;`;
         let result = await db(query);
         if(result.length==0){
-            res.send("Page Not Found");
+            res.render("error");
             return;
         }
         let item = result[0];
         seller = res.locals.user;
         if(item.seller_id!=seller.id){
-            res.send("You Are Not Authorised")
+            res.render("error")
             return;
         }
         query = `SELECT attachment.imgPath FROM attachment WHERE attachment.item_id=${item.id}`
@@ -89,7 +89,7 @@ router.get("/edit/:id",async(req,res)=>{
         return;
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);
-        res.send("Error");
+        res.send("Internal Server Error");
     }
 })
 
