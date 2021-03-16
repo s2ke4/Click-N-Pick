@@ -84,6 +84,10 @@ app.use("/seller",ensureSeller,require("./router/sellerDashboard"));
 //route for buyer dashboard
 app.use("/buyer",ensureBuyer,require("./router/buyerDashboard"))
 
+app.use((req,res)=>{
+    res.render("error");
+})
+
 app.listen(port,(req,res)=>{
     console.log(`Server is listening on port ${port}`);
 })
