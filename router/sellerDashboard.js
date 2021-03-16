@@ -63,6 +63,36 @@ router.post("/addItem",upload.array("photos",100),async(req,res)=>{
     }
 })
 
+//to edit an item
+router.get("/edit/:id",async(req,res)=>{
+    try {
+        let query = `SELECT * FROM items WHERE items.id=${req.params.id} LIMIT 1;`;
+        let result = await db(query);
+        if(result.length==0){
+            res.send("Page Not Found");
+            return;
+        }
+        let item = result[0];
+        seller = res.locals.user;
+        if(item.seller_id!=seller.id){
+            res.send("You Are Not Authorised")
+            return;
+        }
+        query = `SELECT attachment.imgPath FROM attachment WHERE attachment.item_id=${item.id}`
+        result = await db(query);
+        let attachments = [];
+        for(let i=0;i<result.length;i++)
+        {
+            attachments.push(result[i].imgPath)
+        }
+        res.render("seller/editItem",{item,attachments});
+        return;
+    } catch (error) {
+        console.log("Error While Opening Edit Item Page ",error);
+        res.send("Error");
+    }
+})
+
 //To view the details of an order
 router.get("/orders/order-details",(req,res)=>{
     res.render("seller/orderDetails");

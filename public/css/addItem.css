@@ -101,7 +101,7 @@ body{
 }
 /* container for uploaded image */
 .slide-container{
-    display: none;
+    /* display: none; */
     justify-content: center;
     align-items: center;
     max-width: 500px;

@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/addItem.css">
+<title>Add Items</title>
+<body>
+    <%- include("../partials/sellerNav.ejs") %>
+    <form id="form">
+        <div class="add-Item">
+            <div class="uploadImage">
+                <div class="slide-container">
+                    <% attachments.forEach((img)=>{ %>
+                        <div class="slide fade">
+                            <img src="/uploads/<%=img%>" alt="product image">
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="dots-container">
+                    <% attachments.forEach((img)=>{ %>
+                        <span class="dot"></span>
+                    <% }) %>
+                </div>
+                <label for="files" class="upload-btn">Upload Images of Product</label>
+                <p class="err-msg">Images Are Required</p>
+                <input id="files" name="photos" accept="image/*" style="display:none;" type="file" multiple>
+            </div>
+            <div class="product-info">
+                <div class="input-box">
+                    <input type="text" value="<%=item.product_name%>" name="productName" id="productName" required>
+                    <label for="productName">Product Name</label>
+                </div>
+                <div class="input-box">
+                    <input type="text" value="<%=item.brand_name%>"name="brandName" id="brandName" required>
+                    <label for="brandName">Brand Name</label>
+                </div>
+                <div class="input-box">
+                    <input type="number" value="<%=item.price%>" min="1" name="price" id="price" required>
+                    <label for="price">Price (Rs.)</label>
+                </div>
+                <div class="input-box">
+                    <input type="number" value="<%=item.discount%>" min="0" name="discount" id="discount" required>
+                    <label for="discount">Discount (%)</label>
+                </div>
+                <div class="input-box">
+                    <input type="number" value="<%=item.num_of_items%>" min="1" name="numberOfItems" id="numberOfItems" required >
+                    <label for="numberOfItems">Number of Items</label>
+                </div>
+                <div class="input-box">
+                    <input type="text" value="<%=item.product_color%>" name="productColour" id="productColour" required>
+                    <label for="productColour">Product Colour</label>
+                </div>
+                <div class="inp-box">
+                    <label for="cars">Category</label>
+                    <select name="category" id="category" value="<%=item.category%>">
+                        <option value="grocery">Grocerry</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="stationary">Stationary</option>
+                        <option value="novels">Novels</option>
+                        <option value="luggage">Luggage</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="cosmetics">Cosmetics</option>
+                        <option value="medicine">Health And Medicine</option>
+                        <option value="games">Games</option>
+                        <option value="kitchen">Home And Kitchen</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <textarea name="description" id="description" rows="1" required><%=item.prod_description%></textarea>
+                    <label for="description">Product Description</label>
+                </div>
+            </div>
+        </div>
+        <button class="add-item-btn" type="submit">Add Item</button>
+    </form>
+    <script src="/js/editItem.js"></script>
+</body>

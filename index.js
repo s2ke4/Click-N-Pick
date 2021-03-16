@@ -30,7 +30,7 @@ conn.connect((err)=>{
     })
 
     //creating seller table
-    query1 = "CREATE TABLE IF NOT EXISTS seller(id INT PRIMARY KEY,phone_number TEXT,address TEXT,FOREIGN KEY(id) REFERENCES user(id));";
+    query1 = "CREATE TABLE IF NOT EXISTS seller(id INT PRIMARY KEY,phone_number TEXT,address TEXT,FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE);";
     conn.query(query1,(error,res)=>{
         if(error){
             console.log("Error While Creating seller table");
