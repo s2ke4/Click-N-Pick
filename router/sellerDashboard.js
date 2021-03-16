@@ -57,7 +57,6 @@ router.post("/addItem",upload.array("photos",100),async(req,res)=>{
             await db(query);
         }
         console.log("ITEM ADDED successfully")
-        res.redirect("/")
     } catch (error) {
         console.log("Error while adding item",error);
         res.send("Error");

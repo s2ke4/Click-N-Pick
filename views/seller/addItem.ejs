@@ -2,7 +2,7 @@
 <title>Add Items</title>
 <body>
     <%- include("../partials/sellerNav.ejs") %>
-    <form action="./addItem" method="POST" enctype="multipart/form-data">
+    <form id="form">
         <div class="add-Item">
             <div class="uploadImage">
                 <div class="slide-container">
@@ -10,7 +10,8 @@
                 <div class="dots-container">
                 </div>
                 <label for="files" class="upload-btn">Upload Images of Product</label>
-                <input required id="files" name="photos" accept="image/*" style="display:none;" type="file" multiple>
+                <p class="err-msg">Images Are Required</p>
+                <input id="files" name="photos" accept="image/*" style="display:none;" type="file" multiple>
             </div>
             <div class="product-info">
                 <div class="input-box">
@@ -39,7 +40,7 @@
                 </div>
                 <div class="inp-box">
                     <label for="cars">Category</label>
-                    <select name="category" id="cars">
+                    <select name="category" id="category">
                         <option value="grocery">Grocerry</option>
                         <option value="electronics">Electronics</option>
                         <option value="clothing">Clothing</option>
@@ -60,86 +61,7 @@
                 </div>
             </div>
         </div>
-        <button class="add-item-btn">Add Item</button>
+        <button class="add-item-btn" type="submit">Add Item</button>
     </form>
-    <script>
-        var currentSlide = 0;
-        let slides = document.querySelectorAll(".slide")
-        let dots = document.querySelectorAll('.dot')
-        const slide_container = document.getElementsByClassName("slide-container")[0];
-        const dots_container = document.getElementsByClassName("dots-container")[0];
-        document.getElementById("description").addEventListener("input",function(){
-            this.style.height = 'auto';
-            this.style.height = ((this.scrollHeight)+4) + 'px';
-        })
-
-        // code for uploading image
-        document.getElementById("files").addEventListener('change',function(){
-            let obj = document.getElementsByClassName("slide fade");
-            let dot_obj = document.getElementsByClassName("dot");
-            let len = obj.length;
-            for(let i=0;i<len;i++){
-                obj[0].remove();
-                console.log(dot_obj.length);
-                dot_obj[0].remove();
-            }
-            if(this.files && this.files[0]){
-                let l = this.files.length;
-                for (var i = 0; i < l; i++) {
-                    var file = this.files[i];
-                    var picReader = new FileReader();
-                    picReader.addEventListener("load", function (e) {
-                        let div1 = document.createElement("div");
-                        div1.className = "slide fade";
-                        let img = document.createElement("IMG");
-                        img.setAttribute("src",e.target.result);
-                        div1.appendChild(img);
-                        slide_container.appendChild(div1);
-                        let span1 = document.createElement("span");
-                        span1.className = "dot";
-                        dots_container.appendChild(span1);
-                        slides = document.querySelectorAll(".slide")
-                        dots = document.querySelectorAll('.dot')
-                        updateListener();
-                        showSlide(0);
-                    });
-                    //Read the image
-                    picReader.readAsDataURL(file);
-                }
-                slide_container.style.display="flex";
-            }
-        })
-
-        const showSlide = (n) => {
-            slides.forEach((slide) => {
-                slide.style.display = "none"
-                dots.forEach((dot) => {
-                   dot.classList.remove("active")
-                })
-            })
-            slides[n].style.display = "block"
-            dots[n].classList.add("active")
-        }
-
-        const next = () => {
-            currentSlide >= slides.length - 1 ? currentSlide = 0 : currentSlide++
-            showSlide(currentSlide)
-        }
-
-        const prev = () => {
-            currentSlide <= 0 ? currentSlide = slides.length - 1 : currentSlide--
-            showSlide(currentSlide)
-        }
-
-        const updateListener = ()=>{
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    showSlide(index)
-                    currentSlide = index
-                })
-            })
-        }
-
-    </script>
+    <script src="/js/addItem.js"></script>
 </body>

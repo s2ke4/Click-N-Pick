@@ -10,6 +10,12 @@ body{
     height: 100%;
 }
 /* original one */
+
+.err-msg{
+ color: red;
+ padding: 5px;
+ display: none;   
+}
 .add-Item{
     margin-top: 50px;
     width: 100%;
