@@ -24,14 +24,14 @@ form.addEventListener("submit",(e)=>{
     e.preventDefault();
     var formData = new FormData();
     var request = new XMLHttpRequest();
-    let productName = productNameInp.value;
-    let brandName = brandNameInp.value;
-    let price = priceInp.value;
-    let discount = discountInp.value;
-    let numOfItem = numOfItemInp.value;
-    let prodColor = prodColorInp.value;
+    let productName = productNameInp.value.trim();
+    let brandName = brandNameInp.value.trim();
+    let price = priceInp.value.trim();
+    let discount = discountInp.value.trim();
+    let numOfItem = numOfItemInp.value.trim();
+    let prodColor = prodColorInp.value.trim();
     let category = categoryInp.value;
-    let des = desInp.value;
+    let des = desInp.value.trim();
     if(uploadedFiles.length == 0){
         document.getElementsByClassName("err-msg")[0].style.display = "block";
         return;

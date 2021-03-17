@@ -1,0 +1,213 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins',sans-serif;
+    color: #323232;
+    height: 100%;
+}
+/* original one */
+
+.err-msg{
+ color: red;
+ padding: 5px;
+ display: none;   
+}
+.add-Item{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+.product-info{
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.input-box,.inp-box {
+    position: relative;
+}
+  
+.input-box input,textarea,select {
+    width: 100%;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    margin-bottom: 35px;
+    border: none;
+    border-bottom: 1px solid #323232;
+    outline: none;
+    background: transparent;
+}
+.inp-box label{
+    font-weight: bold;
+    top:0;
+    left: 0;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    pointer-events: none;
+} 
+.input-box label {
+    font-weight: bold;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label {
+  top: -25px;
+  left: 0;
+  color: #323232;
+  font-size: 15px;
+}
+.upload-btn{
+    color: white;
+    background-color: rgb(71, 71, 255);
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    border-radius: 40px;
+}
+.uploadImage{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.upload-btn:hover{
+    transform: scale(1.1);
+    transition: all 1s;
+}
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+/* container for uploaded image */
+.slide-container{
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+}
+img{
+    max-height: 500px;
+}
+.slide-container .slide {
+    display: none;
+    width: 100%;
+  }
+  
+  .slide-container .slide.fade {
+    animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  }
+  
+  .slide-container .slide img {
+    width: 100%;
+  }
+
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.dots-container .dot {
+  cursor: pointer;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  color: #333;
+  border-radius: 50%;
+  background-color: #dfd6ce;
+}
+
+.dots-container .dot.active {
+  border: 2px solid rgb(71, 71, 255);
+}
+
+.add-item-btn{
+    background-color: rgb(71, 71, 255);
+    padding: 8px 25px;
+    color: white;
+    font-size: 18px;
+    border-radius: 40px;
+    margin:20px auto;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    outline: none;
+    cursor: pointer;
+    transition: all 1s;
+    text-align: center;
+}
+@media screen and (max-width: 1100px) {
+    .add-Item{
+        flex-direction: column;
+    }
+    .product-info{
+        width: 95vw;
+    }
+    .uploadImage{
+        margin-bottom: 30px;
+    }
+  }
+
+  .add-item-btn:hover,.remove-item-btn:hover{
+      transform: scale(1.2);
+  }
+
+  .cross{
+      color: red;
+      font-size: 18px;
+      right: 0;
+      position: absolute;
+      cursor: pointer;
+      padding-left: 3px;
+      text-decoration: none;
+      background-color: black;
+      border-radius: 4px;
+      padding: 5px;
+      transition: all 1s;
+      /* margin-left: 7px; */
+  }
+  .cross:hover{
+    transform: scale(1.1);
+  }
+  .remove-item-btn{
+    background-color: red;
+    padding: 8px 25px;
+    color: white;
+    font-size: 18px;
+    border-radius: 40px;
+    margin:20px auto;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 1s;
+  }
+  .final-btn{
+      display: flex;
+      justify-content: space-evenly;
+  }

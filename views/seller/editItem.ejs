@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/addItem.css">
+<link rel="stylesheet" href="/css/editItem.css">
 <title>Add Items</title>
 <body>
     <%- include("../partials/sellerNav.ejs") %>
@@ -8,6 +8,7 @@
                 <div class="slide-container">
                     <% attachments.forEach((img)=>{ %>
                         <div class="slide fade">
+                            <abbr class="cross" onclick="removeImg('<%=img%>',this)" title="Remove This Image">X</abbr>
                             <img src="/uploads/<%=img%>" alt="product image">
                         </div>
                     <% }) %>
@@ -69,7 +70,10 @@
                 </div>
             </div>
         </div>
-        <button class="add-item-btn" type="submit">Update Item</button>
+        <div class="final-btn">
+            <button class="remove-item-btn" type="submit">Delete Item</button>
+            <button class="add-item-btn" type="submit">Update Item</button>
+        </div>
     </form>
     <script src="/js/editItem.js"></script>
 </body>

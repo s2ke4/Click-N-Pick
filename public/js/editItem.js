@@ -2,6 +2,7 @@ var currentSlide = 0;
 let slides = document.querySelectorAll(".slide")
 let dots = document.querySelectorAll('.dot')
 let uploadedFiles = [];
+let removedFiles = [];
 const slide_container = document.getElementsByClassName("slide-container")[0];
 const dots_container = document.getElementsByClassName("dots-container")[0];
 let productNameInp = document.getElementById("productName");
@@ -87,15 +88,16 @@ document.getElementById("files").addEventListener('change',function(){
 })
 
 const showSlide = (n) => {
-    slides.forEach((slide) => {
-        slide.style.display = "none"
-        dots.forEach((dot) => {
-            dot.classList.remove("active")
+    if(slides.length > 0){
+        slides.forEach((slide) => {
+            slide.style.display = "none"
+            dots.forEach((dot) => {
+                dot.classList.remove("active")
+            })
         })
-    })
-    slides[n].style.display = "block"
-    console.log(slides[n].style.display);
-    dots[n].classList.add("active")
+        slides[n].style.display = "block"
+        dots[n].classList.add("active")
+    }
 }
 
 const next = () => {
@@ -118,3 +120,17 @@ const updateListener = ()=>{
 }
 showSlide(0);
 updateListener();
+
+function removeImg(file,gold){
+    let removeItem = gold.parentNode;
+    console.log(removeItem)
+    let div = removeItem.parentNode;
+    console.log(div);
+    removedFiles.push(file);
+    div.removeChild(removeItem);
+    dots[0].remove();
+    slides = document.querySelectorAll(".slide");
+    dots = document.querySelectorAll('.dot')
+    updateListener();
+    showSlide(0);
+}
