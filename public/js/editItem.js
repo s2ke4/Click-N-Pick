@@ -15,6 +15,7 @@ let categoryInp = document.getElementById("category");
 let desInp = document.getElementById("description");
 let form = document.getElementById("form");
 let cross = document.getElementsByClassName("Cross");
+let deleteItemBtn = document.getElementsByClassName("remove-item-btn")[0];
 
 document.getElementById("description").addEventListener("input",function(){
     this.style.height = 'auto';
@@ -109,7 +110,7 @@ const prev = () => {
     currentSlide <= 0 ? currentSlide = slides.length - 1 : currentSlide--
     showSlide(currentSlide)
 }
-
+ 
 const updateListener = ()=>{
     dots.forEach((dot, index) => {
         dot.addEventListener("click", () => {
@@ -123,9 +124,7 @@ updateListener();
 
 function removeImg(file,gold){
     let removeItem = gold.parentNode;
-    console.log(removeItem)
     let div = removeItem.parentNode;
-    console.log(div);
     removedFiles.push(file);
     div.removeChild(removeItem);
     dots[0].remove();
@@ -133,4 +132,13 @@ function removeImg(file,gold){
     dots = document.querySelectorAll('.dot')
     updateListener();
     showSlide(0);
+}
+
+// to delete an item
+const deleteItem = (id)=>{
+    var xhr = new XMLHttpRequest()
+    xhr.open('post', `/seller/deleteItem/${id}`, true)
+    xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE')
+    xhr.send()
+    window.location.href = "/";
 }

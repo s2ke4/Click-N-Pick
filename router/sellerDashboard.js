@@ -5,6 +5,7 @@ const conn = require("../connection");
 const util = require('util');
 const db = util.promisify(conn.query).bind(conn);
 let seller;
+const fs = require("fs");
 
 //multer options
 var storage = multer.diskStorage({
@@ -90,6 +91,30 @@ router.get("/edit/:id",async(req,res)=>{
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);
         res.send("Internal Server Error");
+    }
+})
+
+//router to delete an item
+router.delete("/deleteItem/:id",async(req,res)=>{
+    try {
+        let query = `SELECT * FROM attachment WHERE item_id=${req.params.id};`;
+        let result = await db(query);
+        for(let i=0;i<result.length;i++)
+        {
+            fs.unlink(`public/uploads/${result[i].imgPath}`,(err)=>{
+                if(err){
+                  console.log("error while deleting image ",err);
+                }else{
+                  console.log("Image Deleted Successfully :) ");
+                }
+              })
+        }
+        query = `DELETE FROM items WHERE items.id = ${req.params.id};`;
+        await db(query);
+        console.log("Item Delete Successfully")
+    } catch (error) {
+        console.log("Error While Deleting Item")
+        console.log(error);
     }
 })
 

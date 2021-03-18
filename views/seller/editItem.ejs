@@ -49,19 +49,12 @@
                 </div>
                 <div class="inp-box">
                     <label for="cars">Category</label>
-                    <select name="category" id="category" value="<%=item.category%>">
-                        <option value="grocery">Grocerry</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="clothing">Clothing</option>
-                        <option value="footwear">Footwear</option>
-                        <option value="stationary">Stationary</option>
-                        <option value="novels">Novels</option>
-                        <option value="luggage">Luggage</option>
-                        <option value="furniture">Furniture</option>
-                        <option value="cosmetics">Cosmetics</option>
-                        <option value="medicine">Health And Medicine</option>
-                        <option value="games">Games</option>
-                        <option value="kitchen">Home And Kitchen</option>
+                    <% let options = ["grocery","clothing","footwear","stationary","electronics","novels","luggage","furniture","cosmetics","medicine","games","kitchen"] %>
+                    <select name="category" id="category">
+                        <% for(let i=0;i < options.length;i++){ %>
+                           <% let selected = ( options[i] == item.category ) ? "selected" : "" %>
+                           <option value="<%= options [ i ] %>" <%=selected%>><%=options[i]%></option>
+                        <% } %>
                     </select>
                 </div>
                 <div class="input-box">
@@ -71,7 +64,7 @@
             </div>
         </div>
         <div class="final-btn">
-            <button class="remove-item-btn" type="submit">Delete Item</button>
+            <button onclick="deleteItem('<%=item.id%>')" class="remove-item-btn">Delete Item</button>
             <button class="add-item-btn" type="submit">Update Item</button>
         </div>
     </form>
