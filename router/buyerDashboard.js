@@ -8,9 +8,9 @@ router.get("/",(req,res)=>{
     res.render("buyer/dashboard")
 })
 
-//user image route
-router.get("/",(req,res)=>{
-    res.render("public/asset/user")
+//route for cart
+router.get("/cart",(req,res)=>{
+    res.render("buyer/cart")
 })
 
 module.exports = router;
