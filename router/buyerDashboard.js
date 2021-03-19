@@ -20,7 +20,7 @@ router.get("/",async(req,res)=>{
         let attachResult = await db(query);
         imgs.push(attachResult[0]);
     }
-    console.log(imgs);
+    console.log(topItems);
     res.render("buyer/dashboard",{topItems: topItems,images: imgs})
 })
 

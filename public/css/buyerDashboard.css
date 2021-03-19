@@ -1,0 +1,63 @@
+.wrapper{
+    padding: 40px;
+    display:grid;
+    grid-gap: 0.5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+
+.category-heading {
+    font-size: 4.5rem;
+    margin-top: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+}
+
+.solid {
+    margin: 0.5rem 2rem;
+    border-top: 4px solid rgb(71,71,246);
+}
+
+.product-name {
+    font-size: 2rem;
+}
+
+.product-price {
+    color: grey;
+    font: 0.5rem;
+}
+
+.wrapper .card {
+    padding: 10px;
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    border: 10px solid #fff;
+    transition: .5s ease;
+}
+
+.card:hover{
+    border: 1px solid black;
+}
+
+.in-card{
+    text-align: center;
+}
+
+.img{ 
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* .linktoinfo{
+    text-decoration: none;
+    color: black;
+} */
+

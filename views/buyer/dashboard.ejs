@@ -1,30 +1,48 @@
-<link rel="stylesheet" href="/css/sellerDashboard.css">
+<link rel="stylesheet" href="/css/buyerDashboard.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <body>
     <%-include("../partials/customerNav") %>
-    <h1>Welcome to E-Commerce</h1>
-    <div class="wrapper">
-        <% if(locals.topItems && topItems.length > 0){ %>
-            <% for(let i=0;i< topItems.length;i++){ %>
-                <%if(i==0) { %>
-                    <h2><%= topItems[i].category%></h2>
-                <% } %>
-                <% if(i!=0 && topItems[i].category!=topItems[i-1].category) { %>
-                    <h2><%= topItems[i].category %></h2>
-                <% } %>
-                <div class="card">
-                    <div class="in-card">
-                        <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
-                        <h3><%= topItems[i].product_name %></h3>
-                        <h3><%= topItems[i].price%></h3>
-                        <h3>quantity left- <%= topItems[i].topItems%></h3>
-                    </div>
-                    <div class="for-btn">
-                        <button class="cart-btn"> <a href="seller/edit/<%=topItems[i].id%>"> EDIT</a> </button>
-                    </div>
-                </div>
-            <% } %>
-        <% }else{ %>
-            <h2>Your Store Is Empty Click On Add Item to Add an Item.</h2>
+    <% console.log(topItems.length) %>
+    <%for(let i=0;i < topItems.length;i++) { %>
+        
+        <%if(i==0) { %>
+            <h2 class="category-heading"><%= topItems[i].category%></h2>
+            <hr class="solid">
         <% } %>
-    </div> 
+        <% if(i!=0 && topItems[i].category!=topItems[i-1].category) { %>
+            <h2 class="category-heading"><%= topItems[i].category %></h2>
+            <hr class="solid">
+        <% } %>
+        <div class="wrapper">
+            <div class="card">
+                <div class="in-card">
+                    <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
+                    <h3 class="product-name"><%= topItems[i].product_name %></h3>
+                    <h3 class="product-price">₹ <%= topItems[i].price%></h3>
+                </div>
+                <a href="" class="btn btn-primary">Add to Cart</a>
+            </div>
+            <% if(i+1 < topItems.length && topItems[i+1].category!=topItems[i].category) { %>
+        </div>
+            <% continue; }%>
+        <% let c;%>
+            <% for(let j=i+1;j < topItems.length && topItems[j].category === topItems[j-1].category;j++){ %>
+        
+                    <div class="card">
+                        <div class="in-card">
+                            <img src="/uploads/<%= images[j].imgPath %>" alt={title} class="img"></img>
+                            <h3 class="product-name"><%= topItems[j].product_name %></h3>
+                            <h3 class="product-price">₹ <%= topItems[j].price%></h3>
+                        </div>
+                        <a href="" class="btn btn-primary">Add to Cart</a>
+                    </div>
+        
+                <% c = j %>
+            <% } %>
+        <% i = c %> 
+    </div>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
