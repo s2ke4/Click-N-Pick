@@ -1,127 +1,46 @@
-<html lang="en"></html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/sellerDashboard.css">
-    <title>Dashboard</title>
-    <%- include("./partials/customerNav.ejs") %>
-  </head>
-
-  <body>
-
-    <div class="wrapper">
-      <div class="card">
-          <div class="in-card">
-              <img src="/images/img1.png" alt={title} class="img"></img>
-              <h5>Product 1</h5>
-              <h5>₹ price</h5>
-
-          </div>
-          <div class="for-btn">
-              <button class="cart-btn" > Add to Cart </button>
-          </div>
-      </div>
-
-
-      <div class="card">
-          <div class="in-card">
-              <img src="/images/img2.png" alt={title} class="img"></img>
-              <h5>Product 1</h5>
-              <h5>₹ price</h5>
-
-          </div>
-          <div class="for-btn">
-              <button class="cart-btn" > Add to Cart </button>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="in-card">
-              <img src="/images/img3.png" alt={title} class="img"></img>
-              <h5>Product 1</h5>
-              <h5>₹ price</h5>
-
-          </div>
-          <div class="for-btn">
-              <button class="cart-btn" > Add to Cart </button>
-          </div>
-      </div>
-
-
-      <div class="card">
-          <div class="in-card">
-              <img src="/images/img4.png" alt={title} class="img"></img>
-              <h5>Product 1</h5>
-              <h5>₹ price</h5>
-      
-          </div>
-          <div class="for-btn">
-              <button class="cart-btn" > Add to Cart </button>
-          </div>
-      </div>
-
-
-      <div class="card">
-        <div class="in-card">
-            <img src="/images/img2.png" alt={title} class="img"></img>
-            <h5>Product 1</h5>
-            <h5>₹ price</h5>
-    
+<link rel="stylesheet" href="/css/buyerDashboard.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<body>
+    <%-include("partials/customerNav") %>
+    <% console.log(topItems.length) %>
+    <%for(let i=0;i < topItems.length;i++) { %>
+        
+        <%if(i==0) { %>
+            <h2 class="category-heading"><%= topItems[i].category%></h2>
+            <hr class="solid">
+        <% } %>
+        <% if(i!=0 && topItems[i].category!=topItems[i-1].category) { %>
+            <h2 class="category-heading"><%= topItems[i].category %></h2>
+            <hr class="solid">
+        <% } %>
+        <div class="wrapper">
+            <div class="card">
+                <div class="in-card">
+                    <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
+                    <h3 class="product-name"><%= topItems[i].product_name %></h3>
+                    <h3 class="product-price">₹ <%= topItems[i].price%></h3>
+                </div>
+                <a href="" class="btn btn-primary">Add to Cart</a>
+            </div>
+            <% if(i+1 < topItems.length && topItems[i+1].category!=topItems[i].category) { %>
         </div>
-        <div class="for-btn">
-            <button class="cart-btn" > Add to Cart </button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="in-card">
-          <img src="/images/img1.png" alt={title} class="img"></img>
-          <h5>Product 1</h5>
-          <h5>₹ price</h5>
-
-        </div>
-        <div class="for-btn">
-          <button class="cart-btn" > Add to Cart </button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="in-card">
-            <img src="/images/img2.png" alt={title} class="img"></img>
-            <h5>Product 1</h5>
-            <h5>₹ price</h5>
-
-        </div>
-        <div class="for-btn">
-            <button class="cart-btn" > Add to Cart </button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="in-card">
-            <img src="/images/img1.png" alt={title} class="img"></img>
-            <h5>Product 1</h5>
-            <h5>₹ price</h5>
-
-        </div>
-        <div class="for-btn">
-            <button class="cart-btn" > Add to Cart </button>
-        </div>
+            <% continue; }%>
+        <% let c;%>
+            <% for(let j=i+1;j < topItems.length && topItems[j].category === topItems[j-1].category;j++){ %>
+        
+                    <div class="card">
+                        <div class="in-card">
+                            <img src="/uploads/<%= images[j].imgPath %>" alt={title} class="img"></img>
+                            <h3 class="product-name"><%= topItems[j].product_name %></h3>
+                            <h3 class="product-price">₹ <%= topItems[j].price%></h3>
+                        </div>
+                        <a href="" class="btn btn-primary">Add to Cart</a>
+                    </div>
+        
+                <% c = j %>
+            <% } %>
+        <% i = c %> 
     </div>
-    
-    <div class="card">
-        <div class="in-card">
-            <img src="/images/img1.png" alt={title} class="img"></img>
-            <h5>Product 1</h5>
-            <h5>₹ price</h5>
-
-        </div>
-        <div class="for-btn">
-            <button class="cart-btn" > Add to Cart </button>
-        </div>
-    </div>
-
-
-    </div> 
-  </body>
-</html>
+    <% } %>
+</body>
