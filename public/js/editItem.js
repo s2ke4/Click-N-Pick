@@ -15,6 +15,7 @@ let categoryInp = document.getElementById("category");
 let desInp = document.getElementById("description");
 let form = document.getElementById("form");
 let cross = document.getElementsByClassName("Cross");
+let editItemBtn = document.getElementsByClassName("add-item-btn")[0];
 let deleteItemBtn = document.getElementsByClassName("remove-item-btn")[0];
 
 document.getElementById("description").addEventListener("input",function(){
@@ -22,8 +23,16 @@ document.getElementById("description").addEventListener("input",function(){
     this.style.height = ((this.scrollHeight)+4) + 'px';
 })
 
-form.addEventListener("submit",(e)=>{
+editItemBtn.addEventListener("click",(e)=>{
     e.preventDefault();
+})
+
+deleteItemBtn.addEventListener("click",(e)=>{
+    e.preventDefault();
+})
+
+const updateItem = (id)=>{
+    console.log("HELLO")
     var formData = new FormData();
     var request = new XMLHttpRequest();
     let productName = productNameInp.value;
@@ -34,14 +43,19 @@ form.addEventListener("submit",(e)=>{
     let prodColor = prodColorInp.value;
     let category = categoryInp.value;
     let des = desInp.value;
-    if(uploadedFiles.length == 0){
+    dots = document.querySelectorAll('.dot');
+    if(dots.length == 0){
         document.getElementsByClassName("err-msg")[0].style.display = "block";
         return;
     }
     if(productName!="" && brandName!="" && price!="" && discount!="" && numOfItem!="" && prodColor!="" && category!="" && des !=""){
-        for(let i=0;i<uploadedFiles.length;i++)
+        // for(let i=0;i<uploadedFiles.length;i++)
+        // {
+        //     formData.append("photos",uploadedFiles[i],uploadedFiles[i].name);
+        // }
+        for(let i=0;i<removedFiles.length;i++)
         {
-            formData.append("photos",uploadedFiles[i],uploadedFiles[i].name);
+            formData.append("remove",removedFiles[i]);
         }
         formData.append("productName",productName);
         formData.append("brandName",brandName);
@@ -51,11 +65,12 @@ form.addEventListener("submit",(e)=>{
         formData.append("productColour",prodColor);
         formData.append("category",category);
         formData.append("description",des);
-        request.open("POST","./addItem",true);
+        console.log(id);
+        request.open("PUT",`/seller/editItem/${id}`,true);
         request.send(formData);
         window.location.href = "/";
     }
-})
+}
 
 // code for uploading image
 document.getElementById("files").addEventListener('change',function(){
