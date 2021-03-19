@@ -4,6 +4,7 @@ const port = 3000 || process.env.PORT;
 const conn = require("./connection");
 const cookieParser = require("cookie-parser");
 const {checkUser,ensureGuest,ensureBuyer,ensureSeller} = require("./middleware/authMiddleware");
+const methodOverride = require("method-override");
 
 conn.connect((err)=>{
     if(err) throw err;
@@ -65,6 +66,9 @@ app.set("view engine","ejs");
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
+
+// to override method
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.get("*",checkUser);
 

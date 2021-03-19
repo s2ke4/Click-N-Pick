@@ -7,65 +7,25 @@
         <title>Dashboard</title>
         <%- include("../partials/sellerNav.ejs") %>
     </head>
-
-
     <body>
-
         <div class="wrapper">
-            <div class="card">
-                <div class="in-card">
-                    <% if(locals.img){%>
-                        <img src="data:image/png;charset=utf8;base64,<%=locals.img%>" alt={title} class="img"></img>
-                    <% }else{ %>
-                        <img src="/images/img1.png" alt={title} class="img"></img>
-                    <% } %>
-                    <h3>Product 1</h3>
-                    <h3>₹ price</h3>
-                    <h3>Quantity sold- 2500</h3>
-                    <h3>quantity left- 233</h3>
-                </div>
-                <div class="for-btn">
-                    <button class="cart-btn" > EDIT </button>
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="in-card">
-                    <img src="/images/img2.png" alt={title} class="img"></img>
-                    <h3>Product 1</h3>
-                    <h3>₹ price</h3>
-                    <h3>Quantity sold- 250</h3>
-                    <h3>quantity left- 233</h3>
-                </div>
-                <div class="for-btn">
-                    <button class="cart-btn" > EDIT </button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="in-card">
-                    <img src="/images/img3.png" alt={title} class="img"></img>
-                    <h3>Product 1</h3>
-                    <h3>₹ price</h3>
-                    <h3>Quantity sold- 250</h3>
-                    <h3>quantity left- 233</h3>
-                </div>
-                <div class="for-btn">
-                    <button class="cart-btn" > EDIT </button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="in-card">
-                    <img src="/images/img4.png" alt={title} class="img"></img>
-                    <h3>Product 1</h3>
-                    <h3>₹ price</h3>
-                    <h3>Quantity sold- 250</h3>
-                    <h3>quantity left- 233</h3>
-                </div>
-                <div class="for-btn">
-                    <button class="cart-btn" > EDIT </button>
-                </div>
-            </div>
+            <% if(locals.items && items.length > 0){ %>
+                <% for(let i=0;i< items.length;i++){ %>
+                    <div class="card">
+                        <div class="in-card">
+                            <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
+                            <h3><%= items[i].product_name %></h3>
+                            <h3><%= items[i].price%></h3>
+                            <h3>quantity left- <%= items[i].num_of_items%></h3>
+                        </div>
+                        <div class="for-btn">
+                            <button class="cart-btn"> <a href="seller/edit/<%=items[i].id%>"> EDIT</a> </button>
+                        </div>
+                    </div>
+                <% } %>
+            <% }else{ %>
+                <h2>Your Store Is Empty Click On Add Item to Add an Item.</h2>
+            <% } %>
         </div> 
     </body>
 </html>
