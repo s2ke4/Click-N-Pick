@@ -1,4 +1,30 @@
+<link rel="stylesheet" href="/css/sellerDashboard.css">
 <body>
     <%-include("../partials/customerNav") %>
-    <h1>Home Page For Customer</h1>
+    <h1>Welcome to E-Commerce</h1>
+    <div class="wrapper">
+        <% if(locals.topItems && topItems.length > 0){ %>
+            <% for(let i=0;i< topItems.length;i++){ %>
+                <%if(i==0) { %>
+                    <h2><%= topItems[i].category%></h2>
+                <% } %>
+                <% if(i!=0 && topItems[i].category!=topItems[i-1].category) { %>
+                    <h2><%= topItems[i].category %></h2>
+                <% } %>
+                <div class="card">
+                    <div class="in-card">
+                        <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
+                        <h3><%= topItems[i].product_name %></h3>
+                        <h3><%= topItems[i].price%></h3>
+                        <h3>quantity left- <%= topItems[i].topItems%></h3>
+                    </div>
+                    <div class="for-btn">
+                        <button class="cart-btn"> <a href="seller/edit/<%=topItems[i].id%>"> EDIT</a> </button>
+                    </div>
+                </div>
+            <% } %>
+        <% }else{ %>
+            <h2>Your Store Is Empty Click On Add Item to Add an Item.</h2>
+        <% } %>
+    </div> 
 </body>
