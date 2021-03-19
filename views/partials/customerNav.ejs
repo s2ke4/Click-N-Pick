@@ -40,8 +40,23 @@
                   <a class="nav-link" href="/buyer/cart">🛒Cart</a>
                 </li>
               </ul>
+              <select class="filter-bar aria-label="Default select example">
+                <option selected>Filter</option>
+                <option value="1">Grocerries</option>
+                <option value="2">Electronics</option>
+                <option value="3">Clothing</option>
+                <option value="4">Footwear</option>
+                <option value="5">Stationary</option>
+                <option value="6">Novels</option>
+                <option value="7">Luggage</option>
+                <option value="8">Furniture</option>
+                <option value="9">Cosmetics</option>
+                <option value="10">Health and Medicine</option>
+                <option value="11">Games</option>
+                <option value="12">Home and Kitchen</option>
+              </select>
               <form class="d-flex flex-grow-1 search-bar">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
               </form>
             <% }else{ %>
@@ -59,15 +74,39 @@
                   🛒Cart
                 </a>
               </ul>
+              <select class="filter-bar" aria-label="Default select example">
+                <option selected>Filter</option>
+                <option value="1">Grocerries</option>
+                <option value="2">Electronics</option>
+                <option value="3">Clothing</option>
+                <option value="4">Footwear</option>
+                <option value="5">Stationary</option>
+                <option value="6">Novels</option>
+                <option value="7">Luggage</option>
+                <option value="8">Furniture</option>
+                <option value="9">Cosmetics</option>
+                <option value="10">Health and Medicine</option>
+                <option value="11">Games</option>
+                <option value="12">Home and Kitchen</option>
+              </select>
               <form class="d-flex flex-grow-1 search-bar">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
               </form>
             <% } %>
           </div>
         </div>
       </nav>
-
+      <script>
+        const selectBox = document.getElementsByClassName("filter-bar")[0];
+        const search = document.getElementsByClassName("search-box")[0];
+        const placeholders = ["Search","Search for Grocerries...","Search for Electronics...","Search for Clothing...","Search for Footwear..."
+        ,"Search for Stationary...","Search for Novels...","Search for Luggage...","Search for Furniture...",
+        "Search for Cosmetics...","Search for Health and Medicine...","Search for Games...","Search for Home and Kitchen..."];
+        selectBox.addEventListener("change",(e)=>{
+         search.placeholder = placeholders[selectBox.selectedIndex]
+        })
+     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>
