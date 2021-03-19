@@ -35,7 +35,7 @@ h3{
 .img{ 
     display: block;
     width: 200px;
-    height: 200px;
+    max-height: 300px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -69,4 +69,9 @@ h3{
 .linktoinfo{
     text-decoration: none;
     color: black;
+}
+
+a{
+    color:white;
+    text-decoration:none;
 }
