@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/css/productinfo.css">
-<link rel="stylesheet" href="/css/editItem.css">
+
+
+<%-include("../partials/customerNav") %>
 <body>
     <div class="container">
         <div className="image-area">
@@ -12,7 +14,7 @@
                     <% }) %>
                 </div>
                 <div class="dots-container">
-                    <% attachments.forEach((img)=>{ console.logimg) %>
+                    <% attachments.forEach((img)=>{ %>
                         <span class="dot"></span>
                     <% }) %>
                 </div>
@@ -20,18 +22,24 @@
         </div>
         <div class="InfoContainer">
             <h1><%=item.product_name%></h1>
-            <h3><%=item.brand_name%></h3>
+            <h5><%=item.brand_name%></h5>
             <div class="amount">
-                <h2><%=item.price%></h2>
+                <h2>Price : ₹ <%=item.price%></h2>
                 <h3 style="color: #07db00;"><%=item.discount%> % off</h3>
             </div>
             <div class="button-area">
+                <div class="btn1" >
+                    <button class="toWishlist">Add to Wishlist</button>
+                </div>
                 <div class="btn2" >
-                    <button disabled={inCart ? true : false} class="toCart">Add to Cart</button>
+                    <button class="toCart">Add to Cart</button>
                 </div>
             </div>
             <p><strong>Description: </strong><%=item.prod_description%></p>
-            <h3><%=item.product_color%></h3>
+            <h5><%=item.product_color%></h5>
         </div>
     </div>
+
+
+    <script src="/js/productinfo.js"></script>
 </body>
