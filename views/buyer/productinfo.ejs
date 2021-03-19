@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/css/productinfo.css">
+<link rel="stylesheet" href="/css/editItem.css">
+<body>
+    <div class="container">
+        <div className="image-area">
+            <div class="uploadImage">
+                <div class="slide-container">
+                    <% attachments.forEach((img)=>{ %>
+                        <div class="slide fade">
+                            <img src="/uploads/<%=img%>" alt="product image">
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="dots-container">
+                    <% attachments.forEach((img)=>{ console.logimg) %>
+                        <span class="dot"></span>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <div class="InfoContainer">
+            <h1><%=item.product_name%></h1>
+            <h3><%=item.brand_name%></h3>
+            <div class="amount">
+                <h2><%=item.price%></h2>
+                <h3 style="color: #07db00;"><%=item.discount%> % off</h3>
+            </div>
+            <div class="button-area">
+                <div class="btn2" >
+                    <button disabled={inCart ? true : false} class="toCart">Add to Cart</button>
+                </div>
+            </div>
+            <p><strong>Description: </strong><%=item.prod_description%></p>
+            <h3><%=item.product_color%></h3>
+        </div>
+    </div>
+</body>

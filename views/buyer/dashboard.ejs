@@ -11,6 +11,7 @@
                 <% if(i!=0 && topItems[i].category!=topItems[i-1].category) { %>
                     <h2><%= topItems[i].category %></h2>
                 <% } %>
+                <a href="buyer/productinfo/<%=topItems[i].id%>">
                 <div class="card">
                     <div class="in-card">
                         <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
@@ -22,6 +23,7 @@
                         <button class="cart-btn"> <a href="seller/edit/<%=topItems[i].id%>"> EDIT</a> </button>
                     </div>
                 </div>
+                </a>
             <% } %>
         <% }else{ %>
             <h2>Your Store Is Empty Click On Add Item to Add an Item.</h2>
