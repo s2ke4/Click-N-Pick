@@ -21,9 +21,8 @@
 
 
 
-.product-price {
-    color: grey;
-    font: 0.5rem;
+.product-name {
+    padding-top: 5px;
 }
 
 .wrapper .card {
@@ -58,7 +57,7 @@
     color: black;
 } */
 
-.card a{
+.card a,.card a:hover{
     color: black;
     text-decoration: none;
 }

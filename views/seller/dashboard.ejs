@@ -15,7 +15,20 @@
                         <div class="in-card">
                             <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
                             <h3><%= items[i].product_name %></h3>
-                            <h3><%= items[i].price%></h3>
+                            <% if(items[i].discount > 0){ %>
+                                <h3>
+                                M.R.P : ₹ 
+                                    <s>
+                                        <span style='color:black'><%= items[i].price %><span>
+                                    </s>
+                                </h3>
+                                <h3 style='color:red'>
+                                    ₹ <%= items[i].price - items[i].discount*(items[i].price)/100 %>
+                                    <span style="color: #07db00;">(<%=items[i].discount%>% off)</span>
+                                </h3>
+                            <% }else{ %>
+                                <h3>₹ <%= items[i].price %></h3>
+                            <% } %>
                             <h3>quantity left- <%= items[i].num_of_items%></h3>
                         </div>
                         <div class="for-btn">
