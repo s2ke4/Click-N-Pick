@@ -35,14 +35,14 @@ const updateItem = (id)=>{
     console.log("HELLO")
     var formData = new FormData();
     var request = new XMLHttpRequest();
-    let productName = productNameInp.value;
-    let brandName = brandNameInp.value;
+    let productName = productNameInp.value.trim().replaceAll('"',"'");
+    let brandName = brandNameInp.value.trim().replaceAll('"',"'");
     let price = priceInp.value;
     let discount = discountInp.value;
     let numOfItem = numOfItemInp.value;
-    let prodColor = prodColorInp.value;
+    let prodColor = prodColorInp.value.trim().replaceAll('"',"'");
     let category = categoryInp.value;
-    let des = desInp.value;
+    let des = desInp.value.trim().replaceAll('"',"'");
     dots = document.querySelectorAll('.dot');
     if(dots.length == 0){
         document.getElementsByClassName("err-msg")[0].style.display = "block";

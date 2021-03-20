@@ -3,7 +3,7 @@ const app = express();
 const port = 3000 || process.env.PORT;
 const conn = require("./connection");
 const cookieParser = require("cookie-parser");
-const {checkUser,ensureGuest,ensureBuyer,ensureSeller} = require("./middleware/authMiddleware");
+const {checkUser,ensureGuest,ensureSeller} = require("./middleware/authMiddleware");
 const methodOverride = require("method-override");
 const util = require('util');
 const db = util.promisify(conn.query).bind(conn);
@@ -84,7 +84,7 @@ app.get("/",ensureGuest,async(req,res)=>{
     let imgs = [];
     for(let i=0;i<topItems.length;i++)
     {
-        query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${topItems[i].id} LIMIT 1`;
+        let query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${topItems[i].id} LIMIT 1`;
         let attachResult = await db(query);
         imgs.push(attachResult[0]);
     }
@@ -93,9 +93,9 @@ app.get("/",ensureGuest,async(req,res)=>{
 
 //route to display the search results of E-Commerce
 //to be done not completed yet... the below post middleware
-app.post("/",ensureGuest,(req,res)=>{
-    console.log(req.body);
-})
+// app.post("/",ensureGuest,(req,res)=>{
+//     console.log(req.body);
+// })
 
 //route for seller login and signup
 app.use('/sellerAuth',require("./router/sellerAuth"));
@@ -107,7 +107,7 @@ app.use("/buyerAuth",require("./router/buyerAuth"));
 app.use("/seller",ensureSeller,require("./router/sellerDashboard"));
 
 //route for buyer dashboard
-app.use("/buyer",ensureBuyer,require("./router/buyerDashboard"))
+app.use("/buyer",require("./router/buyerDashboard"))
 
 app.use((req,res)=>{
     res.render("error");

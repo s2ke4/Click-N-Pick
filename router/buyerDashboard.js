@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../connection");
 const util = require('util');
+const {ensureBuyer} = require("../middleware/authMiddleware");
 const db = util.promisify(conn.query).bind(conn);
 
 // all the routes will came here
@@ -16,7 +17,7 @@ router.get("/",async(req,res)=>{
     let imgs = [];
     for(let i=0;i<topItems.length;i++)
     {
-        query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${topItems[i].id} LIMIT 1`;
+        let query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${topItems[i].id} LIMIT 1`;
         let attachResult = await db(query);
         imgs.push(attachResult[0]);
     }
@@ -24,7 +25,7 @@ router.get("/",async(req,res)=>{
 })
 
 //route for cart
-router.get("/cart",(req,res)=>{
+router.get("/cart",ensureBuyer,(req,res)=>{
     res.render("buyer/cart")
 })
 
