@@ -61,3 +61,6 @@
     color: black;
     text-decoration: none;
 }
+.btn-primary:hover{
+    color: white;
+}
