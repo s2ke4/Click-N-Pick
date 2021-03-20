@@ -74,8 +74,9 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.get("*",checkUser);
 
+//route to display the homepage of E-Commerce
 app.get("/",ensureGuest,async(req,res)=>{
-    let queryTopItems = `(SELECT * from items WHERE items.category='Grocery' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Electronics' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Clothing' LIMIT 4)
+    let queryTopItems = `(SELECT * FROM items WHERE items.category='Grocery' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Electronics' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Clothing' LIMIT 4)
     UNION ALL (SELECT * FROM items WHERE items.category='Footwear' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Stationary' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Novels' LIMIT 4)
     UNION ALL (SELECT * FROM items WHERE items.category='Luggage' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Furniture' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Cosmetics' LIMIT 4)
     UNION ALL (SELECT * FROM items WHERE items.category='Health and Medicine' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Games' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Home and Kitchen' LIMIT 4)`;
@@ -88,6 +89,12 @@ app.get("/",ensureGuest,async(req,res)=>{
         imgs.push(attachResult[0]);
     }
     res.render("home",{topItems: topItems,images: imgs});
+})
+
+//route to display the search results of E-Commerce
+//to be done not completed yet... the below post middleware
+app.post("/",ensureGuest,(req,res)=>{
+    console.log(req.body);
 })
 
 //route for seller login and signup

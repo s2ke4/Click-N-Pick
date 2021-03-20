@@ -55,9 +55,9 @@
                 <option value="11">Games</option>
                 <option value="12">Home and Kitchen</option>
               </select>
-              <form class="d-flex flex-grow-1 search-bar">
+              <form class="d-flex flex-grow-1 search-bar" action="/search" method="POST">
                 <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
+                <button class="btn btn-outline-success btn-outline-light" type="submit" method="POST">Search</button>
               </form>
             <% }else{ %>
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -89,9 +89,9 @@
                 <option value="11">Games</option>
                 <option value="12">Home and Kitchen</option>
               </select>
-              <form class="d-flex flex-grow-1 search-bar">
+              <form class="d-flex flex-grow-1 search-bar" action="/search" method="POST">
                 <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
+                <button class="btn btn-outline-success btn-outline-light" type="submit" method="POST">Search</button>
               </form>
             <% } %>
           </div>
