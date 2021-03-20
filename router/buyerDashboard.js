@@ -54,6 +54,14 @@ router.get("/productinfo/:id",async(req,res)=>{
     }
 })
 
+//route for wishlist
+router.get("/wishlist",ensureBuyer,(req,res)=>{
+    res.render("buyer/wishlist")
+})
 
+// route for proceed order
+router.get("/proceedOrder",ensureBuyer,(req,res)=>{
+    res.render("buyer/proceedOrder");
+})
 
 module.exports = router;
