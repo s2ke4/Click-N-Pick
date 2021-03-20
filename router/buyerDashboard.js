@@ -28,4 +28,31 @@ router.get("/cart",(req,res)=>{
     res.render("buyer/cart")
 })
 
+//productinfo 
+router.get("/productinfo/:id",async(req,res)=>{
+    try {
+        let query = `SELECT * FROM items WHERE items.id=${req.params.id} LIMIT 1;`;
+        let result = await db(query);
+        if(result.length==0){
+            res.render("error");
+            return;
+        }
+        let item = result[0];
+        query = `SELECT attachment.imgPath FROM attachment WHERE attachment.item_id=${item.id}`
+        result = await db(query);
+        let attachments = [];
+        for(let i=0;i<result.length;i++)
+        {
+            attachments.push(result[i].imgPath)
+        }
+        res.render("buyer/productinfo",{item,attachments});
+        return;
+    } catch (error) {
+        console.log("Error While Opening Edit Item Page ",error);
+        res.send("Internal Server Error");
+    }
+})
+
+
+
 module.exports = router;
