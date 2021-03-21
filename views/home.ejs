@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="/css/buyerDashboard.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../public/css/footer.css">
+
 <body>
     <%-include("partials/customerNav") %>
     <%for(let i=0;i < topItems.length;i++) { %>
@@ -73,4 +75,6 @@
         <% i = c %> 
     </div>
     <% } %>
+    <%- include('partials/footer') %>
 </body>
+<script src="https://kit.fontawesome.com/5772372b8f.js" crossorigin="anonymous"></script>

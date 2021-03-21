@@ -10,7 +10,8 @@
     font-size: 4.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    text-align: center;
+    text-align: left;
+    padding-left: 3rem;
     font-family: 'Dancing Script', cursive;
 }
 
