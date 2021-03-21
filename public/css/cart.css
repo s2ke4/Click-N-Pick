@@ -66,6 +66,21 @@ input[type=number] {
 .del{
     color: rgba(255, 0, 0, 0.726);
     cursor: pointer;
+    transition: all 1s ease;
+}
+.del:hover{
+    animation: animate 0.5s linear 1;
+}
+@keyframes animate{
+    0%{
+        transform: rotate(-30deg) scale(1.2);
+    }
+    50%{
+        transform: rotate(30deg) scale(1.2);
+    }
+    100%{
+        transform: rotate(0deg) scale(1.3);
+    }
 }
 .back,.proceed{
     outline: none;
@@ -108,6 +123,17 @@ a,a:hover{
     text-decoration: none;
     color: black;
 }
-.back a,.back a:hover{
+.back a,.proceed a,.proceed a:hover,.back a:hover{
+    color: white;
+}
+.move-to-wishlist{
+    background-color: transparent;
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    border-radius: 4px;
+    padding:4px;
+}
+.move-to-wishlist:hover{
+    background-color:#0d6efd;
     color: white;
 }
