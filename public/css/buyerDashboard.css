@@ -64,3 +64,10 @@
 .btn-primary:hover{
     color: white;
 }
+
+/*styling for search results page*/
+.search-heading {
+    font-size: 2rem;
+    margin: 2rem;
+    text-align: left;
+}

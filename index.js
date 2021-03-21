@@ -91,11 +91,44 @@ app.get("/",ensureGuest,async(req,res)=>{
     res.render("home",{topItems: topItems,images: imgs});
 })
 
-//route to display the search results of E-Commerce
-//to be done not completed yet... the below post middleware
-// app.post("/",ensureGuest,(req,res)=>{
-//     console.log(req.body);
-// })
+//route to post the search keywords and filter
+let filter;
+let search;
+app.post("/",(req,res)=>{
+    filter = req.body.filter;
+    search = req.body.search;
+    res.redirect("search");
+})
+
+//route to get the search results
+app.get("/search",async(req,res)=>{
+    let searchQuery;
+    try {
+
+        if(filter==='All Categories')
+            searchQuery = `SELECT * FROM items WHERE (items.product_name LIKE '%${search}%' OR items.brand_name LIKE '%${search}%' OR items.prod_description LIKE '%${search}')`;
+        else
+            searchQuery = `SELECT * FROM items WHERE items.category='${filter}' AND (items.product_name LIKE '%${search}%' OR items.brand_name LIKE '%${search}%' OR items.prod_description LIKE '%${search}')`;
+        
+        let searchResults = await db(searchQuery);
+        let imgs=[];
+        for(let i=0;i<searchResults.length;i++)
+        {
+            let query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${searchResults[i].id} LIMIT 1`;
+            let attachResult = await db(query);
+            imgs.push(attachResult[0]);
+        }
+        console.log(searchResults,search,filter);
+        res.render("search",{results: searchResults,images: imgs,search: search,filter: filter});
+    } 
+    catch(e) {
+        console.log("Errror in SQL Query : ",e);
+    }
+    
+    
+})
+
+
 
 //route for seller login and signup
 app.use('/sellerAuth',require("./router/sellerAuth"));

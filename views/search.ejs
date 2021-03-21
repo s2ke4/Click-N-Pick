@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/buyerDashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+<body>
+    <%- include('partials/customerNav.ejs') %>
+
+    <% if(search=='') { %>
+        <h2 class="search-heading">All products in <%= filter%> ... </h2>
+    <% } else { %>   
+        <h2 class="search-heading">Search results for <%= search %> in <%= filter%> ... </h2>
+    <% } %>
+
+    <div class="wrapper">
+        <%for(let i=0;i < results.length;i++) { %>
+
+            <div class="card">
+                <a href="buyer/productinfo/<%=results[i].id%>">
+                    <div class="in-card">
+                        <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
+                        <h4 class="product-name"><%= results[i].product_name %></h4>
+                        <% if(results[i].discount > 0){ %>
+                            <h4>
+                            M.R.P : ₹ 
+                                <s>
+                                    <span style='color:black'><%= results[i].price %><span>
+                                </s>
+                            </h4>
+                            <h4 style='color:red'>
+                                ₹ <%= results[i].price - results[i].discount*(results[i].price)/100 %>
+                                <span style="color: #07db00;">(<%=results[i].discount%>% off)</span>
+                            </h4>
+                        <% }else{ %>
+                            <h4>₹ <%= results[i].price %></h4>
+                        <% } %>
+                    </div>
+                </a>
+                <button class="btn btn-primary">Add to Cart</button>
+            </div>
+
+        <% } %>
+    </div>
+
+
+</body>

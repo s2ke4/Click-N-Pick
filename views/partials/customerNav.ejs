@@ -40,24 +40,24 @@
                   <a class="nav-link" href="/buyer/cart">🛒Cart</a>
                 </li>
               </ul>
-              <select class="filter-bar aria-label="Default select example">
-                <option selected>Filter</option>
-                <option value="1">Groceries</option>
-                <option value="2">Electronics</option>
-                <option value="3">Clothing</option>
-                <option value="4">Footwear</option>
-                <option value="5">Stationary</option>
-                <option value="6">Novels</option>
-                <option value="7">Luggage</option>
-                <option value="8">Furniture</option>
-                <option value="9">Cosmetics</option>
-                <option value="10">Health and Medicine</option>
-                <option value="11">Games</option>
-                <option value="12">Home and Kitchen</option>
-              </select>
-              <form class="d-flex flex-grow-1 search-bar" action="/search" method="POST">
-                <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-outline-light" type="submit" method="POST">Search</button>
+              <form class="d-flex flex-grow-1 search-bar" action="/" method="POST">
+                <select class="filter-bar" name="filter" aria-label="Default select example">
+                  <option selected>All Categories</option>
+                  <option value="grocery">Groceries</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="footwear">Footwear</option>
+                  <option value="stationary">Stationary</option>
+                  <option value="novels">Novels</option>
+                  <option value="luggage">Luggage</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="cosmetics">Cosmetics</option>
+                  <option value="health and medicine">Health and Medicine</option>
+                  <option value="games">Games</option>
+                  <option value="home and kitchen">Home and Kitchen</option>
+                </select>
+                <input class="form-control me-2 search-box" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
               </form>
             <% }else{ %>
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -74,24 +74,24 @@
                   🛒Cart
                 </a>
               </ul>
-              <select class="filter-bar" aria-label="Default select example">
-                <option selected>Filter</option>
-                <option value="1">Groceries</option>
-                <option value="2">Electronics</option>
-                <option value="3">Clothing</option>
-                <option value="4">Footwear</option>
-                <option value="5">Stationary</option>
-                <option value="6">Novels</option>
-                <option value="7">Luggage</option>
-                <option value="8">Furniture</option>
-                <option value="9">Cosmetics</option>
-                <option value="10">Health and Medicine</option>
-                <option value="11">Games</option>
-                <option value="12">Home and Kitchen</option>
-              </select>
-              <form class="d-flex flex-grow-1 search-bar" action="/search" method="POST">
-                <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-outline-light" type="submit" method="POST">Search</button>
+              <form class="d-flex flex-grow-1 search-bar" action="/" method="POST">
+                <select class="filter-bar" name="filter" aria-label="Default select example">
+                  <option selected>All Categories</option>
+                  <option value="grocery">Groceries</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="footwear">Footwear</option>
+                  <option value="stationary">Stationary</option>
+                  <option value="novels">Novels</option>
+                  <option value="luggage">Luggage</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="cosmetics">Cosmetics</option>
+                  <option value="health and medicine">Health and Medicine</option>
+                  <option value="games">Games</option>
+                  <option value="home and kitchen">Home and Kitchen</option>
+                </select>
+                <input class="form-control me-2 search-box" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-outline-light" type="submit">Search</button>
               </form>
             <% } %>
           </div>
