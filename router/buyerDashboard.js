@@ -4,11 +4,13 @@ const conn = require("../connection");
 const util = require('util');
 const {ensureBuyer} = require("../middleware/authMiddleware");
 const db = util.promisify(conn.query).bind(conn);
+let buyer;
 
 // all the routes will came here
 
 //buyer dashboard route
 router.get("/",async(req,res)=>{
+    buyer = res.locals.user;
     let queryTopItems = `(SELECT * FROM items WHERE items.category='Grocery' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Electronics' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Clothing' LIMIT 4)
     UNION ALL (SELECT * FROM items WHERE items.category='Footwear' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Stationary' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Novels' LIMIT 4)
     UNION ALL (SELECT * FROM items WHERE items.category='Luggage' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Furniture' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Cosmetics' LIMIT 4)
@@ -62,6 +64,18 @@ router.get("/wishlist",ensureBuyer,(req,res)=>{
 // route for proceed order
 router.get("/proceedOrder",ensureBuyer,(req,res)=>{
     res.render("buyer/proceedOrder");
+})
+
+// router for adding item in cart
+router.post("/addToCart/:id",ensureBuyer,async(req,res)=>{
+    try {
+        let query = `SELECT * FROM cart WHERE cart.user_id=${buyer.id} AND cart.item_id = ${req.params.id};`;
+        let result = await db(query);
+        console.log(result);
+    } catch (error) {
+        console.log("Error While Adding Item In Cart ",error);
+        res.send("Internal Server Error");
+    }
 })
 
 module.exports = router;

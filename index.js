@@ -61,6 +61,26 @@ conn.connect((err)=>{
         }
         console.log("attachment table created successfully");
     })
+
+    // creating cart table
+    query1 = "CREATE TABLE IF NOT EXISTS cart(user_id INT ,item_id INT,quantity INT,PRIMARY KEY(user_id,item_id),FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE,FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error While Creating Cart table");
+            throw error;
+        }
+        console.log("cart table created successfully");
+    })
+
+    // creating wishList table
+    query1 = "CREATE TABLE IF NOT EXISTS wishList(user_id INT,item_id INT,PRIMARY KEY(user_id,item_id),FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE,FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error While Creating wishList table");
+            throw error;
+        }
+        console.log("wishList table created successfully");
+    })
 })
 
 app.use(express.static("./public/"));
