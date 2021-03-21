@@ -23,7 +23,7 @@
                                     </s>
                                 </h3>
                                 <h3 style='color:red'>
-                                    ₹ <%= items[i].price - items[i].discount*(items[i].price)/100 %>
+                                    ₹ <%= (items[i].price - items[i].discount*(items[i].price)/100).toFixed(2) %>
                                     <span style="color: #07db00;">(<%=items[i].discount%>% off)</span>
                                 </h3>
                             <% }else{ %>

@@ -28,7 +28,7 @@
                                     </s>
                                 </h4>
                                 <h4 style='color:red'>
-                                    ₹ <%= topItems[i].price - topItems[i].discount*(topItems[i].price)/100 %>
+                                    ₹ <%= (topItems[i].price - topItems[i].discount*(topItems[i].price)/100).toFixed(2) %>
                                     <span style="color: #07db00;">(<%=topItems[i].discount%>% off)</span>
                                 </h4>
                             <% }else{ %>
@@ -58,7 +58,7 @@
                                     </s>
                                 </h4>
                                 <h4 style='color:red'>
-                                    ₹ <%= topItems[j].price - topItems[j].discount*(topItems[j].price)/100 %>
+                                    ₹ <%= (topItems[j].price - topItems[j].discount*(topItems[j].price)/100).toFixed(2) %>
                                     <span style="color: #07db00;">(<%=topItems[j].discount%>% off)</span>
                                 </h4>
                             <% }else{ %>
