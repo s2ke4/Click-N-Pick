@@ -67,15 +67,26 @@ router.get("/proceedOrder",ensureBuyer,(req,res)=>{
 })
 
 // router for adding item in cart
-router.post("/addToCart/:id",ensureBuyer,async(req,res)=>{
+router.put("/addToCart",ensureBuyer,async(req,res)=>{
+
     try {
-        let query = `SELECT * FROM cart WHERE cart.user_id=${buyer.id} AND cart.item_id = ${req.params.id};`;
-        let result = await db(query);
-        console.log(result);
+        console.log(req.body);
+        const {itemId,userId} = req.body;
+        console.log("HELLO")
+        console.log(itemId);
+        console.log(userId);
+        // let query = `SELECT * FROM cart WHERE cart.user_id=${userId} AND cart.item_id = ${itemId};`;
+        // let result = await db(query);
+        // console.log(result);
     } catch (error) {
         console.log("Error While Adding Item In Cart ",error);
         res.send("Internal Server Error");
     }
+})
+
+router.post("/arechaljabhai",(req,res)=>{
+
+    console.log(req)
 })
 
 module.exports = router;

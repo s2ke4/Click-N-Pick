@@ -3,6 +3,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <body>
     <%-include("partials/customerNav") %>
+    <h2 class="arechaljabhai">arechaljabhai</h2>
     <%for(let i=0;i < topItems.length;i++) { %>
         
         <%if(i==0) { %>
@@ -37,7 +38,9 @@
                         </div>
                     </a>
                     <% let disable = user?"HELLO":"disabled" %>
-                    <button class="btn btn-primary" <%=disable%> >Add To Cart</button>
+                    <form>
+                    <button class="btn btn-primary" onclick="addToCart(<%=topItems[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >Add To Cart</button>
+                </form>
                 </div>
             <% if(i+1 < topItems.length && topItems[i+1].category!=topItems[i].category) { %>
         </div>
@@ -67,7 +70,7 @@
                         </div>
                     </a>
                     <% let disable = user?"HELLO":"disabled" %>
-                    <button class="btn btn-primary" <%=disable%> >Add To Cart</button>
+                    <button class="btn btn-primary" onclick="addToCart(<%=topItems[j].id%>,<%=user?user.id:-1%>)" <%=disable%> >Add To Cart</button>
                 </div>
         
                 <% c = j %>
@@ -75,4 +78,6 @@
         <% i = c %> 
     </div>
     <% } %>
+    
+<script src="/js/addCart.js"></script>
 </body>

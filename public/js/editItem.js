@@ -32,7 +32,6 @@ deleteItemBtn.addEventListener("click",(e)=>{
 })
 
 const updateItem = (id)=>{
-    console.log("HELLO")
     var formData = new FormData();
     var request = new XMLHttpRequest();
     let productName = productNameInp.value.trim().replaceAll('"',"'");
@@ -65,7 +64,6 @@ const updateItem = (id)=>{
         formData.append("productColour",prodColor);
         formData.append("category",category);
         formData.append("description",des);
-        console.log(id);
         request.open("PUT",`/seller/editItem/${id}`,true);
         request.send(formData);
         window.location.href = "/";
