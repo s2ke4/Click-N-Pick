@@ -160,6 +160,7 @@ img{
     outline: none;
     cursor: pointer;
     text-align: center;
+    margin-bottom: 7rem;
 }
 @media screen and (max-width: 1100px) {
     .add-Item{
