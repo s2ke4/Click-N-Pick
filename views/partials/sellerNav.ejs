@@ -8,11 +8,11 @@
 </head>
 <body>
     <ul class="topnav">
-        <li><a class="active" href="/seller">E-Commerce</a></li>
-        <li><a href="/seller">Home</a></li>
-        <li><a href="/seller/addItem">Add Items</a></li>
-        <li><a href="/seller/orders">Orders</a></li>
-        <li class="right"><a href="/sellerAuth/logout">LogOut</a></li>
+        <li><a href="/seller" class="brand-logo">E-Commerce</a></li>
+        <li><a href="/seller" class="<%= path === '/seller' ? 'active' : '' %> nav-link">Home</a></li>
+        <li><a href="/seller/addItem" class="<%= path === '/seller/addItem' ? 'active' : '' %> nav-link" >Add Items</a></li>
+        <li><a href="/seller/orders" class="<%= path === '/seller/orders' ? 'active' : '' %> nav-link">Orders</a></li>
+        <li class="right"><a href="/sellerAuth/logout" class="nav-link">LogOut</a></li>
     </ul>
 </body>
 </html>
