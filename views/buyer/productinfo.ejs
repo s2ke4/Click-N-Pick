@@ -34,11 +34,13 @@
                 <h5 style="color: #07db00;"><%=item.discount%> % off</h5>
             </div>
             <div class="button-area">
+                <% let disable = user?"":"disabled" %>
                 <div class="btn1" >
-                    <button class="toWishlist">Add to Wishlist</button>
+                    <button class="toWishlist" <%=disable%>>Add to Wishlist</button>
                 </div>
                 <div class="btn2" >
-                    <button class="toCart">Add to Cart</button>
+                    
+                    <button class="toCart"  <%=disable%>>Add to Cart</button>
                 </div>
             </div>
             <h5 style="font-size: 16px;"> Color : <%=item.product_color%></h5>

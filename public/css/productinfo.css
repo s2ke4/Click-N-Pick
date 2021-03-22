@@ -54,6 +54,10 @@ button{
     border: none;
     width: 110px;
 }
+button:disabled,
+button[disabled]{
+    cursor: not-allowed;
+}
 
 .btn1{
     margin: 10px 10px 10px 0;

@@ -58,7 +58,7 @@
                             <% } %>
                         </div>
                     </a>
-                    <% let disable = user?"HELLO":"disabled" %>
+                    <% let disable = user?"":"disabled" %>
                     <button class="btn btn-primary" onclick="addToCart(<%=topItems[j].id%>,<%=user?user.id:-1%>)" <%=disable%> >Add To Cart</button>
                 </div>
         
