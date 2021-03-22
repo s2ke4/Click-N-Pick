@@ -1,11 +1,14 @@
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
 
 .wrapper{
+    font-family:'Montserrat', serif, bold ;
     padding: 40px;
     display:grid;
     grid-gap: 3rem;
     justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    
 }
 
 
@@ -23,6 +26,7 @@ h3{
     border-radius: 2px;
     border: 10px solid #fff;
     transition: .5s ease;
+    
 }
 
 /* .card:hover{

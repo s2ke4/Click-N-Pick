@@ -15,22 +15,17 @@
                     <div class="card">
                         <div class="in-card">
                             <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
-                            <h3><%= items[i].product_name %></h3>
+                            <h5><%= items[i].product_name.substring(0, 20) %></h5>
                             <% if(items[i].discount > 0){ %>
-                                <h3>
-                                M.R.P : ₹ 
-                                    <s>
-                                        <span style='color:black'><%= items[i].price %><span>
-                                    </s>
-                                </h3>
-                                <h3 style='color:red'>
+                                <h5 style='color:black'>
                                     ₹ <%= (items[i].price - items[i].discount*(items[i].price)/100).toFixed(2) %>
-                                    <span style="color: #07db00;">(<%=items[i].discount%>% off)</span>
-                                </h3>
+                                    <s><span style='color:grey; font-size: 15px' ><%= items[i].price %><span></s>
+                                    <span style="color: #07db00; font-size: 17px;">(<%=items[i].discount%>% off)</span>
+                                </h5>
                             <% }else{ %>
-                                <h3>₹ <%= items[i].price %></h3>
+                                <h5>₹ <%= items[i].price %></h3>
                             <% } %>
-                            <h3>quantity left- <%= items[i].num_of_items%></h3>
+                            <h5 style="font-size: 17px;">quantity left- <%= items[i].num_of_items%></h5>
                         </div>
                         <div class="for-btn">
                             <button class="cart-btn"> <a href="seller/edit/<%=items[i].id%>"> EDIT</a> </button>
