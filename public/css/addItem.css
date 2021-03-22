@@ -34,7 +34,7 @@ body{
     position: relative;
 }
   
-.input-box input,textarea,select {
+.input-box input,textarea,.inp-box select {
     width: 100%;
     padding: 10px 0 2px 0;
     font-size: 16px;
@@ -160,7 +160,9 @@ img{
     outline: none;
     cursor: pointer;
     text-align: center;
+    margin-bottom: 7rem;
 }
+
 @media screen and (max-width: 1100px) {
     .add-Item{
         flex-direction: column;
@@ -173,7 +175,7 @@ img{
     }
   }
 
-  .add-item-btn:hover{
-      transform: scale(1.2);
-      transition: all 1s;
-  }
+.add-item-btn:hover{
+    transform: scale(1.2);
+    transition: all 1s;
+}
