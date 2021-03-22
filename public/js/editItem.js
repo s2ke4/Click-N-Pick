@@ -23,6 +23,8 @@ document.getElementById("description").addEventListener("input",function(){
     this.style.height = ((this.scrollHeight)+4) + 'px';
 })
 
+document.getElementById("description").style.height = (document.getElementById("description").scrollHeight + 4) + 'px';
+
 editItemBtn.addEventListener("click",(e)=>{
     e.preventDefault();
 })
