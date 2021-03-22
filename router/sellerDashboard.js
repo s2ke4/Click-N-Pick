@@ -96,7 +96,7 @@ router.get("/edit/:id",async(req,res)=>{
         {
             attachments.push(result[i].imgPath)
         }
-        res.render("seller/editItem",{item,attachments});
+        res.render("seller/editItem",{item,attachments,path:'editing item'});
         return;
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);

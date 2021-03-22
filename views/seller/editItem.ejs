@@ -10,7 +10,7 @@
                 <div class="slide-container">
                     <% attachments.forEach((img)=>{ %>
                         <div class="slide fade">
-                            <abbr class="del" onclick="removeImg('<%=img%>',this)" title="Remove This Image">X</abbr>
+                            <abbr class="del" onclick="removeImg('<%=img%>',this)" title="Remove This Image" style="text-decoration: none; cursor: pointer;">X</abbr>
                             <img src="/uploads/<%=img%>" alt="product image">
                         </div>
                     <% }) %>
