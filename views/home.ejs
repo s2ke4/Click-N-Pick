@@ -46,7 +46,7 @@
                     <a href="buyer/productinfo/<%=topItems[j].id%>">
                         <div class="in-card">
                             <img src="/uploads/<%= images[j].imgPath %>" alt={title} class="img"></img>
-                            <h5 class="product-name"><%= topItems[j].product_name %></h5>
+                            <h5 class="product-name"><%= topItems[j].product_name.substring(0, 20) %></h5>
                             <% if(topItems[j].discount > 0){ %>
                                 <h5 style='color:black'>
                                     ₹ <%= (topItems[j].price - topItems[j].discount*(topItems[j].price)/100).toFixed(0) %>
