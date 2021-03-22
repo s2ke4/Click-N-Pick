@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
 
 
-.container{
+.cont{
     
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, .8fr));
@@ -25,7 +25,7 @@
     max-height: 500px;
 }
 
-.InfoContainer {
+.Infocont {
     font-family: "Rasa", serif;
     color: #00344b;
     margin-left: 2rem;
@@ -130,7 +130,7 @@ button{
     }
 }
 /* container for uploaded image */
-.slide-container{
+.slide-cont{
     /* display: none; */
     justify-content: center;
     align-items: center;
@@ -141,28 +141,28 @@ button{
 img{
     max-height: 500px;
 }
-.slide-container .slide {
+.slide-cont .slide {
     display: none;
     width: 100%;
   }
   
-  .slide-container .slide.fade {
+  .slide-cont .slide.fade {
     animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
   }
   
-  .slide-container .slide img {
+  .slide-cont .slide img {
     width: 100%;
   }
 
 
-.dots-container {
+.dots-cont {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
 }
 
-.dots-container .dot {
+.dots-cont .dot {
   cursor: pointer;
   margin: 5px;
   width: 20px;
@@ -172,7 +172,7 @@ img{
   background-color: #dfd6ce;
 }
 
-.dots-container .dot.active {
+.dots-cont .dot.active {
   border: 2px solid rgb(71, 71, 255);
 }
 
