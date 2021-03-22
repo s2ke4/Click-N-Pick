@@ -26,9 +26,55 @@ router.get("/",async(req,res)=>{
     res.render("home",{topItems: topItems,images: imgs})
 })
 
+// router to delete item from cart
+router.delete("/deleteFromCart",async(req,res)=>{
+    try {
+        const {itemId,userId} = req.body;
+        let query = `DELETE FROM cart WHERE user_id=${userId} AND item_id=${itemId};`;
+        await db(query); 
+        console.log("Item Deleted From Cart Successfully")
+    } catch (error) {
+        console.log("Error While Deleting Item From Cart ",error);
+    }
+})
+
+// put route for updating quantity in user cart
+router.put("/updateCart",async(req,res)=>{
+    try {
+        const {quantity,itemId,userId} = req.body;
+        let query = `UPDATE cart SET quantity=${quantity} WHERE user_id=${userId} AND item_id=${itemId};`;
+        await db(query); 
+        console.log("Cart Updated Successfully")
+    } catch (error) {
+        console.log("Error While Updating Quantity In Cart ",error);
+    }
+})
+
 //route for cart
-router.get("/cart",ensureBuyer,(req,res)=>{
-    res.render("buyer/cart")
+router.get("/cart",ensureBuyer,async(req,res)=>{
+    try {
+        let query = `SELECT * FROM cart WHERE cart.user_id = ${res.locals.user.id};`;
+        let result = await db(query);
+        let items = [],quantity,price,name,img,id;
+        for(let i=0;i<result.length;i++)
+        {
+            quantity = result[i].quantity;
+            id = result[i].item_id;
+            query = `SELECT * FROM items WHERE items.id=${id};`;
+            let result2 = await db(query);
+            name = result2[0].product_name;
+            price =(result2[0].price - result2[0].discount*(result2[0].price)/100).toFixed(0);
+            query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
+            result2 = await db(query);
+            img = result2[0].imgPath;
+            let obj = {id,name,price,quantity,img};
+            items.push(obj);
+        }
+        res.render("buyer/cart",{items});
+    } catch (error) {
+        console.log("Error While Fetching Data For Cart" ,error);
+        res.send("Internal Server Error")
+    }
 })
 
 //productinfo 
@@ -67,26 +113,18 @@ router.get("/proceedOrder",ensureBuyer,(req,res)=>{
 })
 
 // router for adding item in cart
-router.put("/addToCart",ensureBuyer,async(req,res)=>{
+router.post("/addToCart",ensureBuyer,async(req,res)=>{
 
     try {
-        console.log(req.body);
         const {itemId,userId} = req.body;
-        console.log("HELLO")
-        console.log(itemId);
-        console.log(userId);
-        // let query = `SELECT * FROM cart WHERE cart.user_id=${userId} AND cart.item_id = ${itemId};`;
-        // let result = await db(query);
-        // console.log(result);
+        let query = `INSERT INTO cart VALUES (${userId},${itemId},1) ON DUPLICATE KEY UPDATE quantity = quantity + 1;`;
+        await db(query);
+        console.log("Item Added To Cart Successfully")
     } catch (error) {
         console.log("Error While Adding Item In Cart ",error);
         res.send("Internal Server Error");
     }
 })
 
-router.post("/arechaljabhai",(req,res)=>{
-
-    console.log(req)
-})
 
 module.exports = router;

@@ -39,8 +39,9 @@
                     <button class="toWishlist" <%=disable%>>Add to Wishlist</button>
                 </div>
                 <div class="btn2" >
-                    
-                    <button class="toCart"  <%=disable%>>Add to Cart</button>
+                    <button class="cart-btn toCart" onclick="addToCart(this,<%=item.id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                    </button>
                 </div>
             </div>
             <h5 style="font-size: 16px;"> Color : <%=item.product_color%></h5>
@@ -103,4 +104,5 @@
     </footer>
     <!-- Footer -->
     <script src="/js/productinfo.js"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script> 
 </body>

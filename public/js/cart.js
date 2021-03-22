@@ -4,42 +4,72 @@ let inp = document.getElementsByClassName("number");
 let pricePerItem = document.getElementsByClassName("price-per-item");
 let partial_total = document.getElementsByClassName("total-per-item");
 let totalSum = document.getElementsByClassName("total-amount")[0];
-for(let i=0;i<inc.length;i++)
-{
-    inc[i].addEventListener("click",()=>{
-        let val = inp[i].value;
-        inp[i].value =  parseInt(val) + 1;
-        updateValue(i);
-    })
-    dec[i].addEventListener("click",()=>{
-        let val = parseInt(inp[i].value);
-        if(val > 1){
-            inp[i].value =  val - 1;
-            updateValue(i);
-        }
-    })
-    inp[i].addEventListener("blur",()=>{
-        if(inp[i].value.trim()=="" || parseInt(inp[i].value) <1){
-            inp[i].value = "1";
-        }
-        updateValue(i);
-    })
-    inp[i].addEventListener("change",()=>{
-        updateValue(i);
-    })
-    inp[i].addEventListener("input",()=>{
-        if(inp[i].value.trim()=="" || parseInt(inp[i].value) <1){
-            ;
-        }else{
-            updateValue(i);
-        }
-    })
+
+const increment = (e,itemId,userId)=>{
+    let parent = e.parentNode;
+    let input = parent.getElementsByClassName("number")[0];
+    let val = input.value;
+    input.value =  parseInt(val) + 1;
+    let tr = parent.parentNode.parentNode.parentNode;
+    updateValue(tr,parseInt(input.value),userId,itemId,true);
 }
 
-const updateValue = (i)=>{
-    let val = parseInt(pricePerItem[i].innerText);
-    let num = Math.max(1,parseInt(inp[i].value));
-    partial_total[i].innerText = val*num;
+const decrement = (e,itemId,userId)=>{
+    let parent = e.parentNode;
+    let input = parent.getElementsByClassName("number")[0];
+    let val = input.value;
+    if(parseInt(val) > 1){
+        input.value =  parseInt(val) - 1;
+        let tr = parent.parentNode.parentNode.parentNode;
+        updateValue(tr,parseInt(input.value),userId,itemId,true);
+    }
+}
+
+const handleBlur = (e,itemId,userId)=>{
+    let parent = e.parentNode;
+    let input = parent.getElementsByClassName("number")[0];
+    let val = input.value;
+    console.log("HELLO")
+    if(val.trim()=="" || parseInt(val) <1){
+        input.value = "1";
+    }
+    let tr = parent.parentNode.parentNode.parentNode;
+    updateValue(tr,parseInt(input.value),userId,itemId,true);
+}
+
+const handleChange = (e,itemId,userId)=>{
+    let parent = e.parentNode;
+    let input = parent.getElementsByClassName("number")[0];
+    let tr = parent.parentNode.parentNode.parentNode;
+    updateValue(tr,parseInt(input.value),userId,itemId,false);
+}
+
+const handleInput = (e,itemId,userId)=>{
+    let parent = e.parentNode;
+    let input = parent.getElementsByClassName("number")[0];
+    let val = input.value;
+    let tr = parent.parentNode.parentNode.parentNode;
+    if(val.trim()=="" || parseInt(val) <1){
+        ;
+    }else{
+        updateValue(tr,parseInt(input.value),userId,itemId,false);
+    }
+}
+
+const updateValue = async(tr,value,userId,itemId,request)=>{
+    let val = parseInt(tr.getElementsByClassName("price-per-item")[0].innerText);
+    let num = Math.max(1,value);
+    tr.getElementsByClassName("total-per-item")[0].innerText = val*num;
+    if(request){
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', '/buyer/updateCart', true);
+        await xhr.setRequestHeader('Content-Type', 'application/json');
+        await xhr.send(
+            JSON.stringify({
+                quantity:num,userId,itemId
+            }) 
+        );
+    }
     updateTotalSum();
 }
 
@@ -51,3 +81,20 @@ const updateTotalSum = ()=>{
     }
     totalSum.innerText = sum;
 }
+
+const handleDelete = async(e,itemId,userId)=>{
+    let tr = e.parentNode.parentNode;
+    let table = tr.parentNode;
+    table.removeChild(tr);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/buyer/deleteFromCart', true);
+    await xhr.setRequestHeader('Content-Type', 'application/json');
+    await xhr.send(
+        JSON.stringify({
+            userId,itemId
+        }) 
+    );
+    updateTotalSum();
+}
+
+updateTotalSum();

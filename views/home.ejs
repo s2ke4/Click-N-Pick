@@ -33,8 +33,10 @@
                             <% } %>
                         </div>
                     </a>
-                    <% let disable = user?"HELLO":"disabled" %>
-                    <button class="btn btn-primary" onclick="addToCart(<%=topItems[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >Add To Cart</button>
+                    <% let disable = user?"":"disabled" %>
+                    <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=topItems[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                    </button>
                 </div>
             <% if(i+1 < topItems.length && topItems[i+1].category!=topItems[i].category) { %>
         </div>
@@ -59,7 +61,9 @@
                         </div>
                     </a>
                     <% let disable = user?"":"disabled" %>
-                    <button class="btn btn-primary" onclick="addToCart(<%=topItems[j].id%>,<%=user?user.id:-1%>)" <%=disable%> >Add To Cart</button>
+                    <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=topItems[j].id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                    </button>
                 </div>
         
                 <% c = j %>
