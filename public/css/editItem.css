@@ -176,7 +176,7 @@ img{
       transform: scale(1.2);
   }
 
-  .cross{
+  .del{
       color: red;
       font-size: 18px;
       right: 0;
@@ -190,7 +190,7 @@ img{
       transition: all 1s;
       /* margin-left: 7px; */
   }
-  .cross:hover{
+  .del:hover{
     transform: scale(1.1);
   }
   .remove-item-btn{
