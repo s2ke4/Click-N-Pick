@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="in-card">
                             <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
-                            <h5><%= items[i].product_name.substring(0, 20) %></h5>
+                            <h5 class="prod-name"><%= items[i].product_name.substring(0, 20) %></h5>
                             <% if(items[i].discount > 0){ %>
                                 <h5 style='color:black'>
                                     ₹ <%= (items[i].price - items[i].discount*(items[i].price)/100).toFixed(2) %>
