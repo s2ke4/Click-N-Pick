@@ -74,6 +74,31 @@ router.post("/addItem",upload.array("photos",100),async(req,res)=>{
     }
 })
 
+//route for product info
+router.get("/productInfo/:id",async(req,res)=>{
+    try {
+        let query = `SELECT * FROM items WHERE items.id=${req.params.id} AND items.seller_id = ${res.locals.user.id};`
+        let result = await db(query);
+        if(result.length==0){
+            res.render("error")
+            return;
+        }
+        let item = result[0];
+        query = `SELECT * FROM attachment WHERE attachment.item_id=${item.id};`;
+        result = await db(query);
+        let attachments = [];
+        for(let i=0;i<result.length;i++)
+        {
+            attachments.push(result[i].imgPath)
+        }
+        res.render("seller/productInfo",{item,attachments,path:'product info'});
+        return;
+    } catch (error) {
+        console.log("Error While showing product info ",error);
+        res.send("Internal Server Error");
+    }
+})
+
 //to edit an item
 router.get("/edit/:id",async(req,res)=>{
     try {

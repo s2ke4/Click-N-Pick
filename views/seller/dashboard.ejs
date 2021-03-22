@@ -13,7 +13,8 @@
             <% if(locals.items && items.length > 0){ %>
                 <% for(let i=0;i< items.length;i++){ %>
                     <div class="card">
-                        <div class="in-card">
+                        <a href="/seller/productInfo/<%=items[i].id%>">
+                            <div class="in-card">
                             <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
                             <h5 class="prod-name"><%= items[i].product_name.substring(0, 20) %></h5>
                             <% if(items[i].discount > 0){ %>
@@ -27,6 +28,7 @@
                             <% } %>
                             <h5 style="font-size: 17px;">quantity left- <%= items[i].num_of_items%></h5>
                         </div>
+                        </a>
                         <div class="for-btn">
                             <button class="cart-btn"> <a href="seller/edit/<%=items[i].id%>"> EDIT</a> </button>
                         </div>

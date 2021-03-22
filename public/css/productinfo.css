@@ -59,6 +59,11 @@ button[disabled]{
     cursor: not-allowed;
 }
 
+.toWishlist a{
+    text-decoration: none;
+    color: white;
+}
+
 .btn1{
     margin: 10px 10px 10px 0;
 }
@@ -79,6 +84,10 @@ button[disabled]{
     transition: all .2s ease;
     color: #fff;
     outline: none;
+}
+
+.toWishlist a:hover{
+    color: rgb(0, 0, 0);
 }
 
 .toWishlist:hover{

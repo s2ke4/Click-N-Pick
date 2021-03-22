@@ -11,6 +11,11 @@
     
 }
 
+.card a,.card a:hover{
+    color: black;
+    text-decoration: none;
+}
+
 
 h3{
     font-size: 1.1rem;

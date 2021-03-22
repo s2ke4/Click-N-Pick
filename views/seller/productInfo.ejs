@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="/css/productinfo.css">
+
+
+<%-include("../partials/customerNav") %>
+<body>
+    <div class="cont">
+        <div className="image-area">
+            <div class="uploadImage">
+                <div class="slide-cont">
+                    <% attachments.forEach((img)=>{ %>
+                        <div class="slide fade">
+                            <img src="/uploads/<%=img%>" alt="product image">
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="dots-cont">
+                    <% attachments.forEach((img)=>{ %>
+                        <span class="dot"></span>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <div class="InfoContainer">
+            <h3><%=item.product_name%></h3>
+            <h5 style="font-size: 16px;"><%=item.brand_name%></h5>
+            <div class="amount">
+                <div class="price">
+                    <h4>
+                        Price: ₹ <%= (item.price - item.discount*(item.price)/100).toFixed(0) %>  &nbsp 
+                        <s> <span style='color:grey; font-size: 18px'><%=   item.price %><span></s>
+                    </h4>
+                </div>
+                
+                <h5 style="color: #07db00;"><%=item.discount%> % off</h5>
+            </div>
+            <div class="button-area">
+                <div class="btn1" >
+                    <button class="toWishlist"><a href="/seller/edit/<%=item.id%>">Edit Product</a></button>
+                </div>
+            </div>
+            <h5 style="font-size: 16px;"> Color : <%=item.product_color%></h5>
+            <p><strong>Description: </strong><%=item.prod_description%></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+       
+        <div class="container p-4">
+
+            <section class="mb-4" style="padding-top: 2rem; padding-bottom: 2rem;">
+                <h2>
+                    E-Commerce
+                </h2>
+                
+            </section>
+            
+            <section>
+                <div class="row">
+                <div class="col">
+                    <img src="/asset/truck-1.jpg" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                    <h5 style="padding-top: 1rem;">Fast and Free Delivery *</h5>
+                </div>
+                <div class="col">
+                    <img src="/asset/easy-returns.png" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                    <h5 style="padding-top: 1rem;">Easy Returns within 15 days</h5>
+                </div>
+                <div class="col">
+                    <img src="/asset/customercare.png" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                    <h5 style="padding-top: 1rem;">24 x 7 Customer Support</h5>
+                </div>
+                </div>
+            </section>
+
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-sm btn-outline-light text-center" style="margin: 2rem;">About Us</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-sm btn-outline-success" style="margin: 2rem;">Support Us</a>
+                </div>
+                <div class="col">
+                    <a href="mailto:doubtbin@gmail.com" class="btn btn-sm btn-outline-primary" style="margin: 2rem;">Contact Us</a>
+                </div>
+            </div>
+
+            <p style="color: grey; font-size: 0.75rem;">*Delivery is free for orders above ₹499/-</p>
+
+        </div>
+
+    
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+        <a class="text-white" href="https://github.com/s2ke4">S2KE4</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <script src="/js/productinfo.js"></script>
+</body>
