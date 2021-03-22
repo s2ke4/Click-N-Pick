@@ -40,19 +40,19 @@ router.get("/",async(req,res)=>{
         let attachResult = await db(query);
         attachment.push(attachResult[0]);
     }
-    res.render("seller/dashboard",{items:result,images:attachment})
+    res.render("seller/dashboard",{items:result,images:attachment,path:'/seller'})
 })
 
 //Add items route for dashboard
 router.get("/addItem",(req,res)=>{
     seller = res.locals.user;
-    res.render("seller/addItem");
+    res.render("seller/addItem",{path:'/seller/addItem'});
     
 })
 
 //Orders route to view the orders received by the seller
 router.get("/orders",(req,res)=>{
-    res.render("seller/orders");
+    res.render("seller/orders",{path:'/seller/orders'});
 })
 
 //router for adding item
@@ -96,7 +96,7 @@ router.get("/edit/:id",async(req,res)=>{
         {
             attachments.push(result[i].imgPath)
         }
-        res.render("seller/editItem",{item,attachments});
+        res.render("seller/editItem",{item,attachments,path:'editing item'});
         return;
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);
