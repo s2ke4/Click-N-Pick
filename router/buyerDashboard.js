@@ -38,6 +38,18 @@ router.delete("/deleteFromCart",async(req,res)=>{
     }
 })
 
+// router to delete item from wishlist
+router.delete("/deleteFromWishlist",async(req,res)=>{
+    try {
+        const {itemId,userId} = req.body;
+        let query = `DELETE FROM wishlist WHERE user_id=${userId} AND item_id=${itemId};`;
+        await db(query); 
+        console.log("Item Deleted From wishlist Successfully")
+    } catch (error) {
+        console.log("Error While Deleting Item From wishlist ",error);
+    }
+})
+
 // put route for updating quantity in user cart
 router.put("/updateCart",async(req,res)=>{
     try {
@@ -87,6 +99,12 @@ router.get("/productinfo/:id",async(req,res)=>{
             return;
         }
         let item = result[0];
+        let inWishList =false;
+        if(res.locals.user){
+            query = `SELECT * FROM wishlist WHERE item_id=${item.id} AND user_id = ${res.locals.user.id};`;
+            let result2 = await db(query);
+            inWishList = result2.length > 0;
+        }
         query = `SELECT attachment.imgPath FROM attachment WHERE attachment.item_id=${item.id}`
         result = await db(query);
         let attachments = [];
@@ -94,7 +112,7 @@ router.get("/productinfo/:id",async(req,res)=>{
         {
             attachments.push(result[i].imgPath)
         }
-        res.render("buyer/productinfo",{item,attachments});
+        res.render("buyer/productinfo",{item,attachments,inWishList});
         return;
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);
@@ -103,8 +121,29 @@ router.get("/productinfo/:id",async(req,res)=>{
 })
 
 //route for wishlist
-router.get("/wishlist",ensureBuyer,(req,res)=>{
-    res.render("buyer/wishlist")
+router.get("/wishlist",ensureBuyer,async(req,res)=>{
+    try {
+        let query = `SELECT * FROM wishlist WHERE user_id = ${res.locals.user.id};`;
+        let result = await db(query);
+        let items = [],price,name,img,id;
+        for(let i=0;i<result.length;i++)
+        {
+            id = result[i].item_id;
+            query = `SELECT * FROM items WHERE items.id=${id};`;
+            let result2 = await db(query);
+            name = result2[0].product_name;
+            price =(result2[0].price - result2[0].discount*(result2[0].price)/100).toFixed(0);
+            query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
+            result2 = await db(query);
+            img = result2[0].imgPath;
+            let obj = {id,name,price,img};
+            items.push(obj);
+        }
+        res.render("buyer/wishlist",{items})
+    } catch (error) {
+        console.log("Error While Fetching Data for wishlist ",error);
+        res.send("Internal Server Error")
+    }
 })
 
 // route for proceed order
@@ -122,6 +161,19 @@ router.post("/addToCart",ensureBuyer,async(req,res)=>{
         console.log("Item Added To Cart Successfully")
     } catch (error) {
         console.log("Error While Adding Item In Cart ",error);
+        res.send("Internal Server Error");
+    }
+})
+
+//router for adding item in wishlist
+router.post("/addToWishlist",async(req,res)=>{
+    try {
+        const {itemId,userId} = req.body;
+        let query = `REPLACE INTO wishlist VALUES (${userId},${itemId});`;
+        await db(query);
+        console.log("Item Added To wishlist Successfully")
+    } catch (error) {
+        console.log("Error While Adding Item In wishlist ",error);
         res.send("Internal Server Error");
     }
 })

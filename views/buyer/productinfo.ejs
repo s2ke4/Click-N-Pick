@@ -36,7 +36,14 @@
             <div class="button-area">
                 <% let disable = user?"":"disabled" %>
                 <div class="btn1" >
-                    <button class="toWishlist" <%=disable%>>Add to Wishlist</button>
+                    <% let addbtn = inWishList?"none":"block" %>
+                    <% let rembtn = !inWishList?"none":"block" %>
+                    <button style="display: <%=addbtn%>;" class="toWishlist" onclick="addToWishlist(this,<%=item.id%>,<%=user?user.id:-1%>)" <%=disable%>>
+                        Add To Wishlist 
+                    </button>
+                    <button style="display: <%=rembtn%>;" onclick="removeFromWishlist(this,<%=item.id%>,<%=user?user.id:-1%>)" class="removefromWishlist" <%=disable%>>
+                        Remove From Wishlist
+                    </button>
                 </div>
                 <div class="btn2" >
                     <button class="cart-btn toCart" onclick="addToCart(this,<%=item.id%>,<%=user?user.id:-1%>)" <%=disable%> >

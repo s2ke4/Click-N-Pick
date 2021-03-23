@@ -58,3 +58,32 @@ function cartRemove(e){
     // let button =this;
     e.classList.remove('clicked');
 }
+
+
+const addToWishlist = async(cur,itemId,userId)=>{
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "/buyer/addToWishlist", true);
+    await xhr.setRequestHeader('Content-Type', 'application/json');
+    var resp = await xhr.send(
+        JSON.stringify({
+            itemId,userId
+        }) 
+    );
+    let parent = cur.parentNode;
+    cur.style.display = "none";
+    parent.getElementsByClassName("removefromWishlist")[0].style.display = "block";
+}
+
+const removeFromWishlist = async(cur,itemId,userId)=>{
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', "/buyer/deleteFromWishlist", true);
+    await xhr.setRequestHeader('Content-Type', 'application/json');
+    var resp = await xhr.send(
+        JSON.stringify({
+            itemId,userId
+        }) 
+    );
+    let parent = cur.parentNode;
+    cur.style.display = "none";
+    parent.getElementsByClassName("toWishlist")[0].style.display = "block";
+}
