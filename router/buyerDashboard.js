@@ -169,11 +169,41 @@ router.post("/addToCart",ensureBuyer,async(req,res)=>{
 router.post("/addToWishlist",async(req,res)=>{
     try {
         const {itemId,userId} = req.body;
-        let query = `REPLACE INTO wishlist VALUES (${userId},${itemId});`;
+        let query = `INSERT INTO wishlist VALUES (${userId},${itemId});`;
         await db(query);
         console.log("Item Added To wishlist Successfully")
     } catch (error) {
         console.log("Error While Adding Item In wishlist ",error);
+        res.send("Internal Server Error");
+    }
+})
+
+// router for moving item in wishlist from cart
+router.post("/moveToWishListFromCart",async(req,res)=>{
+    try {
+        const {itemId,userId} = req.body;
+        let query = `REPLACE INTO wishlist VALUES (${userId},${itemId});`;
+        await db(query);
+        query = `DELETE FROM cart WHERE user_id=${userId} AND item_id=${itemId};`;
+        await db(query); 
+        console.log("Item move To wishlist Successfully")
+    } catch (error) {
+        console.log("Error While moving Item In wishlist ",error);
+        res.send("Internal Server Error");
+    }
+})
+
+//router for moving item from wishlist to cart
+router.post("/moveToCartFromWishList",async(req,res)=>{
+    try {
+        const {itemId,userId} = req.body;
+        let query = `INSERT INTO cart VALUES (${userId},${itemId},1) ON DUPLICATE KEY UPDATE quantity = quantity + 1;`;
+        await db(query);
+        query = `DELETE FROM wishlist WHERE user_id=${userId} AND item_id=${itemId};`;
+        await db(query); 
+        console.log("Item move To cart Successfully")
+    } catch (error) {
+        console.log("Error While moving cart In wishlist ",error);
         res.send("Internal Server Error");
     }
 })

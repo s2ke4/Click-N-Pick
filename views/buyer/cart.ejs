@@ -32,7 +32,7 @@
                         </span>
                     </td>
                     <td class="total-per-item"><%=total%></td>
-                    <td><button class="move-to-wishlist">Move To WishList</button></td>
+                    <td><button class="move-to-wishlist" onclick="handleMoveToWishlist(this,<%=items[i].id%>,<%= user.id%>)">Move To WishList</button></td>
                     <td><i class="fas del fa-trash-alt" onclick="handleDelete(this,<%=items[i].id%>,<%= user.id%>)"></i></td>
                 </tr>
             <% } %>
