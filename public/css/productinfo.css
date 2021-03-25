@@ -73,9 +73,9 @@ button[disabled]{
 }
 
 
-.toWishlist{
+.toWishlist,.removefromWishlist{
     background-color: rgb(71,71,255);
-    width: 150px;
+    width: auto;
     height: 40px;
     border-radius: 10px;
     font-size: 15px;
@@ -84,15 +84,17 @@ button[disabled]{
     transition: all .2s ease;
     color: #fff;
     outline: none;
+    padding: 0 20px;
 }
-
-.toWishlist a:hover{
-    color: rgb(0, 0, 0);
+.removefromWishlist{
+    background-color: rgb(195, 55, 55);
 }
-
+.removefromWishlist:hover{
+    background-color: rgb(195, 55, 55,.8);
+}
 .toWishlist:hover{
     background-color: rgb(71,71,255,.8);
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
 }
 
 .toCart:hover{

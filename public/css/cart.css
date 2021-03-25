@@ -13,6 +13,11 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+tr{
+    opacity: 1;
+    -webkit-transition: opacity 500ms linear;
+    transition: opacity 500ms linear;
+}
 
 tr:nth-child(even) {
     background-color: #dddddd;

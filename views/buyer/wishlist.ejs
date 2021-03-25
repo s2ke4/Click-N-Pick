@@ -14,34 +14,15 @@
                 <th>Move To Cart</th>
                 <th>Remove From WishList</th>
             </tr>
-            <tr>
-                <td><img src="/asset/user.png" width="50px" height="50px" alt=""></td>
-                <td><a href="#">MacBook</a></td>
-                <td class="price-per-item">10000</td>
-                <td><button class="move-to-wishlist">Move To Cart</button></td>
-                <td><i class="fas del fa-trash-alt"></i></td>
-            </tr>
-            <tr>
-                <td><img src="/asset/user.png" width="50px" height="50px" alt=""></td>
-                <td><a href="#">MacBook</a></td>
-                <td class="price-per-item">10000</td>
-                <td><button class="move-to-wishlist">Move To Cart</button></td>
-                <td><i class="fas del fa-trash-alt"></i></td>
-            </tr>
-            <tr>
-                <td><img src="/asset/user.png" width="50px" height="50px" alt=""></td>
-                <td><a href="#">MacBook </a></td>
-                <td class="price-per-item">10000</td>
-                <td><button class="move-to-wishlist">Move To Cart</button></td>
-                <td><i class="fas del fa-trash-alt"></i></td>
-            </tr>
-            <tr>
-                <td><img src="/asset/user.png" width="50px" height="50px" alt=""></td>
-                <td><a href="#">MacBook</a></td>
-                <td class="price-per-item">10000</td>
-                <td><button class="move-to-wishlist">Move To Cart</button></td>
-                <td><i class="fas del fa-trash-alt"></i></td>
-            </tr>
+            <% for(let i=0;i< items.length;i++){ %>
+                <tr>
+                    <td><img src="/uploads/<%=items[i].img%>" width="50px" height="50px" alt=""></td>
+                    <td><a href="/buyer/productInfo/<%=items[i].id%>"><%=items[i].name%></a></td>
+                    <td class="price-per-item"><%=items[i].price%></td>
+                    <td><button class="move-to-wishlist" onclick="handleMoveToCart(this,<%=items[i].id%>,<%= user.id%>)">Move To Cart</button></td>
+                    <td><i class="fas del fa-trash-alt" onclick="handleDelete(this,<%=items[i].id%>,<%= user.id%>)"></i></td>
+                </tr>
+            <% } %>
         </tbody>
     </table>
     <div class="major-btn">
@@ -103,4 +84,4 @@
         <!-- Footer -->
 </body>
 <script src="https://kit.fontawesome.com/a81368914c.js"></script> 
-<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>

@@ -82,10 +82,27 @@ const updateTotalSum = ()=>{
     totalSum.innerText = sum;
 }
 
+const handleMoveToWishlist = async(e,itemId,userId)=>{
+    let tr = e.parentNode.parentNode;
+    let table = tr.parentNode;
+    tr.style.opacity = 0;
+    setTimeout(()=>{table.removeChild(tr);},500);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/buyer/moveToWishListFromCart', true);
+    await xhr.setRequestHeader('Content-Type', 'application/json');
+    await xhr.send(
+        JSON.stringify({
+            userId,itemId
+        }) 
+    );
+    updateTotalSum();
+}
+
 const handleDelete = async(e,itemId,userId)=>{
     let tr = e.parentNode.parentNode;
     let table = tr.parentNode;
-    table.removeChild(tr);
+    tr.style.opacity = 0;
+    setTimeout(()=>{table.removeChild(tr);},500);
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', '/buyer/deleteFromCart', true);
     await xhr.setRequestHeader('Content-Type', 'application/json');
