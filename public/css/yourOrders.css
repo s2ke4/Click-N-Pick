@@ -76,3 +76,14 @@ tr:nth-child(even) {
     font-size: 1.1rem;
 }
 
+.back-div {
+    margin: 1.5rem;
+}
+
+.back-link {
+    text-decoration: none;
+    color: Blue;
+}
+.back-link:hover {
+    color: rgb(11, 11, 107);
+}
