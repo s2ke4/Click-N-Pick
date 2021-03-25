@@ -155,7 +155,7 @@ router.delete("/deleteItem/:id",async(req,res)=>{
 
 //To view the details of an order
 router.get("/orders/order-details",(req,res)=>{
-    res.render("seller/orderDetails");
+    res.render("seller/orderDetails",{path: '/seller/orders'});
 })
 
 //put request to update an item
