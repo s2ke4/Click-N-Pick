@@ -102,9 +102,19 @@ router.get("/productinfo/:id",async(req,res)=>{
     }
 })
 
+//route for your orders
+router.get("/yourOrders",ensureBuyer,(req,res)=>{
+    res.render("buyer/yourOrders");
+})
+
+//route to view your order details
+router.get("/yourOrders/yourOrderDetails",ensureBuyer,(req,res)=>{
+    res.render("buyer/yourOrderDetails");
+})
+
 //route for wishlist
 router.get("/wishlist",ensureBuyer,(req,res)=>{
-    res.render("buyer/wishlist")
+    res.render("buyer/wishlist");
 })
 
 // route for proceed order

@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="/css/yourOrders.css">
+<title>Orders</title>
+
+<body>
+    <%- include('../partials/customerNav') %>
+    <h2 class="heading">Your Orders</h2>
+
+    <div class="inp-box">
+      <select name="Filter" class="filter">
+          <option value="">Filter</option>
+          <option value="Order Number">Order Number</option>
+          <option value="Customer Name">Customer Name</option>
+          <option value="Order Date">Order Date</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Total Price">Total Price</option>
+      </select>
+    </div>
+
+    <div class="search">
+      <form class="d-flex flex-grow-1 sbar">
+        <input class="search-bar-box form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary btn-outline-primary search-btn" type="submit">Search</button>
+      </form>
+    </div>
+
+    <table>
+        <tr>
+          <th class="orderNum">Order No.</th>  
+          <th class="orderItems">Ordered Items</th>
+          <th class="orderDate">Date</th>
+          <th class="dispatch">Dispatched</th>
+          <th class="price">Total Price</th>
+          <th class="details">View Details</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <%for(let i = 0;i < 11; i++) { %>
+              <div class="item">
+                Item <%= i %> <br>
+              </div>
+              <% if(i>2) 
+                { %>
+                  <div class="item"><a href="yourOrders/yourOrderDetails">View All</a></div>
+                <% break; } %>
+              <% } %>
+          </td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+          <td>Centro comercial Moctezuma</td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+          <td>Ernst Handel</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+          <td>Island Trading</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>31/02/2020</td>
+          <td>✔️</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+          <td>Magazzini Alimentari Riuniti</td>
+          <td>31/02/2020</td>
+          <td>⏳</td>
+          <td>10</td>
+          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+        </tr>
+      </table>
+          <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+       
+        <div class="container p-4">
+
+            <section class="mb-4" style="padding-top: 2rem; padding-bottom: 2rem;">
+                <h2>
+                    E-Commerce
+                </h2>
+                
+            </section>
+            
+            <section>
+                <div class="row">
+                  <div class="col">
+                      <img src="/asset/truck-1.jpg" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                      <h5 style="padding-top: 1rem;">Fast and Free Delivery *</h5>
+                  </div>
+                  <div class="col">
+                      <img src="/asset/easy-returns.png" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                      <h5 style="padding-top: 1rem;">Easy Returns within 15 days</h5>
+                  </div>
+                  <div class="col">
+                      <img src="/asset/customercare.png" class="img-fluid" alt="ResponsiveImage" height="75" width="75" style="border-radius: 50%;">
+                      <h5 style="padding-top: 1rem;">24 x 7 Customer Support</h5>
+                  </div>
+                </div>
+            </section>
+
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-sm btn-outline-light text-center" style="margin: 2rem;">About Us</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-sm btn-outline-success" style="margin: 2rem;">Support Us</a>
+                </div>
+                <div class="col">
+                    <a href="mailto:doubtbin@gmail.com" class="btn btn-sm btn-outline-primary" style="margin: 2rem;">Contact Us</a>
+                </div>
+            </div>
+
+            <p style="color: grey; font-size: 0.75rem;">*Delivery is free for orders above ₹499/-</p>
+
+        </div>
+
+    
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+        <a class="text-white" href="https://github.com/s2ke4">S2KE4</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+</body>
