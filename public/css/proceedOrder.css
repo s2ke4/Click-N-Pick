@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-div{
+    background-color: #fff;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    border: 10px solid #fff;
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px 10px;
+    margin-top: 10px;
+}
+.option-btn{
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    display: flex;
+    padding: 20px 10px;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+.detail{
+    margin: 15px 0;
+}
+.main-div h3{
+    margin-bottom: 20px;
+}
+.detail{
+    display: none;
+}
+button.next{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    border: none;
+    outline: none;
+    width: 60px;
+    padding: 5px 10px;
+    text-align: center;
+    background-color: rgb(255, 145, 0,.8);
+    color: white;
+    margin-bottom: 50px;
+}
+.current{
+    color: rgb(255, 145, 0);
+}
+.not-selected,.upiIdNotProvided,.cardDetailNotProvided,.addressError{
+    color: red;
+    display: none;
+}
+input{
+    outline: none;
+    border: 1px solid;
+}
+
+.address{
+    display: none;
+}
+.address textarea{
+    width: 100%;
+    padding: 2px;
+    outline:none;
+    padding-bottom: 0;
+}
+
+
+.input-box {
+    position: relative;
+}
+  
+.input-box input,.input-box textarea {
+    width: 100%;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    margin-bottom: 35px;
+    border: none;
+    border-bottom: 1px solid #323232;
+    outline: none;
+    background: transparent;
+}
+.input-box label {
+    font-weight: bold;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0 2px 0;
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label {
+  top: -25px;
+  left: 0;
+  color: #323232;
+  font-size: 15px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr{
+    opacity: 1;
+    -webkit-transition: opacity 500ms linear;
+    transition: opacity 500ms linear;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.order-summary{
+    margin: 50px;
+}
+.addressAndTotalAmount{
+    display: flex;
+}
+.ShippingAddress{
+    flex: 0 0 70%;
+}
+.final-amount{
+    flex: 0 0 25%;
+}
+.final-amount:not(h3){
+    font-size: 18px;
+}
+.final-amount button{
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    margin: 10px 0;
+    padding: 3px 0;
+    font-size: 18px;
+    color: white;
+}
+.order-now{
+    background-color: rgb(255, 145, 0);
+}
+.back{
+    background-color: #323232;
+}
+.cancel{
+    background-color: grey;
+}
+@media screen and (max-width: 930px) {
+    .addressAndTotalAmount{
+        flex-direction: column;
+    }
+  }
