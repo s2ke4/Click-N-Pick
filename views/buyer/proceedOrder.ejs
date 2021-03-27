@@ -1,32 +1,118 @@
 <%- include("../partials/customerNav") %>
+<link rel="stylesheet" href="/css/proceedOrder.css">
 <body>
     <div>
-        <p>Total Amount 10,000</p>
-        <p>Shipping 50</p>
-        <p>Total = 10050</p>
+        <div class="option-btn">
+            <p class="current">Select Payment Method</p>
+            <pre> -> </pre>
+            <p class="after-current">Place Order</p>
+        </div>
+        <div class="paymentMethod">
+            <div class="main-div">
+                <h3>Payment Method</h3>
+                <div>
+                    <input class="onSelect" type="radio" id="card" name="paymentMethod" value="card">
+                    <label for="card">Debit / Credit Card</label><br>
+                    <div class="detail">
+                        <input class="value" id="cardName" type="text" placeholder="Cardholder Name">
+                        <input class="value" id="cardNumber" type="text" placeholder="Card Number">
+                        <input class="value" id="cardMonth" type="number" max="12" min="1" placeholder="MM">
+                        <input class="value" id="cardYear" type="number" max="2100" min="2021" placeholder="YYYY">
+                        <p class="cardDetailNotProvided">please fill all the details</p>
+                    </div>
+                </div>
+                <div>
+                    <input class="onSelect" type="radio" id="upi" name="paymentMethod" value="upi">
+                    <label for="upi">Upi Payment</label><br>
+                    <div class="detail">
+                        <input class="value" id="upiId" type="text" placeholder="Upi Id">
+                        <p class="upiIdNotProvided">Please provide all the details</p>
+                    </div>
+                </div>
+                <div>
+                    <input class="onSelect" type="radio" id="cod" name="paymentMethod" value="cod">
+                    <label for="cod">Cash On Delivery</label><br> 
+                </div> 
+                <p class="not-selected">Please Select A Payment Method</p>
+            </div>
+            <div>
+                <button class="next">Next</button>
+            </div>
+        </div>
+        <div class=" address">
+            <div class="addressAndTotalAmount">
+                <div class="main-div ShippingAddress">
+                    <h3>Shipping Address</h3>
+                    <div class="input-box">
+                        <textarea id="shipping-address-textarea" name="address" required></textarea>
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="city" id="city" required>
+                        <label for="city">City</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="Country" id="Country" required>
+                        <label for="Country">Country</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" min="1" name="pincode" id="pincode" required>
+                        <label for="pincode">pincode</label>
+                    </div>
+                    <p class="addressError">Please fill all the details</p>
+                </div>
+                <div class="main-div final-amount">
+                    <h3>Order Summary</h3>
+                    <p>Order Amount : 515 rs</p>
+                    <p>Shipping Charge : 30</p>
+                    <p>Total Amount : 545</p>
+                    <button class="order-now">Order Now</button>
+                    <button class="back">Back</button>
+                    <button class="cancel">Cancel</button>
+                </div>
+            </div>
+            <div class="order-summary">
+                <h3>Order Detail</h3>
+                <table>
+                    <tr>
+                      <th>Item Name</th>
+                      <th>Item Quantity</th>
+                      <th>Price per Item</th>
+                    </tr>
+                    <tr>
+                      <td>Alfreds Futterkiste</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Centro comercial Moctezuma</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Ernst Handel</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Island Trading</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Laughing Bacchus Winecellars</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Magazzini Alimentari Riuniti</td>
+                      <td>9</td>
+                      <td>10</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="address">
-        <textarea name="address"></textarea>
-        <div>
-            <input type="text">
-            <label for="">City</label>
-        </div>
-        <div>
-            <input type="text">
-            <label for="">pincode</label>
-        </div>
-        <div>
-            <input type="text">
-            <label for="">State</label>
-        </div>
-        <div>
-            <input type="text">
-            <label for="">Country</label>
-        </div>
-    </div>
-    <div>
-        <h4>Please Choose Payment Method</h4>
-        <div>COD</div>
-        <div>Card</div>
-    </div>
+<script src="/js/proceedOrder.js"></script>
 </body>
+<%- include("../partials/footer") %>
