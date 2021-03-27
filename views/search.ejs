@@ -34,11 +34,16 @@
                         <% } %>
                     </div>
                 </a>
-                <button class="btn btn-primary">Add to Cart</button>
+                <% let disable = user?"":"disabled" %>
+                <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=results[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                    <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                </button>
             </div>
 
         <% } %>
     </div>
+    <script src="/js/addCart.js"></script>
+    <script src="https://kit.fontawesome.com/5772372b8f.js" crossorigin="anonymous"></script>
     <%- include('partials/footer') %>
 
 </body>
