@@ -86,6 +86,14 @@ button[disabled]{
     outline: none;
     padding: 0 20px;
 }
+button.cart-btn.toCart.similarItemCartBtn{
+    width: 100%;
+}
+
+.similarProudctHeading{
+    margin-left: 50px;
+}
+
 .removefromWishlist{
     background-color: rgb(195, 55, 55);
 }
@@ -317,3 +325,48 @@ img{
         opacity: 1
     }
 }
+
+.wrapper{
+    padding: 40px;
+    display:grid;
+    grid-gap: 0.5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+
+.wrapper .card {
+    padding: 10px;
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    border: 10px solid #fff;
+    transition: .5s ease;
+}
+
+.in-card{
+    text-align: center;
+}
+
+.img{ 
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* .linktoinfo{
+    text-decoration: none;
+    color: black;
+} */
+
+.card a,.card a:hover{
+    color: black;
+    text-decoration: none;
+}
+.btn-primary:hover{
+    color: white;
+}
+
