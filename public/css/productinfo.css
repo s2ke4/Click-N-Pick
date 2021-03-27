@@ -4,9 +4,9 @@
 .cont{
     
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, .8fr));
-    grid-template-rows: minmax(400px,1fr);
-    margin: 3rem 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-rows: minmax(300px,1fr);
+    margin: 3rem 10px;
     justify-content: center;
     
     
@@ -49,11 +49,12 @@ p{
     flex-wrap: wrap;
 }
 
-button{
+.button-area button{
     outline: none;
     border: none;
-    width: 110px;
+    width: 200px;
 }
+
 button:disabled,
 button[disabled]{
     cursor: not-allowed;
@@ -64,12 +65,12 @@ button[disabled]{
     color: white;
 }
 
-.btn1{
-    margin: 10px 10px 10px 0;
+.button-area .btn1{
+    margin: 5px 5px 5px 0;
 }
 
-.btn2{
-    margin: 10px 0 10px 0;
+.button-area .btn2{
+    margin: 5px 0 5px 0;
 }
 
 
