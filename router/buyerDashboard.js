@@ -112,12 +112,31 @@ router.get("/productinfo/:id",async(req,res)=>{
         {
             attachments.push(result[i].imgPath)
         }
-        res.render("buyer/productinfo",{item,attachments,inWishList});
+        query = `SELECT * FROM items WHERE items.category = "${item.category}" AND items.id <>${item.id} LIMIT 4;`;
+        let similarItem = await db(query);
+        let similarImg = [];
+        for(let i=0;i<similarItem.length;i++)
+        {
+            query = `SELECT attachment.imgPath FROM attachment WHERE attachment.item_id=${similarItem[i].id} LIMIT 1`;
+            result = await db(query);
+            similarImg.push(result[0].imgPath);
+        }
+        res.render("buyer/productinfo",{item,attachments,inWishList,similarItem,similarImg});
         return;
     } catch (error) {
         console.log("Error While Opening Edit Item Page ",error);
         res.send("Internal Server Error");
     }
+})
+
+//route for your orders
+router.get("/yourOrders",ensureBuyer,(req,res)=>{
+    res.render("buyer/yourOrders");
+})
+
+//route to view your order details
+router.get("/yourOrders/yourOrderDetails",ensureBuyer,(req,res)=>{
+    res.render("buyer/yourOrderDetails");
 })
 
 //route for wishlist
