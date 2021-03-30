@@ -166,8 +166,35 @@ router.get("/wishlist",ensureBuyer,async(req,res)=>{
 })
 
 // route for proceed order
-router.get("/proceedOrder",ensureBuyer,(req,res)=>{
-    res.render("buyer/proceedOrder");
+router.get("/proceedOrder",ensureBuyer,async(req,res)=>{
+    try {
+        let query = `SELECT * FROM cart WHERE cart.user_id = ${res.locals.user.id};`;
+        let result = await db(query);
+        let items = [],quantity,price,name,img,id;
+        for(let i=0;i<result.length;i++)
+        {
+            quantity = result[i].quantity;
+            id = result[i].item_id;
+            query = `SELECT * FROM items WHERE items.id=${id};`;
+            let result2 = await db(query);
+            name = result2[0].product_name;
+            price =(result2[0].price - result2[0].discount*(result2[0].price)/100).toFixed(0);
+            query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
+            result2 = await db(query);
+            img = result2[0].imgPath;
+            let obj = {id,name,price,quantity,img};
+            items.push(obj);
+        }
+        let orderAmount = 0;
+        for(let i=0;i<items.length;i++)
+        {
+            orderAmount += (items[i].price * items[i].quantity);
+        }
+        res.render("buyer/proceedOrder",{items,orderAmount});
+    } catch (error) {
+        console.log("Error While Fetching Data For Cart" ,error);
+        res.send("Internal Server Error")
+    }
 })
 
 // router for adding item in cart
