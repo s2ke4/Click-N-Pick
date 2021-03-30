@@ -227,5 +227,9 @@ router.post("/moveToCartFromWishList",async(req,res)=>{
     }
 })
 
+//router for confirming the placed order
+router.get('/orderPlaced',ensureBuyer,(req,res)=>{
+    res.render('buyer/orderPlaced');
+})
 
 module.exports = router;

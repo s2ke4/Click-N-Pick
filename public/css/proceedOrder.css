@@ -31,6 +31,9 @@
 .detail{
     display: none;
 }
+.button-div {
+    float: left;
+}
 button.next{
     display: flex;
     align-items: center;
@@ -43,6 +46,17 @@ button.next{
     background-color: rgb(255, 145, 0,.8);
     color: white;
     margin-bottom: 50px;
+}
+button.back-to-cart {
+    align-items: center;
+    margin-left: 24.5rem;
+    border: none;
+    outline: none;
+    width: 120px;
+    padding: 5px 10px;
+    text-align: center;
+    background-color: rgb(91, 91, 241);
+    color: white;
 }
 .current{
     color: rgb(255, 145, 0);
@@ -155,8 +169,14 @@ tr:nth-child(even) {
 .cancel{
     background-color: grey;
 }
+.add-card {
+    background-color: rgb(91,91,241);
+}
 @media screen and (max-width: 930px) {
     .addressAndTotalAmount{
         flex-direction: column;
+    }
+    button.back-to-cart {
+        margin-left: 5rem;
     }
   }
