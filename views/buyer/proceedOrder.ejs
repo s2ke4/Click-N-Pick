@@ -47,6 +47,7 @@
             <div class="addressAndTotalAmount">
                 <div class="main-div ShippingAddress">
                     <h3>Shipping Address</h3>
+                    <form action="/buyer/proceedOrder" method="POST">
                     <div class="input-box">
                         <textarea id="shipping-address-textarea" name="address" required></textarea>
                         <label for="address">Address</label>
@@ -73,7 +74,9 @@
                     <% let totalAmount = orderAmount + ship; %>
                     <h4>Total Amount : <%= totalAmount %></h4>
                     
-                    <button class="order-now">Order Now</button>
+                    
+                        <button class="order-now">Order Now</button>
+                    </form>
                     <button class="back">Back</button>
                     <a href="/"><button class="cancel">Cancel</button></a>
                 </div>

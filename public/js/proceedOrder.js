@@ -99,6 +99,6 @@ back.addEventListener("click",()=>{
     afterCur.classList.remove("current");
 })
 
-orderNow.addEventListener("click",(req,res)=>{
-    res.render("/buyer/orderPlaced");
+orderNow.addEventListener("click",()=>{
+    
 })
