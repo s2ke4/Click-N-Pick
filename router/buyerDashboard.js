@@ -131,8 +131,37 @@ router.get("/productinfo/:id",async(req,res)=>{
 })
 
 //route for your orders
-router.get("/yourOrders",ensureBuyer,(req,res)=>{
-    res.render("buyer/yourOrders");
+router.get("/yourOrders",ensureBuyer,async(req,res)=>{
+    let query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,address,dispatch FROM orders WHERE user_id=${res.locals.user.id};`;
+    let orders = await db(query);
+    let items = [];
+    let index;
+    console.log(orders);
+    for(let i=0;i<orders.length;i++)
+    {
+        let datetime = `${orders[i].date}`;
+        let date = datetime.substring(4,15);
+        console.log(date);
+        orders[i].date = date;
+        let item_id, item_name, quantity, price, totalPrice,order_num;
+        index = orders[i].order_num;
+        query = `SELECT * FROM orderitem WHERE order_num=${index}`;
+        let result = await db(query);
+        for(let j=0;j<result.length;j++)
+        {
+            quantity = result[j].quantity;
+            item_id = result[j].item_id;
+            order_num = result[j].order_num;
+            query = `SELECT * FROM items WHERE id=${item_id}`;
+            result2 = await db(query);
+            item_name = result2[0].product_name;
+            price = result2[0].price;
+            totalPrice = result2[0].price * quantity;
+            items.push({item_name,quantity,price,totalPrice,order_num});
+        }
+    }
+    console.log(items);
+    res.render("buyer/yourOrders",{orders: orders, items: items});
 })
 
 //route to view your order details
