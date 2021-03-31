@@ -25,7 +25,7 @@ conn.connect((err)=>{
 
     // creating user table
     let query1 = "CREATE TABLE IF NOT EXISTS user(id INT PRIMARY KEY AUTO_INCREMENT,name TEXT,email TEXT,password TEXT,role TEXT);";
-    conn.query(query1,(error,res)=>{
+    conn.query(query1,(error,res)=> {
         if(error){
             console.log("Error While Creating user table");
             throw error;
