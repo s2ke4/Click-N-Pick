@@ -142,3 +142,7 @@ a,a:hover{
     background-color:#0d6efd;
     color: white;
 }
+.empty-cart{
+    text-align: center;
+    margin: 50px 0;
+}

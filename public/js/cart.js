@@ -80,6 +80,10 @@ const updateTotalSum = ()=>{
         sum+=parseInt(partial_total[i].innerText)
     }
     totalSum.innerText = sum;
+    if(sum==0){
+        document.getElementsByClassName("empty-cart")[0].style.display = "block";
+        document.getElementsByClassName("user-cart")[0].style.display = "none";
+    }
 }
 
 const handleMoveToWishlist = async(e,itemId,userId)=>{
@@ -101,7 +105,6 @@ const handleMoveToWishlist = async(e,itemId,userId)=>{
 const handleDelete = async(e,itemId,userId)=>{
     let tr = e.parentNode.parentNode;
     let table = tr.parentNode;
-    tr.style.opacity = 0;
     table.removeChild(tr)
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', '/buyer/deleteFromCart', true);
@@ -111,7 +114,7 @@ const handleDelete = async(e,itemId,userId)=>{
             userId,itemId
         }) 
     );
-    partial_total = document.getElementsByClassName("total-per-item");
+    
     updateTotalSum();
 }
 
