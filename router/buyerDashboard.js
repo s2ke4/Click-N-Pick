@@ -239,7 +239,8 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             id = cartItems[i].item_id;
             query = `SELECT * FROM items WHERE items.id=${id};`;
             let resultItems = await db(query);
-            if(resultItems[0].quantity < quantity) {
+            console.log(resultItems[0].num_of_items,quantity);
+            if(resultItems[0].num_of_items < quantity) {
                 success = false;
                 break;
             }
