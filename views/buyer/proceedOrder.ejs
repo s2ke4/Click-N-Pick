@@ -18,6 +18,7 @@
                         <input class="value" id="cardNumber" type="text" placeholder="Card Number">
                         <input class="value" id="cardMonth" type="number" max="12" min="1" placeholder="MM">
                         <input class="value" id="cardYear" type="number" max="2100" min="2021" placeholder="YYYY">
+                        <input class="value" id="cvv" type="number" placeholder="CVV" style="margin-top: 0.7rem;">
                         <p class="cardDetailNotProvided">please fill all the details</p>
                     </div>
                 </div>
@@ -35,6 +36,9 @@
                 </div> 
                 <p class="not-selected">Please Select A Payment Method</p>
             </div>
+            <div class="button-div">
+                <a href="/buyer/cart"><button class="back-to-cart">Back to Cart</button></a>
+            </div>
             <div>
                 <button class="next">Next</button>
             </div>
@@ -43,6 +47,7 @@
             <div class="addressAndTotalAmount">
                 <div class="main-div ShippingAddress">
                     <h3>Shipping Address</h3>
+                    <form action="/buyer/proceedOrder" method="POST">
                     <div class="input-box">
                         <textarea id="shipping-address-textarea" name="address" required></textarea>
                         <label for="address">Address</label>
@@ -63,12 +68,17 @@
                 </div>
                 <div class="main-div final-amount">
                     <h3>Order Summary</h3>
-                    <p>Order Amount : 515 rs</p>
-                    <p>Shipping Charge : 30</p>
-                    <p>Total Amount : 545</p>
-                    <button class="order-now">Order Now</button>
+                    <p>Order Amount : <%= orderAmount%></p>
+                    <% let ship = (orderAmount > 499) ? (0):(50);%>
+                    <p>Shipping Charge :  <%= ship %> </p>
+                    <% let totalAmount = orderAmount + ship; %>
+                    <h4>Total Amount : <%= totalAmount %></h4>
+                    
+                    
+                        <button class="order-now">Order Now</button>
+                    </form>
                     <button class="back">Back</button>
-                    <button class="cancel">Cancel</button>
+                    <a href="/"><button class="cancel">Cancel</button></a>
                 </div>
             </div>
             <div class="order-summary">
@@ -76,43 +86,24 @@
                 <table>
                     <tr>
                       <th>Item Name</th>
-                      <th>Item Quantity</th>
-                      <th>Price per Item</th>
+                      <th>Price per item</th>
+                      <th>Quantity</th>
+                      <th>Total per Item</th>
                     </tr>
-                    <tr>
-                      <td>Alfreds Futterkiste</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>Centro comercial Moctezuma</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>Ernst Handel</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>Island Trading</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>Laughing Bacchus Winecellars</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>Magazzini Alimentari Riuniti</td>
-                      <td>9</td>
-                      <td>10</td>
-                    </tr>
+                    <% for(let i=0;i < items.length;i++){ %>
+                        <tr>
+                            <% let total =  items[i].price*items[i].quantity%>
+                            <td><a href="/buyer/productInfo/<%=items[i].id%>" style="text-decoration: none;"><%=items[i].name%></a></td>
+                            <td class="price-per-item"><%=items[i].price%></td>
+                            <td class="quantity"><%=items[i].quantity%></td>
+                            <td class="total-per-item"><%=total%></td>
+                        </tr>
+                    <% } %>
                 </table>
             </div>
         </div>
     </div>
 <script src="/js/proceedOrder.js"></script>
+<!-- <script src="/js/cart.js"></script> -->
 </body>
 <%- include("../partials/footer") %>

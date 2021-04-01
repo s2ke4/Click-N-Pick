@@ -82,6 +82,26 @@ conn.connect((err)=>{
         }
         console.log("wishList table created successfully");
     })
+
+    // creating orders table
+    query1 = "CREATE TABLE IF NOT EXISTS orders(order_num INT PRIMARY KEY AUTO_INCREMENT, order_date DATETIME DEFAULT now() , user_id INT, order_amt INT, address VARCHAR(500) NOT NULL, dispatch BOOLEAN DEFAULT FALSE, FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error while creating orders table");
+            throw error;
+        }
+        console.log("orders table created successfully");
+    })
+
+    // creating order-item table
+    query1 = "CREATE TABLE IF NOT EXISTS orderitem(order_num INT, item_id INT, quantity INT, PRIMARY KEY(order_num,item_id), FOREIGN KEY(order_num) REFERENCES orders(order_num) ON DELETE CASCADE, FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE);";
+    conn.query(query1,(error,res)=>{
+        if(error){
+            console.log("Error while creating orderitem table");
+            throw error;
+        }
+        console.log("orderitem table created successfully");
+    })
 })
 
 module.exports = conn;

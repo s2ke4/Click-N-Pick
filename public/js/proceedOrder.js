@@ -14,9 +14,7 @@ const paymentMethod = document.getElementsByClassName("paymentMethod")[0];
 const address = document.getElementsByClassName("address")[0]
 const afterCur = document.getElementsByClassName("after-current")[0];
 const back = document.getElementsByClassName("back")[0];
-const orderNow = document.getElementsByClassName("order-now")[0]
-
-
+const orderNow = document.getElementsByClassName("order-now")[0];
 for(let i=0;i<ele.length;i++)
 {
     ele[i].addEventListener("click",()=>{
@@ -102,5 +100,5 @@ back.addEventListener("click",()=>{
 })
 
 orderNow.addEventListener("click",()=>{
-
+    
 })

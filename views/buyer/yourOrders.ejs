@@ -21,66 +21,50 @@
           <th class="price">Total Price</th>
           <th class="details">View Details</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>
-            <%for(let i = 0;i < 11; i++) { %>
-              <div class="item">
-                Item <%= i %> <br>
-              </div>
-              <% if(i>2) 
-                { %>
-                  <div class="item"><a href="yourOrders/yourOrderDetails">View All</a></div>
-                <% break; } %>
+        <% for(let i = 0 ; i < orders.length ; i++) {
+           let count=0;;
+          %>
+          <tr>
+            <td><%= orders[i].order_num %></td>
+            <td>
+              <%for(let j = 0;j < items.length; j++) { %>
+                <div class="item">
+                  <%if(items[j].order_num==orders[i].order_num) { %>
+                    <%= items[j].item_name %> <br>
+                    <% count++;
+                      } else {
+                      count=1;
+                    }%>
+                </div>
+                <% if(count > 2) 
+                  { %>
+                    <div class="item"><a href="yourOrders/yourOrderDetails">View All</a></div>
+                  <% break; } %>
+                <% } %>
+            </td>
+            <td><%= orders[i].date%></td>
+            <td>
+              <% if(orders[i].dispatch===true) {%>
+                <i class="fas fa-check-circle fa-2x" style="color: green;"></i>
+              <% } else { %>
+                <i class="far fa-clock fa-2x" style="color: red;"></i>
               <% } %>
-          </td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-          <td>Centro comercial Moctezuma</td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-          <td>Ernst Handel</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-          <td>Island Trading</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
+            </td>
+            <td>
+              <% if(orders[i].order_amt > 499) { %>
+                <%= orders[i].order_amt%>
+              <% } else {
+                  let totalAmt = orders[i].order_amt + 50;
+                %>
+                <%= totalAmt%>
+              <% } %>
+            </td>
+            <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+          </tr>
+        <% } %>
       </table>
     <!-- Footer -->
     <%- include("../partials/footer.ejs") %>
     <!-- Footer -->
+    <script src="https://kit.fontawesome.com/5772372b8f.js" crossorigin="anonymous"></script>
 </body>
