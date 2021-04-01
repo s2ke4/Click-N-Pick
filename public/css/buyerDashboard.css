@@ -222,3 +222,8 @@
 .setPriceBtn{
     border: 1px solid;
 }
+.noItem{
+    text-align: center;
+    font-size: 25px;
+    margin: 50px 0;
+}
