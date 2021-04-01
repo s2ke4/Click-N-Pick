@@ -158,7 +158,6 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
             items.push({item_name,quantity,price,totalPrice,order_num});
         }
     }
-    console.log(items);
     res.render("buyer/yourOrders",{orders: orders, items: items});
 })
 
@@ -263,7 +262,6 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             let country = req.body.Country;
             let pincode = req.body.pincode;
             address += " " + city + " " + country + " - " + pincode;
-            console.log(address);
             query = `INSERT INTO orders(user_id,order_amt,address) VALUES (${buyer},${orderAmount},'${address}')`;
             await db(query);
             query = `SELECT MAX(order_num) AS order_no FROM orders`;
