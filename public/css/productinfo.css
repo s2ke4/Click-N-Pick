@@ -85,7 +85,6 @@ button[disabled]{
     transition: all .2s ease;
     color: #fff;
     outline: none;
-    padding: 0 20px;
 }
 button.cart-btn.toCart.similarItemCartBtn{
     width: 100%;

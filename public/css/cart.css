@@ -90,7 +90,7 @@ input[type=number] {
 .back,.proceed{
     outline: none;
     border: none;
-    background-color: #e67e22;
+    background-color: rgb(255, 145, 0);
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
