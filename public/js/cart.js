@@ -75,6 +75,7 @@ const updateValue = async(tr,value,userId,itemId,request)=>{
 
 const updateTotalSum = ()=>{
     let sum=0;
+    console.log(partial_total)
     for(let i=0;i<partial_total.length;i++)
     {
         sum+=parseInt(partial_total[i].innerText);
@@ -111,6 +112,7 @@ const handleDelete = async(e,itemId,userId)=>{
             userId,itemId
         }) 
     );
+    console.log(table)
     updateTotalSum();
 }
 
