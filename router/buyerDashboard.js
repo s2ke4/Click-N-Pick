@@ -231,7 +231,7 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
     try {
         let query = `SELECT * FROM cart WHERE cart.user_id = ${buyer};`;
         let cartItems = await db(query);
-        let items = [],quantity,price,id,resultItems;
+        let items = [],quantity,price,id,resultItems,sellerId;
         for(let i=0;i<cartItems.length;i++)
         {
             quantity = cartItems[i].quantity;
@@ -242,29 +242,39 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
                 success = false;
                 break;
             }
+            sellerId = resultItems[0].seller_id;
             price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
-            let obj = {id,price,quantity};
+            let obj = {id,sellerId,price,quantity};
             items.push(obj);
         }
         if(success===true) {
             let orderAmount = 0;
-            for(let i=0;i<items.length;i++)
-            {
-                orderAmount += (items[i].price * items[i].quantity);
-            } 
+            items.sort((a,b)=>a.sellerId - b.sellerId)
             let address = req.body.address;
             let city = req.body.city;
             let country = req.body.Country;
             let pincode = req.body.pincode;
             address += " " + city + " " + country + " - " + pincode;
-            query = `INSERT INTO orders(user_id,order_amt,address) VALUES (${buyer},${orderAmount},'${address}')`;
-            resultItems = await db(query);
-            let order_no = resultItems.insertId;
             for(let i=0;i<items.length;i++)
             {
-                query = `INSERT INTO orderitem VALUES(${order_no},${items[i].id},${items[i].quantity})`;
-                await db(query);
-            }
+                orderAmount = (items[i].price * items[i].quantity);
+                let itemFromOneSeller = [];
+                let currentSeller = items[i].sellerId;
+                itemFromOneSeller.push(items[i]);
+                while(i+1<items.length && items[i+1].sellerId==currentSeller){
+                    itemFromOneSeller.push(items[i+1]);
+                    i++;
+                    orderAmount += (items[i].price * items[i].quantity);
+                }
+                query = `INSERT INTO orders(seller_id,user_id,order_amt,address) VALUES (${currentSeller},${buyer},${orderAmount},'${address}')`;
+                resultItems = await db(query);
+                let order_no = resultItems.insertId;
+                for(let j=0;j<itemFromOneSeller.length;j++)
+                {
+                    query = `INSERT INTO orderitem VALUES(${order_no},${itemFromOneSeller[j].id},${itemFromOneSeller[j].quantity})`;
+                    await db(query);
+                }
+            } 
             console.log("Order Placed Successfully!");
 
             //reducing the number of items from the items table
