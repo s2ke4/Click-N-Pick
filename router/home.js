@@ -42,14 +42,16 @@ router.get("/search",async(req,res)=>{
             searchQuery = `SELECT * FROM items WHERE items.category='${filter}' AND (items.product_name LIKE '%${search}%' OR items.brand_name LIKE '%${search}%' OR items.prod_description LIKE '%${search}')`;
         
         let searchResults = await db(searchQuery);
-        let imgs=[];
+        let finalResult = [];
         for(let i=0;i<searchResults.length;i++)
         {
             let query = `SELECT imgPath FROM attachment WHERE attachment.item_id=${searchResults[i].id} LIMIT 1`;
             let attachResult = await db(query);
-            imgs.push(attachResult[0]);
+            let obj = searchResults[i];
+            obj.img = attachResult[0].imgPath;
+            finalResult.push(obj)
         }
-        res.render("search",{results: searchResults,images: imgs,search: search,filter: filter});
+        res.render("search",{results: finalResult,search: search,filter: filter});
     } 
     catch(e) {
         console.log("Errror in SQL Query : ",e);

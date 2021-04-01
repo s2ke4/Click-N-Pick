@@ -5,40 +5,265 @@
     <%- include('partials/customerNav.ejs') %>
 
     <% if(search=='') { %>
-        <h2 class="search-heading">All products in <%= filter%> ... </h2>
+        <h3 class="search-heading">All products in <%= filter%> ... </h3>
     <% } else { %>   
-        <h2 class="search-heading">Search results for <%= search %> in <%= filter%> ... </h2>
+        <h3 class="search-heading">Search results for <%= search %> in <%= filter%> ... </h3>
     <% } %>
-
-    <div class="wrapper">
-        <%for(let i=0;i < results.length;i++) { %>
-
-            <div class="card">
-                <a href="buyer/productinfo/<%=results[i].id%>">
-                    <div class="in-card">
-                        <img src="/uploads/<%= images[i].imgPath %>" alt={title} class="img"></img>
-                        <h5 class="product-name"><%= results[i].product_name %></h5>
-                        <% if(results[i].discount > 0){ %>
-                            <h5 style='color:black'>
-                                ₹ <%= results[i].price - results[i].discount*(results[i].price)/100 %>
-                                <s><span style='color:grey; font-size: 15px'><%= results[i].price %><span></s>
-                                <span style="color: #07db00; font-size: 17px;">(<%=results[i].discount%>% off)</span>
-                            </h5>
-                        <% }else{ %>
-                            <h5>₹ <%= results[i].price %></h5>
-                        <% } %>
-                    </div>
-                </a>
-                <% let disable = user?"":"disabled" %>
-                <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=results[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
-                    <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
-                </button>
-            </div>
-
-        <% } %>
+    <div class="full-search-page">
+        <div class="searchFilter">
+            <h6>Sort By</h6>
+            <input class="filter" type="checkbox" id="lowToHigh" value="lowToHigh">
+            <label for="lowToHigh">low to high</label><br>
+            <input class="filter" type="checkbox" id="highToLow" value="highToLow">
+            <label for="highToLow">high to low</label><br><br>
+            <h6>Brand Name</h6>
+            <% let myset = new Set() %>
+            <%for(let i=0;i < results.length;i++) { %>
+                <% if(!myset.has(results[i].brand_name)){myset.add(results[i].brand_name) %>
+                    <input type="checkbox" class="filter brandCheckBox" value="<%=results[i].brand_name %>">
+                    <label><%=results[i].brand_name %></label><br>
+                <% } %>
+            <% } %>
+            <br>
+            <h6>Price</h6>
+            <input class="filter priceCheckBox" type="checkbox" value="<1000">
+            <label>Under ₹ 1000</label><br>
+            <input class="filter priceCheckBox" type="checkbox" value="1000To5000">
+            <label>₹ 1000 - 5000</label><br>
+            <input class="filter priceCheckBox" type="checkbox" value="5000To10000">
+            <label>₹ 5000 - 10000</label><br>
+            <input class="filter priceCheckBox" type="checkbox" value=">10000">
+            <label>Above ₹ 10000</label><br>
+            <input class="minPriceFilter" type="number" placeholder="₹ Min"> 
+            <input class="maxPriceFilter" type="text" placeholder="₹ Max"> <button class="setPriceBtn">Go</button>
+        </div>
+        <div class="wrapper">
+            <%for(let i=0;i < results.length;i++) { %>
+                <div class="card">
+                    <a href="buyer/productinfo/<%=results[i].id%>">
+                        <div class="in-card">
+                            <img src="/uploads/<%= results[i].img %>" alt={title} class="img"></img>
+                            <h5 class="product-name"><%= results[i].product_name %></h5>
+                            <% if(results[i].discount > 0){ %>
+                                <h5 style='color:black'>
+                                    ₹ <%= results[i].price - results[i].discount*(results[i].price)/100 %>
+                                    <s><span style='color:grey; font-size: 15px'><%= results[i].price %><span></s>
+                                    <span style="color: #07db00; font-size: 17px;">(<%=results[i].discount%>% off)</span>
+                                </h5>
+                            <% }else{ %>
+                                <h5>₹ <%= results[i].price %></h5>
+                            <% } %>
+                        </div>
+                    </a>
+                    <% let disable = user?"":"disabled" %>
+                    <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=results[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                    </button>
+                </div>
+    
+            <% } %>
+        </div>
     </div>
+
     <script src="/js/addCart.js"></script>
     <script src="https://kit.fontawesome.com/5772372b8f.js" crossorigin="anonymous"></script>
     <%- include('partials/footer') %>
+    <script>
+        var results = <%- JSON.stringify(results) %>;
+        var user = <%-  JSON.stringify(user)%>;
+        let x = document.getElementsByClassName("full-search-page")[0].innerHTML;
+        let highToLow = document.getElementById("highToLow");
+        let lowToHigh = document.getElementById("lowToHigh");
+        let brandCheckBox = document.getElementsByClassName("brandCheckBox");
+        let priceCheckBox = document.getElementsByClassName("priceCheckBox");
+        let minPriceFilter = document.getElementsByClassName("minPriceFilter")[0];
+        let maxPriceFilter = document.getElementsByClassName("maxPriceFilter")[0];
+        let setPriceBtn = document.getElementsByClassName("setPriceBtn")[0];
+        let allcheckbox = document.getElementsByClassName("filter")
 
+        // function for manually price filter
+        setPriceBtn.addEventListener("click",()=>{
+            let val1 = minPriceFilter.value.trim();
+            let val2 = maxPriceFilter.value.trim();
+            if(val1=="" && val2==""){
+                return;
+            }else if(val2==""){
+                for(let j=0;j<allcheckbox.length;j++)
+                {
+                    allcheckbox[j].checked =false;
+                }
+               let price =  parseInt(val1);
+               let temResult = [];
+               for(let j=0;j<results.length;j++)
+                {
+                    if(results[j].price >= price){
+                        temResult.push(results[j]);
+                    }
+                }
+                updateData(temResult)
+            }else if(val1==""){
+                for(let j=0;j<allcheckbox.length;j++)
+                {
+                    allcheckbox[j].checked =false;
+                }
+                let price =  parseInt(val2);
+                let temResult = [];
+                for(let j=0;j<results.length;j++)
+                {
+                    if(results[j].price <= price){
+                        temResult.push(results[j]);
+                    }
+                }
+                updateData(temResult)
+            }else{
+                for(let j=0;j<allcheckbox.length;j++)
+                {
+                    allcheckbox[j].checked =false;
+                }
+                val1 = parseInt(val1);
+                val2 = parseInt(val2);
+                let minval = val1 < val2?val1:val2;
+                let maxval = val1 + val2 - minval;
+                let temResult = [];
+                for(let j=0;j<results.length;j++)
+                {
+                    if(results[j].price >= minval && results[j].price <= maxval){
+                        temResult.push(results[j]);
+                    }
+                }
+                updateData(temResult)
+            }
+        })
+
+        // function for adding filter acc to brand name
+        for(let i=0;i<brandCheckBox.length;i++)
+        {
+            brandCheckBox[i].addEventListener("change",(e)=>{
+                if(e.target.checked){
+                    for(let j=0;j<allcheckbox.length;j++)
+                    {
+                        allcheckbox[j].checked =false;
+                    }
+                    brandCheckBox[i].checked = true;
+                    let temResult=[];
+                    for(let j=0;j<results.length;j++)
+                    {
+                        if(results[j].brand_name==e.target.value){
+                            temResult.push(results[j]);
+                        }
+                    }
+                    updateData(temResult);
+                }else{
+                    updateData(results)
+                }
+            })
+        }
+
+        //function to add filter for price
+        for(let i=0;i<priceCheckBox.length;i++)
+        {
+            priceCheckBox[i].addEventListener("change",(e)=>{
+                if(e.target.checked){
+                    for(let j=0;j<allcheckbox.length;j++)
+                    {
+                        allcheckbox[j].checked =false;
+                    }
+                    priceCheckBox[i].checked = true;
+                    let temResult=[];
+                    if(e.target.value=="<1000"){
+                        for(let j=0;j<results.length;j++)
+                        {
+                            if(results[j].price <= 1000){
+                                temResult.push(results[j]);
+                            }
+                        }
+                    }else if(e.target.value=="1000To5000"){
+                        for(let j=0;j<results.length;j++)
+                        {
+                            if(results[j].price >= 1000 && results[j].price <=5000){
+                                temResult.push(results[j]);
+                            }
+                        }
+                    }else if(e.target.value=="5000To10000"){
+                        for(let j=0;j<results.length;j++)
+                        {
+                            if(results[j].price >= 5000 && results[j].price <=10000){
+                                temResult.push(results[j]);
+                            }
+                        }
+                    }else{
+                        for(let j=0;j<results.length;j++)
+                        {
+                            if(results[j].price >= 10000){
+                                temResult.push(results[j]);
+                            }
+                        }
+                    }
+                    updateData(temResult)
+                }else{
+                    updateData(results);
+                }
+            })
+        }
+
+        // sort low to high
+        lowToHigh.addEventListener("click",(e)=>{
+            let temResult = <%- JSON.stringify(results) %>;
+            if(e.target.checked){
+                for(let j=0;j<allcheckbox.length;j++)
+                {
+                    allcheckbox[j].checked =false;
+                }
+                lowToHigh.checked = true;
+                temResult.sort((a,b)=>a.price - b.price)
+                updateData(temResult)
+            }else{
+                updateData(results)
+            }
+        })
+
+        // sort high to low
+        highToLow.addEventListener("click",(e)=>{
+            let temResult = <%- JSON.stringify(results) %>;
+            if(e.target.checked){
+                for(let j=0;j<allcheckbox.length;j++)
+                {
+                    allcheckbox[j].checked =false;
+                }
+                highToLow.checked = true;
+                temResult.sort((a,b)=>b.price - a.price)
+                updateData(temResult)
+            }else{
+                updateData(results)
+            }
+        })
+        // function to update data
+        const updateData = (results)=>{
+            let p=[];
+            for(let i=0;i < results.length;i++) { 
+                p += `<div class="card">
+                    <a href="buyer/productinfo/${results[i].id}">
+                        <div class="in-card">
+                            <img src="/uploads/${results[i].img}" alt={title} class="img"></img>
+                            <h5 class="product-name">${results[i].product_name}</h5>`
+                            if(results[i].discount > 0){
+                            p += `<h5 style='color:black'>
+                                    ₹ ${results[i].price - results[i].discount*(results[i].price)/100 }
+                                    <s><span style='color:grey; font-size: 15px'>${results[i].price}<span></s>
+                                    <span style="color: #07db00; font-size: 17px;">(${results[i].discount}% off)</span>
+                                </h5>`
+                            }else{
+                                p += `<h5>₹ ${results[i].price}</h5>`
+                            }
+                        p+=`</div></a>`
+                    let disable = user?"":"disabled"
+                    p+=`<button class="cart-btn btn btn-primary" onclick="addToCart(this,${results[i].id},${user?user.id:-1})" ${disable} >
+                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                    </button>
+                </div>`
+
+            }
+            document.getElementsByClassName("wrapper")[0].innerHTML = p;
+        }
+    </script>
 </body>

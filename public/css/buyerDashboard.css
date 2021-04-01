@@ -1,5 +1,8 @@
+*{
+    margin: 0;
+}
 .wrapper{
-    padding: 40px;
+    flex: 5;
     display:grid;
     grid-gap: 0.5rem;
     justify-items: center;
@@ -68,8 +71,8 @@
 
 /*styling for search results page*/
 .search-heading {
-    font-size: 2rem;
-    margin: 2rem;
+    font-size: 1.7rem;
+    margin: 1rem 1rem 0 1rem;
     text-align: left;
 }
 .cart-btn.btn.btn-primary:focus {
@@ -194,4 +197,28 @@
     100% {
         opacity: 1
     }
+}
+
+/* styling for search page filter */
+.full-search-page{
+    display: flex;
+    padding:40px 20px;
+}
+.searchFilter{
+    flex: 1;
+}
+
+.star-rating{
+    list-style-type: none;
+    padding: 0;
+}
+.star-rating li{
+    color: #ffa41c;
+    font-size: 120%;
+}
+.minPriceFilter,.maxPriceFilter{
+    width: 70px;
+}
+.setPriceBtn{
+    border: 1px solid;
 }
