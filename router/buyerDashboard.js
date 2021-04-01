@@ -229,27 +229,21 @@ router.get("/proceedOrder",ensureBuyer,async(req,res)=>{
 router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
     let success = true;
     try {
-        console.log("Updating the orders table...");
         let query = `SELECT * FROM cart WHERE cart.user_id = ${buyer};`;
         let cartItems = await db(query);
-        let items = [],quantity,price,name,img,id;
+        let items = [],quantity,price,id,resultItems;
         for(let i=0;i<cartItems.length;i++)
         {
             quantity = cartItems[i].quantity;
             id = cartItems[i].item_id;
             query = `SELECT * FROM items WHERE items.id=${id};`;
-            let resultItems = await db(query);
-            console.log(resultItems[0].num_of_items,quantity);
+            resultItems = await db(query);
             if(resultItems[0].num_of_items < quantity) {
                 success = false;
                 break;
             }
-            name = resultItems[0].product_name;
             price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
-            query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
-            let resultImg = await db(query);
-            img = resultImg[0].imgPath;
-            let obj = {id,name,price,quantity,img};
+            let obj = {id,price,quantity};
             items.push(obj);
         }
         if(success===true) {
@@ -257,17 +251,15 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             for(let i=0;i<items.length;i++)
             {
                 orderAmount += (items[i].price * items[i].quantity);
-            }
+            } 
             let address = req.body.address;
             let city = req.body.city;
             let country = req.body.Country;
             let pincode = req.body.pincode;
             address += " " + city + " " + country + " - " + pincode;
             query = `INSERT INTO orders(user_id,order_amt,address) VALUES (${buyer},${orderAmount},'${address}')`;
-            await db(query);
-            query = `SELECT MAX(order_num) AS order_no FROM orders`;
-            let recOrder = await db(query);
-            let order_no = recOrder[0].order_no;
+            resultItems = await db(query);
+            let order_no = resultItems.insertId;
             for(let i=0;i<items.length;i++)
             {
                 query = `INSERT INTO orderitem VALUES(${order_no},${items[i].id},${items[i].quantity})`;
@@ -278,10 +270,7 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             //reducing the number of items from the items table
             for(let i = 0; i < cartItems.length; i++) {
                 id = cartItems[i].item_id;
-                query = `SELECT * FROM items WHERE items.id=${id};`;
-                resultItems = await db(query);
-                let rem = resultItems[0].num_of_items - cartItems[i].quantity;
-                query = `UPDATE items SET num_of_items = ${rem} WHERE (id=${id});`;
+                query = `UPDATE items SET num_of_items = num_of_items - ${cartItems[i].quantity} WHERE (id=${id});`;
                 await db(query);
             }
 
