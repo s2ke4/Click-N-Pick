@@ -136,12 +136,10 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
     let orders = await db(query);
     let items = [];
     let index;
-    console.log(orders);
     for(let i=0;i<orders.length;i++)
     {
         let datetime = `${orders[i].date}`;
         let date = datetime.substring(4,15);
-        console.log(date);
         orders[i].date = date;
         let item_id, item_name, quantity, price, totalPrice,order_num;
         index = orders[i].order_num;
@@ -160,7 +158,6 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
             items.push({item_name,quantity,price,totalPrice,order_num});
         }
     }
-    console.log(items);
     res.render("buyer/yourOrders",{orders: orders, items: items});
 })
 

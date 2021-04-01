@@ -52,11 +52,11 @@
             </td>
             <td>
               <% if(orders[i].order_amt > 499) { %>
-                <%= orders[i].order_amt%>
+                ₹ <%= orders[i].order_amt%>
               <% } else {
                   let totalAmt = orders[i].order_amt + 50;
                 %>
-                <%= totalAmt%>
+                ₹ <%= totalAmt%>
               <% } %>
             </td>
             <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
