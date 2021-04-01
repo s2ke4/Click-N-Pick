@@ -89,8 +89,7 @@ const updateTotalSum = ()=>{
 const handleMoveToWishlist = async(e,itemId,userId)=>{
     let tr = e.parentNode.parentNode;
     let table = tr.parentNode;
-    tr.style.opacity = 0;
-    setTimeout(()=>{table.removeChild(tr);},500);
+    table.removeChild(tr);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/buyer/moveToWishListFromCart', true);
     await xhr.setRequestHeader('Content-Type', 'application/json');
