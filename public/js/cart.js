@@ -75,10 +75,9 @@ const updateValue = async(tr,value,userId,itemId,request)=>{
 
 const updateTotalSum = ()=>{
     let sum=0;
-    console.log(partial_total)
     for(let i=0;i<partial_total.length;i++)
     {
-        sum+=parseInt(partial_total[i].innerText);
+        sum+=parseInt(partial_total[i].innerText)
     }
     totalSum.innerText = sum;
 }
@@ -103,7 +102,7 @@ const handleDelete = async(e,itemId,userId)=>{
     let tr = e.parentNode.parentNode;
     let table = tr.parentNode;
     tr.style.opacity = 0;
-    setTimeout(()=>{table.removeChild(tr);},500);
+    table.removeChild(tr)
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', '/buyer/deleteFromCart', true);
     await xhr.setRequestHeader('Content-Type', 'application/json');
@@ -112,7 +111,7 @@ const handleDelete = async(e,itemId,userId)=>{
             userId,itemId
         }) 
     );
-    console.log(table)
+    partial_total = document.getElementsByClassName("total-per-item");
     updateTotalSum();
 }
 
