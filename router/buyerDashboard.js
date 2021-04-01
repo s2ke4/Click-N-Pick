@@ -136,12 +136,10 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
     let orders = await db(query);
     let items = [];
     let index;
-    console.log(orders);
     for(let i=0;i<orders.length;i++)
     {
         let datetime = `${orders[i].date}`;
         let date = datetime.substring(4,15);
-        console.log(date);
         orders[i].date = date;
         let item_id, item_name, quantity, price, totalPrice,order_num;
         index = orders[i].order_num;
@@ -200,27 +198,27 @@ router.get("/proceedOrder",ensureBuyer,async(req,res)=>{
     try {
         buyer = res.locals.user.id;
         let query = `SELECT * FROM cart WHERE cart.user_id = ${res.locals.user.id};`;
-        let result = await db(query);
+        let cartItems = await db(query);
         let items = [],quantity,price,name,img,id;
-        for(let i=0;i<result.length;i++)
+        for(let i=0;i<cartItems.length;i++)
         {
-            quantity = result[i].quantity;
-            id = result[i].item_id;
+            quantity = cartItems[i].quantity;
+            id = cartItems[i].item_id;
             query = `SELECT * FROM items WHERE items.id=${id};`;
-            let result2 = await db(query);
-            name = result2[0].product_name;
-            price =(result2[0].price - result2[0].discount*(result2[0].price)/100).toFixed(0);
+            let resultItems = await db(query);
+            name = resultItems[0].product_name;
+            price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
             query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
             result2 = await db(query);
             img = result2[0].imgPath;
             let obj = {id,name,price,quantity,img};
             items.push(obj);
         }
-        let orderAmount = 0;
-        for(let i=0;i<items.length;i++)
-        {
-            orderAmount += (items[i].price * items[i].quantity);
-        }
+            let orderAmount = 0;
+            for(let i=0;i<items.length;i++)
+            {
+                orderAmount += (items[i].price * items[i].quantity);
+            }
         res.render("buyer/proceedOrder",{items,orderAmount});
     } catch (error) {
         console.log("Error While Fetching Data For Cart" ,error);
@@ -230,57 +228,79 @@ router.get("/proceedOrder",ensureBuyer,async(req,res)=>{
 
 //route for placing the order
 router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
+    let success = true;
     try {
         console.log("Updating the orders table...");
         let query = `SELECT * FROM cart WHERE cart.user_id = ${buyer};`;
-        let result = await db(query);
+        let cartItems = await db(query);
         let items = [],quantity,price,name,img,id;
-        for(let i=0;i<result.length;i++)
+        for(let i=0;i<cartItems.length;i++)
         {
-            quantity = result[i].quantity;
-            id = result[i].item_id;
+            quantity = cartItems[i].quantity;
+            id = cartItems[i].item_id;
             query = `SELECT * FROM items WHERE items.id=${id};`;
-            let result2 = await db(query);
-            name = result2[0].product_name;
-            price =(result2[0].price - result2[0].discount*(result2[0].price)/100).toFixed(0);
+            let resultItems = await db(query);
+            if(resultItems[0].quantity < quantity) {
+                success = false;
+                break;
+            }
+            name = resultItems[0].product_name;
+            price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
             query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
-            result2 = await db(query);
-            img = result2[0].imgPath;
+            let resultImg = await db(query);
+            img = resultImg[0].imgPath;
             let obj = {id,name,price,quantity,img};
             items.push(obj);
         }
-        let orderAmount = 0;
-        for(let i=0;i<items.length;i++)
-        {
-            orderAmount += (items[i].price * items[i].quantity);
-        }
-        let address = req.body.address;
-        let city = req.body.city;
-        let country = req.body.Country;
-        let pincode = req.body.pincode;
-        address += " " + city + " " + country + " - " + pincode;
-        console.log(address);
-        query = `INSERT INTO orders(user_id,order_amt,address) VALUES (${buyer},${orderAmount},'${address}')`;
-        await db(query);
-        query = `SELECT MAX(order_num) AS order_no FROM orders`;
-        result = await db(query);
-        let order_no = result[0].order_no;
-        for(let i=0;i<items.length;i++)
-        {
-            query = `INSERT INTO orderitem VALUES(${order_no},${items[i].id},${items[i].quantity})`;
+        if(success===true) {
+            let orderAmount = 0;
+            for(let i=0;i<items.length;i++)
+            {
+                orderAmount += (items[i].price * items[i].quantity);
+            }
+            let address = req.body.address;
+            let city = req.body.city;
+            let country = req.body.Country;
+            let pincode = req.body.pincode;
+            address += " " + city + " " + country + " - " + pincode;
+            console.log(address);
+            query = `INSERT INTO orders(user_id,order_amt,address) VALUES (${buyer},${orderAmount},'${address}')`;
             await db(query);
+            query = `SELECT MAX(order_num) AS order_no FROM orders`;
+            let recOrder = await db(query);
+            let order_no = recOrder[0].order_no;
+            for(let i=0;i<items.length;i++)
+            {
+                query = `INSERT INTO orderitem VALUES(${order_no},${items[i].id},${items[i].quantity})`;
+                await db(query);
+            }
+            console.log("Order Placed Successfully!");
+
+            //reducing the number of items from the items table
+            for(let i = 0; i < cartItems.length; i++) {
+                id = cartItems[i].item_id;
+                query = `SELECT * FROM items WHERE items.id=${id};`;
+                resultItems = await db(query);
+                let rem = resultItems[0].num_of_items - cartItems[i].quantity;
+                query = `UPDATE items SET num_of_items = ${rem} WHERE (id=${id});`;
+                await db(query);
+            }
+
+            //emptying the cart as the order has been placed
+            query = `DELETE FROM cart WHERE user_id=${buyer}`;
+            await db(query);
+            console.log("Cart Emptied!");
         }
-        console.log("Order Placed Successfully!");
-        //emptying the cart as the order has been placed
-        query = `DELETE FROM cart WHERE user_id=${buyer}`;
-        await db(query);
-        console.log("Cart Emptied!");
+        
     } 
     catch(e) {
         console.log("Error while placing order : ",e);
     }
-    console.log('Redirected after posting to /proceedOrder');
-    res.redirect('orderPlaced');
+
+    if(success===true)
+        res.redirect('orderPlaced');
+    else
+        res.redirect('errorPlacingOrder');
 })
 
 // router for adding item in cart
@@ -347,6 +367,10 @@ router.get('/orderPlaced',ensureBuyer,(req,res)=>{
     res.render('buyer/orderPlaced');
 })
 
+//router for informing the error while placing order
+router.get('/errorPlacingOrder',ensureBuyer,(req,res)=>{
+    res.render('buyer/errorPlacingOrder');
+})
 
 router.get("/profile",ensureBuyer,async(req,res)=>{
     try {

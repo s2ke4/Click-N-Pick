@@ -44,7 +44,11 @@
     </div>
     <div class="major-btn">
         <button class="back"><a href="/">Back To Shopping</a></button>
-        <button class="proceed"><a href="./proceedOrder">Proceed With Your Order</a></button>
+        <% if(items.length===0) { %>
+            <p><i class="fas fa-shopping-cart fa-2x empty-cart"> Your Cart is Empty!</i></p>
+        <% } else { %>
+            <button class="proceed"><a href="./proceedOrder">Proceed With Your Order</a></button>
+        <% } %>
     </div>
 </body>
 <%- include("../partials/footer.ejs") %>
