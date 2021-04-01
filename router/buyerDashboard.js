@@ -139,6 +139,7 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
     for(let i=0;i<orders.length;i++)
     {
         let datetime = `${orders[i].date}`;
+        console.log(datetime);
         let date = datetime.substring(4,15);
         orders[i].date = date;
         let item_id, item_name, quantity, price, totalPrice,order_num;
@@ -303,7 +304,6 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
 
 // router for adding item in cart
 router.post("/addToCart",ensureBuyer,async(req,res)=>{
-
     try {
         const {itemId,userId} = req.body;
         let query = `INSERT INTO cart VALUES (${userId},${itemId},1) ON DUPLICATE KEY UPDATE quantity = quantity + 1;`;

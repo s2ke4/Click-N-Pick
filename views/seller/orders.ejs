@@ -33,54 +33,16 @@
           <th class="price">Total Price</th>
           <th class="details">View Details</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Alfreds Futterkiste</td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-          <td>Centro comercial Moctezuma</td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-          <td>Ernst Handel</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-          <td>Island Trading</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>31/02/2020</td>
-          <td>✔️</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>31/02/2020</td>
-          <td>⏳</td>
-          <td>10</td>
-          <td><a href="orders/order-details" class="btn btn-outline-primary btn-sm">Order Details</a></td>
-        </tr>
+        <% for(let i=0;i< orders.length;i++){ %>
+          <tr>
+            <td><%=orders[i].order_num%></td>
+            <td><%=orders[i].name%></td>
+            <td><%=orders[i].date %></td>
+            <td><%-(orders[i].dispatch)?"✔️":"⏳"%></td>
+            <td><%=orders[i].order_amt%></td>
+            <td><a href="orders/order-details/<%=orders[i].order_num%>" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+          </tr>
+        <% } %>
       </table>
       <!-- Footer -->
       <%- include("../partials/footer.ejs") %>

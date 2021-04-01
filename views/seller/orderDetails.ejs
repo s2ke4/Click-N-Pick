@@ -5,8 +5,8 @@
 <%- include("../partials/sellerNav.ejs") %>
 
 <body>
-    <h4 class="heading">Order Number : 23873</h4>
-    <h4 class="heading">Customer's Name : Wolf Gupta aka Chintu</h4>
+    <h4 class="heading">Order Number : <%=generalInfo.orderNum%></h4>
+    <h4 class="heading">Customer's Name : <%=generalInfo.customerName%></h4>
     <table>
         <tr>
           <th>Item Name</th>
@@ -14,50 +14,27 @@
           <th>Price per Item</th>
           <th>Total Price</th>
         </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
+        <% for(let i=0;i< items.length;i++){ %>
+          <tr>
+            <td><a class="product-info-link" href="/seller/productInfo/<%=items[i].id%>"><%=items[i].product_name %></a></td>
+            <td><%=items[i].quantity%></td>
+            <td>dummy</td>
+            <td>dummy</td>
+          </tr>
+        <% } %>
       </table>
-      <h4 class="heading">Total Price to be paid : 540</h4>
+      <h4 class="heading">Total Price to be paid : <%=generalInfo.order_amt%></h4>
       <div class="dispatch">Dispatch Status :
+        <% if(generalInfo.dispatch){ %>
+          <span>Dispatched</span>
+        <% }else{ %>
         <input type="checkbox" style="height: 1rem; width: 1rem;" id="myCheck" onclick="myFunction()">
         <p id="text" style="display:none;">Once dispatch status is confirmed, you will not be able to undo it.</p>
+        <% } %>
       </div> 
-
-      <a class="btn btn-outline-primary" style="margin: 1.5rem;" href="/seller/orders">Confirm</a>
+      <% if(!generalInfo.dispatch){ %>
+        <a class="btn btn-outline-primary" style="margin: 1.5rem;" href="/seller/orders">Confirm</a>
+      <% } %>
       <!-- Footer -->
       <%- include("../partials/footer.ejs") %>
       <!-- Footer -->
