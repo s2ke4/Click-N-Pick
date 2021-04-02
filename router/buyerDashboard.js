@@ -139,7 +139,6 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
     for(let i=0;i<orders.length;i++)
     {
         let datetime = `${orders[i].date}`;
-        console.log(datetime);
         let date = datetime.substring(4,15);
         orders[i].date = date;
         let item_id, item_name, quantity, price, totalPrice,order_num;
