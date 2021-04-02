@@ -94,7 +94,7 @@ conn.connect((err)=>{
     })
 
     // creating order-item table
-    query1 = "CREATE TABLE IF NOT EXISTS orderitem(order_num INT, item_id INT, quantity INT, PRIMARY KEY(order_num,item_id), FOREIGN KEY(order_num) REFERENCES orders(order_num) ON DELETE CASCADE, FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE);";
+    query1 = "CREATE TABLE IF NOT EXISTS orderitem(order_num INT, item_id INT, quantity INT, price INT, discount INT, PRIMARY KEY(order_num,item_id), FOREIGN KEY(order_num) REFERENCES orders(order_num) ON DELETE CASCADE, FOREIGN KEY(item_id) REFERENCES items(id) ON DELETE CASCADE);";
     conn.query(query1,(error,res)=>{
         if(error){
             console.log("Error while creating orderitem table");

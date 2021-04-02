@@ -232,7 +232,7 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
     try {
         let query = `SELECT * FROM cart WHERE cart.user_id = ${buyer};`;
         let cartItems = await db(query);
-        let items = [],quantity,price,id,resultItems,sellerId;
+        let items = [],quantity,price,id,resultItems,sellerId,discount;
         for(let i=0;i<cartItems.length;i++)
         {
             quantity = cartItems[i].quantity;
@@ -245,7 +245,8 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             }
             sellerId = resultItems[0].seller_id;
             price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
-            let obj = {id,sellerId,price,quantity};
+            discount = resultItems[0].discount;
+            let obj = {id,sellerId,price,quantity,discount};
             items.push(obj);
         }
         if(success===true) {
@@ -272,7 +273,7 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
                 let order_no = resultItems.insertId;
                 for(let j=0;j<itemFromOneSeller.length;j++)
                 {
-                    query = `INSERT INTO orderitem VALUES(${order_no},${itemFromOneSeller[j].id},${itemFromOneSeller[j].quantity})`;
+                    query = `INSERT INTO orderitem VALUES(${order_no},${itemFromOneSeller[j].id},${itemFromOneSeller[j].quantity},${itemFromOneSeller[j].price},${itemFromOneSeller[j].discount})`;
                     await db(query);
                 }
             } 
