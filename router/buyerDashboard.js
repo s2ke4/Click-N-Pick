@@ -239,7 +239,6 @@ router.post('/proceedOrder',ensureBuyer,async(req,res)=>{
             id = cartItems[i].item_id;
             query = `SELECT * FROM items WHERE items.id=${id};`;
             let resultItems = await db(query);
-            console.log(resultItems[0].num_of_items,quantity);
             if(resultItems[0].num_of_items < quantity) {
                 success = false;
                 break;
@@ -326,7 +325,7 @@ router.post("/addToWishlist",async(req,res)=>{
     } catch (error) {
         console.log("Error While Adding Item In wishlist ",error);
         res.send("Internal Server Error");
-    }
+    } 
 })
 
 // router for moving item in wishlist from cart
