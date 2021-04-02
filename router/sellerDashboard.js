@@ -192,18 +192,33 @@ router.get("/orders/order-details/:id",async(req,res)=>{
         let items = [];
         for(let i=0;i<result.length;i++)
         {
-            query = `SELECT * FROM items WHERE items.id=${result[i].item_id};`;
+            query = `SELECT product_name FROM items WHERE items.id=${result[i].item_id};`;
             let response= await db(query);
             let product_name =response[0].product_name;
+            let price = (result[i].price - result[i].discount*(result[i].price)/100).toFixed(0);
             let quantity = result[i].quantity;
-            let id = response[0].id
-            let obj = {product_name,id,quantity}
+            let id = result[i].item_id;
+            let obj = {product_name,id,quantity,price}
             items.push(obj);
         }
         let generalInfo = {customerName,dispatch,orderNum,order_amt};
         res.render("seller/orderDetails",{path: '/seller/orders',generalInfo,items});
     } catch (error) {
         console.log("Error While showing particular detail")
+        console.log(error);
+    }
+})
+
+// to confirm order
+router.put("/confirmOrder",async(req,res)=>{
+    try {
+        const orderNum  = req.body.orderNum;
+        const sellerId = req.body.seller;
+        let query = `UPDATE orders SET dispatch=TRUE WHERE order_num = ${orderNum} AND seller_id = ${sellerId};`;
+        await db(query);
+        console.log("Status Changed Successfully");
+    } catch (error) {
+        console.log("Error While Changing Status")
         console.log(error);
     }
 })
