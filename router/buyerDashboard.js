@@ -12,10 +12,10 @@ let buyer;
 //buyer dashboard route
 router.get("/",async(req,res)=>{
     buyer = res.locals.user;
-    let queryTopItems = `(SELECT * FROM items WHERE items.category='Grocery' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Electronics' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Clothing' LIMIT 4)
-    UNION ALL (SELECT * FROM items WHERE items.category='Footwear' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Stationary' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Novels' LIMIT 4)
-    UNION ALL (SELECT * FROM items WHERE items.category='Luggage' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Furniture' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Cosmetics' LIMIT 4)
-    UNION ALL (SELECT * FROM items WHERE items.category='Health and Medicine' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Games' LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Home and Kitchen' LIMIT 4)`;
+    let queryTopItems = `(SELECT * FROM items WHERE items.category='Grocery' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Electronics' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Clothing' AND items.num_of_items > 0 LIMIT 4)
+    UNION ALL (SELECT * FROM items WHERE items.category='Footwear' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Stationary' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Novels' AND items.num_of_items > 0 LIMIT 4)
+    UNION ALL (SELECT * FROM items WHERE items.category='Luggage' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Furniture' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Cosmetics' AND items.num_of_items > 0 LIMIT 4)
+    UNION ALL (SELECT * FROM items WHERE items.category='Health and Medicine' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Games' AND items.num_of_items > 0 LIMIT 4) UNION ALL (SELECT * FROM items WHERE items.category='Home and Kitchen' AND items.num_of_items > 0 LIMIT 4)`;
     let topItems = await db(queryTopItems);
     let imgs = [];
     for(let i=0;i<topItems.length;i++)
@@ -208,10 +208,7 @@ router.get("/proceedOrder",ensureBuyer,async(req,res)=>{
             let resultItems = await db(query);
             name = resultItems[0].product_name;
             price =(resultItems[0].price - resultItems[0].discount*(resultItems[0].price)/100).toFixed(0);
-            query = `SELECT * FROM attachment WHERE item_id=${id} LIMIT 1`;
-            result2 = await db(query);
-            img = result2[0].imgPath;
-            let obj = {id,name,price,quantity,img};
+            let obj = {id,name,price,quantity};
             items.push(obj);
         }
             let orderAmount = 0;
