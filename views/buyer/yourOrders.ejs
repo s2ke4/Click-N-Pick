@@ -38,7 +38,7 @@
                 </div>
                 <% if(count > 2) 
                   { %>
-                    <div class="item"><a href="yourOrders/yourOrderDetails">View All</a></div>
+                    <div class="item"><a href="yourOrders/yourOrderDetails/<%= orders[i].order_num %>">View All</a></div>
                   <% break; } %>
                 <% } %>
             </td>
@@ -59,7 +59,7 @@
                 ₹ <%= totalAmt%>
               <% } %>
             </td>
-            <td><a href="yourOrders/yourOrderDetails" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+            <td><a href="yourOrders/yourOrderDetails/<%= orders[i].order_num %>" class="btn btn-outline-primary btn-sm">Order Details</a></td>
           </tr>
         <% } %>
       </table>

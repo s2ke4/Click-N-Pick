@@ -163,8 +163,30 @@ router.get("/yourOrders",ensureBuyer,async(req,res)=>{
 })
 
 //route to view your order details
-router.get("/yourOrders/yourOrderDetails",ensureBuyer,(req,res)=>{
-    res.render("buyer/yourOrderDetails");
+router.get("/yourOrders/yourOrderDetails/:id",ensureBuyer,async(req,res)=>{
+    let query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,address,dispatch FROM orders WHERE order_num=${req.params.id};`;
+    let orders = await db(query);
+    let order = orders[0];
+    let datetime = `${order.date}`;
+    let date = datetime.substring(4,15);
+    order.date = date;
+    let items = [];
+
+    query = `SELECT * FROM orderitem WHERE order_num=${order.order_num}`;
+    let result = await db(query);
+    for(let j=0;j<result.length;j++)
+    {
+        quantity = result[j].quantity;
+        item_id = result[j].item_id;
+        order_num = result[j].order_num;
+        price = result[j].price;
+        totalPrice = result[j].price * quantity;
+        query = `SELECT * FROM items WHERE id=${item_id}`;
+        result2 = await db(query);
+        item_name = result2[0].product_name;
+        items.push({item_name,quantity,price,totalPrice,order_num});
+    }
+    res.render("buyer/yourOrderDetails",{order,items});
 })
 
 //route for wishlist

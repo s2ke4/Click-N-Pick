@@ -4,61 +4,41 @@
 <%- include("../partials/customerNav.ejs") %>
 
 <body>
-    
+
     <h6 class="back-div"><a href="/buyer/yourOrders" class="back-link">< Back to Your Orders</a></h6>
-    <h5 class="heading">Order Number : 23873</h5>
-    <h5 class="heading">Order Date : 03/03/2021</h5>
-    <h5 class="heading">Shipped to : A-10 904 Millenium Towers CHS. LTD., Sector -10, Sanpada, Navi Mumbai, Maharashtra - 400705</h5>
-    <h5 class="heading">Tracking Status : Dispatched ✔️</h5>
+    <h5 class="heading">Order Number : <%= order.order_num %></h5>
+    <h5 class="heading">Order Date : <%= order.date %></h5>
+    <h5 class="heading">Shipped to :  <%= order.address %></h5>
+    <h5 class="heading">Tracking Status : 
+      <% if(order.dispatch===true) {%>
+        <i class="fas fa-check-circle fa-2x" style="color: green;"></i>
+      <% } else { %>
+        <i class="far fa-clock fa-2x" style=" color: red;"></i> 
+      <% } %>
+    </h5>
 
     <table>
         <tr>
-          <th>Item Name</th>
-          <th>Item Quantity</th>
-          <th>Price per Item</th>
-          <th>Total Price</th>
+            <th>Item Name</th>
+            <th>Item Quantity</th>
+            <th>Price per Item</th>
+            <th>Total Price</th>
         </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>9</td>
-          <td>10</td>
-          <td>90</td>
-        </tr>
+        <% for(let i=0;i< items.length;i++){ %>
+            <tr>
+              <td><%= items[i].item_name %></td>
+              <td><%= items[i].quantity %></td>
+              <td><%= items[i].price %></td>
+              <td><%= items[i].totalPrice %></td>
+            </tr>
+        <% } %>
       </table>
-      <h4 class="heading">Total Price paid : 540</h4>
+      <h4 class="heading">Total Price paid : <%= order.order_amt %></h4>
       <h5 class="heading">Payment Mode : UPI ✔️</h5>
     
     <!-- Footer -->
     <%- include("../partials/footer.ejs") %>
     <!-- Footer -->
+
+    <script src="https://kit.fontawesome.com/5772372b8f.js" crossorigin="anonymous"></script>
 </body>
