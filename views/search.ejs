@@ -9,7 +9,10 @@
     <% } else { %>   
         <h3 class="search-heading">Search results for <%= search %> in <%= filter%> ... </h3>
     <% } %>
-    <div class="full-search-page">
+    <div class="noItem" style="display: <%= results.length!=0?'none':'block'%>;">
+        <i class="far fa-frown"> OOPS! There is no such item according to your search</i>
+    </div>
+    <div style="display: <%= results.length==0?'none':'flex'%>;" class="full-search-page">
         <div class="searchFilter">
             <h6>Sort By</h6>
             <input class="filter" type="checkbox" id="lowToHigh" value="lowToHigh">
@@ -239,7 +242,12 @@
         })
         // function to update data
         const updateData = (results)=>{
-            let p=[];
+            let p="";
+            if(results.length==0){
+                p = `<div class="noItem">
+                    <i class="far fa-frown"> OOPS! There is no such item according to your Filter.</i>
+                </div>`
+            }
             for(let i=0;i < results.length;i++) { 
                 p += `<div class="card">
                     <a href="buyer/productinfo/${results[i].id}">

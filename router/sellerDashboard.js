@@ -51,8 +51,26 @@ router.get("/addItem",(req,res)=>{
 })
 
 //Orders route to view the orders received by the seller
-router.get("/orders",(req,res)=>{
-    res.render("seller/orders",{path:'/seller/orders'});
+router.get("/orders",async(req,res)=>{
+    try {
+        seller = res.locals.user;
+        let query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE seller_id=${seller.id};`;
+        let result = await db(query);
+        let orders=[];
+        for(let i=0;i<result.length;i++)
+        {
+            let datetime = `${result[i].date}`;
+            let obj = result[i];
+            obj.date = datetime.substring(4,15);
+            query = `SELECT name FROM user WHERE user.id = ${obj.user_id};`;
+            let response = await db(query);
+            obj.name = response[0].name;
+            orders.push(obj);
+        }
+        res.render("seller/orders",{path:'/seller/orders',orders});
+    } catch (error) {
+        console.log("Error While Fetching Order : ",error)
+    }
 })
 
 //router for adding item
@@ -154,8 +172,40 @@ router.delete("/deleteItem/:id",async(req,res)=>{
 })
 
 //To view the details of an order
-router.get("/orders/order-details",(req,res)=>{
-    res.render("seller/orderDetails",{path: '/seller/orders'});
+router.get("/orders/order-details/:id",async(req,res)=>{
+    try {
+        let orderNum = req.params.id;
+        let query = `SELECT * FROM orders WHERE order_num = ${orderNum};`;
+        let result = await db(query);
+        if(result.length==0 || result[0].seller_id!=res.locals.user.id){
+            res.render("error")
+            return;
+        }
+        let customer_id = result[0].user_id;
+        let order_amt = result[0].order_amt;
+        let dispatch = result[0].dispatch;
+        query = `SELECT name FROM user WHERE user.id = ${customer_id};`;
+        result = await db(query);
+        let customerName = result[0].name;
+        query = `SELECT * FROM orderitem WHERE order_num = ${orderNum};`;
+        result = await db(query);
+        let items = [];
+        for(let i=0;i<result.length;i++)
+        {
+            query = `SELECT * FROM items WHERE items.id=${result[i].item_id};`;
+            let response= await db(query);
+            let product_name =response[0].product_name;
+            let quantity = result[i].quantity;
+            let id = response[0].id
+            let obj = {product_name,id,quantity}
+            items.push(obj);
+        }
+        let generalInfo = {customerName,dispatch,orderNum,order_amt};
+        res.render("seller/orderDetails",{path: '/seller/orders',generalInfo,items});
+    } catch (error) {
+        console.log("Error While showing particular detail")
+        console.log(error);
+    }
 })
 
 //put request to update an item

@@ -73,3 +73,6 @@ tr:nth-child(even) {
     font-size: 1.1rem;
 }
 
+a.product-info-link{
+    text-decoration: none;
+}

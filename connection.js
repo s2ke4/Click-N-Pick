@@ -84,7 +84,7 @@ conn.connect((err)=>{
     })
 
     // creating orders table
-    query1 = "CREATE TABLE IF NOT EXISTS orders(order_num INT PRIMARY KEY AUTO_INCREMENT, order_date DATETIME DEFAULT now() , user_id INT, order_amt INT, address VARCHAR(500) NOT NULL, dispatch BOOLEAN DEFAULT FALSE, FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);";
+    query1 = "CREATE TABLE IF NOT EXISTS orders(order_num INT PRIMARY KEY AUTO_INCREMENT, order_date DATETIME DEFAULT now(),seller_id INT , user_id INT, order_amt INT, address VARCHAR(500) NOT NULL, dispatch BOOLEAN DEFAULT FALSE, FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE,FOREIGN KEY(seller_id) REFERENCES user(id) ON DELETE CASCADE);";
     conn.query(query1,(error,res)=>{
         if(error){
             console.log("Error while creating orders table");
