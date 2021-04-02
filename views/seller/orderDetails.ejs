@@ -18,32 +18,34 @@
           <tr>
             <td><a class="product-info-link" href="/seller/productInfo/<%=items[i].id%>"><%=items[i].product_name %></a></td>
             <td><%=items[i].quantity%></td>
-            <td>dummy</td>
-            <td>dummy</td>
+            <td><%=items[i].price%></td>
+            <td><%=items[i].price * items[i].quantity%></td>
           </tr>
         <% } %>
       </table>
       <h4 class="heading">Total Price to be paid : <%=generalInfo.order_amt%></h4>
       <div class="dispatch">Dispatch Status :
-        <% if(generalInfo.dispatch){ %>
-          <span>Dispatched</span>
-        <% }else{ %>
-        <input type="checkbox" style="height: 1rem; width: 1rem;" id="myCheck" onclick="myFunction()">
-        <p id="text" style="display:none;">Once dispatch status is confirmed, you will not be able to undo it.</p>
+        <span class="dispatched" style="display: <%=generalInfo.dispatch?'inline':'none'%>;">Dispatched</span>
+        <%if(!generalInfo.dispatch){ %>
+          <input type="checkbox" style="height: 1rem; width: 1rem;" id="myCheck" onclick="myFunction()">
+          <p id="text" style="display:none;">Once dispatch status is confirmed, you will not be able to undo it.</p>
         <% } %>
       </div> 
       <% if(!generalInfo.dispatch){ %>
-        <a class="btn btn-outline-primary" style="margin: 1.5rem;" href="/seller/orders">Confirm</a>
+        <a class="confirm-btn btn btn-outline-primary" onclick="changeStatus()" style="margin: 1.5rem;">Confirm</a>
       <% } %>
       <!-- Footer -->
       <%- include("../partials/footer.ejs") %>
       <!-- Footer -->
       <script>
+        
+        var checkBox = document.getElementById("myCheck");
+        var text = document.getElementById("text");
+        let confirmBtn = document.getElementsByClassName("confirm-btn")[0];
+        let dispatched = document.getElementsByClassName("dispatched")[0];
+        let seller =  <%- JSON.stringify(user.id) %>;
+        let orderNum =  <%- JSON.stringify(generalInfo.orderNum) %>;
         function myFunction() {
-            // Get the checkbox
-            var checkBox = document.getElementById("myCheck");
-            // Get the output text
-            var text = document.getElementById("text");
 
             // If the checkbox is checked, display the output text
             if (checkBox.checked == true){
@@ -51,6 +53,23 @@
             } else {
                 text.style.display = "none";
             }
+        }
+
+        const changeStatus = async()=>{
+          if(checkBox.checked==true){
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/seller/confirmOrder', true);
+            await xhr.setRequestHeader('Content-Type', 'application/json');
+            await xhr.send(
+                JSON.stringify({
+                    seller,orderNum
+                }) 
+            );
+            checkBox.style.display = "none";
+            text.style.display = "none";
+            confirmBtn.style.display = "none";
+            dispatched.style.display = "inline";
+          }
         }
 
       </script>
