@@ -1,7 +1,8 @@
 /*dropdown button*/
 .dropbtn {
     padding: 0.5rem;
-    margin: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
     font-size: 0.9rem;
     cursor: pointer;
     border-radius: 0.5rem;
@@ -13,7 +14,6 @@
 /*Search bar and button*/
 .search {
     margin: 1.5rem;
-    float: left;
 }
 .sbar {
     max-width: 400px;
