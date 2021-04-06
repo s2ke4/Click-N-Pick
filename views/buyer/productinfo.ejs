@@ -34,7 +34,7 @@
                 <h5 style="color: #07db00;"><%=item.discount%> % off</h5>
             </div>
             <div class="button-area">
-                <% let disable = user?"":"disabled" %>
+                <% let disable = (user && item.num_of_items > 0)?"":"disabled" %>
                 <div class="btn1" >
                     <% let addbtn = inWishList?"none":"block" %>
                     <% let rembtn = !inWishList?"none":"block" %>
@@ -51,6 +51,9 @@
                     </button>
                 </div>
             </div>
+            <%if(item.num_of_items == 0){ %>
+                <p style="color: red; font-size: 21px;">Out Of Stock</p>
+            <% } %>
             <h5 style="font-size: 16px;"> Color : <%=item.product_color%></h5>
             <p><strong>Description: </strong><%=item.prod_description%></p>
         </div>

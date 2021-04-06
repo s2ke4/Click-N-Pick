@@ -58,10 +58,15 @@
                             <% } %>
                         </div>
                     </a>
-                    <% let disable = user?"":"disabled" %>
-                    <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=results[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
-                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
-                    </button>
+                    
+                    <% let disable = (user )?"":"disabled" %>
+                    <%if(results[i].num_of_items == 0){ %>
+                        <p class="text-center" style="color: red; font-size: 18px;">Out Of Stock</p>
+                    <% }else{ %>
+                        <button class="cart-btn btn btn-primary" onclick="addToCart(this,<%=results[i].id%>,<%=user?user.id:-1%>)" <%=disable%> >
+                            <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                        </button>
+                    <% } %>
                 </div>
     
             <% } %>

@@ -23,27 +23,40 @@
           </div>
       </div>
     </form>
-    
-    <table>
-        <tr>
-          <th class="orderNum">Order No.</th>  
-          <th class="customerName">Customer's Name</th>
-          <th class="orderDate">Order Date</th>
-          <th class="dispatch">Dispatched</th>
-          <th class="price">Total Price</th>
-          <th class="details">View Details</th>
-        </tr>
-        <% for(let i=0;i< orders.length;i++){ %>
+    <% if(orders.length==0 && filter){ %>
+      <div class="no-filter">
+        <i class="far fa-frown"> OOPS! There is no order according to your filter</i>
+        <br>
+        <a  class="btn btn-primary active" role="button" aria-pressed="true" href="/seller/orders">Go Back To Order Page</a>
+      </div>
+    <% }else if(orders.length==0){ %>
+      <div class="no-filter">
+        <i class="far fa-frown"> OOPS! Currently There is no order to show. But keep adding items soon you will get the customers.</i>
+        <br>
+        <a  class="btn btn-primary active" role="button" aria-pressed="true" href="/seller">Go Back To Home Page</a>
+      </div>
+    <% }else{ %>
+      <table>
           <tr>
-            <td><%=orders[i].order_num%></td>
-            <td><%=orders[i].name%></td>
-            <td><%=orders[i].date %></td>
-            <td><%-(orders[i].dispatch)?"✔️":"⏳"%></td>
-            <td><%=orders[i].order_amt%></td>
-            <td><a href="/seller/orders/order-details/<%=orders[i].order_num%>" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+            <th class="orderNum">Order No.</th>  
+            <th class="customerName">Customer's Name</th>
+            <th class="orderDate">Order Date</th>
+            <th class="dispatch">Dispatched</th>
+            <th class="price">Total Price</th>
+            <th class="details">View Details</th>
           </tr>
-        <% } %>
+          <% for(let i=0;i< orders.length;i++){ %>
+            <tr>
+              <td><%=orders[i].order_num%></td>
+              <td><%=orders[i].name%></td>
+              <td><%=orders[i].date %></td>
+              <td><%-(orders[i].dispatch)?"✔️":"⏳"%></td>
+              <td><%=orders[i].order_amt%></td>
+              <td><a href="/seller/orders/order-details/<%=orders[i].order_num%>" class="btn btn-outline-primary btn-sm">Order Details</a></td>
+            </tr>
+          <% } %>
       </table>
+    <% } %>
       
       <!-- Footer -->
       <%- include("../partials/footer.ejs") %>
