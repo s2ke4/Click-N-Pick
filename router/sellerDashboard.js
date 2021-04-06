@@ -73,6 +73,68 @@ router.get("/orders",async(req,res)=>{
     }
 })
 
+const getNextDay = (searchValue)=>{
+    let year = parseInt(searchValue.substring(0,4));
+    let month = parseInt(searchValue.substring(5,7));
+    let date = parseInt(searchValue.substring(8,10));
+    // 4 6 9 11
+    let finalAns="";
+    if(month==12 && date==31){
+        finalAns= "" + (year+1) +"-01-01";
+    }else if(date==31){
+        finalAns= "" + (year) +"-"+((month+1)>9?"":"0")+(month + 1)+"-01";
+    }else if(date==30 && (month==4 || month== 6 || month==9 || month==11)){
+        finalAns= "" + (year) +"-"+((month+1)>9?"":"0")+(month + 1)+"-01";
+    }else if((date==29 || date ==28) && month==2){
+        finalAns= "" + (year) +"-03-01";
+    }else{
+        date++;
+        finalAns= "" + (year)+"-"+((month)>9?"":"0")+month+"-"+((date)>9?"":"0")+(date);
+    }
+    return finalAns;
+}
+
+// filter inside order
+router.post("/orders/search",async(req,res)=>{
+   try {
+        let {searchValue,Filter} = req.body;
+        let query;
+        if(Filter=="Order Number"){
+            query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE orders.seller_id = ${seller.id} AND order_num = ${parseInt(searchValue)} ORDER BY order_date DESC;`;
+        }else if(Filter == "Order Date"){
+            let nextDay = getNextDay(searchValue);
+            searchValue = searchValue +" 00:00:00";
+            nextDay = nextDay +" 00:00:00";
+            query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE orders.seller_id = ${seller.id} AND order_date >= "${searchValue}" AND order_date < "${nextDay}" ORDER BY order_date DESC;`;
+        }else if(Filter == "Dispatched"){
+            let val = 0;
+            if(searchValue[0]=='Y' || searchValue[0]=='y'){
+                val = 1;
+            }
+            query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE orders.seller_id = ${seller.id} AND dispatch=${val} ORDER BY order_date DESC;`;
+        }else{
+            query = `WITH customer AS (SELECT user.id FROM user WHERE user.name LIKE "%${searchValue}%") 
+                     SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE orders.seller_id = ${seller.id} AND orders.user_id IN (SELECT customer.id FROM customer) ORDER BY order_date DESC;`;
+        }
+        let result = await db(query);
+        let orders=[];
+        for(let i=0;i<result.length;i++)
+        {
+            let datetime = `${result[i].date}`;
+            let obj = result[i];
+            obj.date = datetime.substring(4,15);
+            query = `SELECT name FROM user WHERE user.id = ${obj.user_id};`;
+            let response = await db(query);
+            obj.name = response[0].name;
+            orders.push(obj);
+        }
+        res.render("seller/orders",{path:'',orders,filter:true});
+   } catch (error) {
+        console.log("error while filtering result : ", error);
+        res.send("internal server error");
+   }
+})
+
 //router for adding item
 router.post("/addItem",upload.array("photos",100),async(req,res)=>{
     // console.log(req.files)
