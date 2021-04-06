@@ -38,6 +38,7 @@
     border-radius: 2px;
     border: 10px solid #fff;
     transition: .5s ease;
+    margin-bottom: 3rem;
 }
 
 /* .card:hover{
