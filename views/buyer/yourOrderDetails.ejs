@@ -9,7 +9,7 @@
     <h5 class="heading">Order Number : <%= order.order_num %></h5>
     <h5 class="heading">Order Date : <%= order.date %></h5>
     <h5 class="heading">Shipped to :  <%= order.address %></h5>
-    <h5 class="heading">Tracking Status : 
+    <h5 class="heading">Order Dispatch : 
       <% if(order.dispatch==true) {%>
         <i class="fas fa-check-circle fa-2x" style="color: green;"></i>
       <% } else { %>
@@ -34,7 +34,6 @@
         <% } %>
       </table>
       <h4 class="heading">Total Price paid : <%= order.order_amt %></h4>
-      <h5 class="heading">Payment Mode : UPI ✔️</h5>
     
     <!-- Footer -->
     <%- include("../partials/footer.ejs") %>

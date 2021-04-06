@@ -54,7 +54,7 @@ router.get("/addItem",(req,res)=>{
 router.get("/orders",async(req,res)=>{
     try {
         seller = res.locals.user;
-        let query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE seller_id=${seller.id};`;
+        let query = `SELECT order_num,DATE(order_date) as date,user_id,order_amt,dispatch FROM orders WHERE seller_id=${seller.id} ORDER BY order_date DESC;`;
         let result = await db(query);
         let orders=[];
         for(let i=0;i<result.length;i++)

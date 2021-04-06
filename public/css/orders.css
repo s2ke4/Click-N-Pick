@@ -76,3 +76,11 @@ tr:nth-child(even) {
 a.product-info-link{
     text-decoration: none;
 }
+
+.back-btn{
+    margin: 20px;
+    font-size: 20px;
+}
+.back-btn a{
+    text-decoration: none;
+}
