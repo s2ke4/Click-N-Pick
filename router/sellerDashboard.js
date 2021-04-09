@@ -257,7 +257,7 @@ router.get("/orders/order-details/:id",async(req,res)=>{
             query = `SELECT product_name FROM items WHERE items.id=${result[i].item_id};`;
             let response= await db(query);
             let product_name =response[0].product_name;
-            let price = (result[i].price - result[i].discount*(result[i].price)/100).toFixed(0);
+            let price = result[i].price ;
             let quantity = result[i].quantity;
             let id = result[i].item_id;
             let obj = {product_name,id,quantity,price}
