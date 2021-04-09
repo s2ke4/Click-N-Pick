@@ -27,6 +27,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 8rem;
+  margin-top: 3.5rem;
 }
 .orderNum {
     width: 5rem;
