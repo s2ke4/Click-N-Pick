@@ -1,0 +1,26 @@
+body {
+    background: #5f2c82; 
+background: -webkit-linear-gradient(to right, #49a09d, #5f2c82);  
+background: linear-gradient(to right, #49a09d, #5f2c82); 
+
+   
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    justify-content: center;
+    transition: all 0.5s;
+    color: rgb(194, 32, 32);
+    border-radius: 50%;
+}
+
+.social-link:hover, .social-link:focus {
+    background: #ddd;
+    text-decoration: none;
+    color: #555;
+}

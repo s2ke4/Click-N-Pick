@@ -59,4 +59,16 @@ router.get("/search",async(req,res)=>{
 })
 
 
+
+router.get("/aboutus",async(req,res)=>{
+    
+    try {
+        res.render("aboutus");
+    } 
+    catch(e) {
+        console.log("some error: ",e);
+    }
+})
+
+
 module.exports = router;

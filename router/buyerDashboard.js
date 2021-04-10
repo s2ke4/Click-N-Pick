@@ -391,16 +391,9 @@ router.get('/errorPlacingOrder',ensureBuyer,(req,res)=>{
 
 router.get("/profile",ensureBuyer,async(req,res)=>{
     try {
-        let query = `SELECT * FROM user WHERE user_id = ${res.locals.user.id};`;
+        let query = `SELECT * FROM user WHERE id = ${res.locals.user.id};`;
         let result = await db(query);
-        let user = [],address,name,password,id,email;
-        id = result[0].id;
-        name = result[0].name;
-        email = result[0].email;
-        password = result[0].password;
-        address = result[0].address;
-        let obj = {id,name,email,password,address};
-        user.push(obj);
+        let user = result[0];
         res.render("buyer/profile",{user})
     } catch (error) {
         console.log("Error While Fetching Data for wishlist ",error);
