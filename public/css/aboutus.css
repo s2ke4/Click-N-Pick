@@ -11,7 +11,6 @@ body {
     font-size: 0.9rem;
     color: rgb(194, 32, 32);
     border-radius: 50%;
-
     width: 40px;
     height: 40px;
     justify-content: center;
@@ -33,17 +32,17 @@ body {
 }
 
 .social-main {
+    align-items: center;
+    color: rgb(230, 18, 18);
+    border-radius: 70%;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    border: 1px solid #ddd;
     display: flex;
     transition: all 0.5s;
     text-decoration: none;
     background: #ddd;
-    align-items: center;
-    color: rgb(194, 32, 32);
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    justify-content: center;
-    border: 1px solid #ddd;
 }
 
 .social-main:hover, .social-main:focus {
