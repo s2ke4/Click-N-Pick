@@ -218,24 +218,29 @@ a:hover{
 		width: 290px;
 	}
 
-	.login-content h2{
-        font-size: 2.2rem;
-        margin: 8px 0;
-	}
-
-    .wave{
+	.wave{
 		width: 50%;
 	}
-
 
 	.img img{
 		width: 400px;
 	}
+
+	.login-content h2{
+        font-size: 2.0rem;  
+        margin: 8px 0;
+	}
+
 }
 
 @media screen and (max-width: 900px){
 	.container{
 		grid-template-columns: 1fr;
+	}
+
+	.login-content{
+		margin: 10px;
+		justify-content: center;
 	}
 
 	.img{
@@ -246,9 +251,6 @@ a:hover{
 		width: 50%;
 	}
 
-	.login-content{
-		justify-content: center;
-	}
 }
 .error{
 	color: rgb(245, 49, 49);
