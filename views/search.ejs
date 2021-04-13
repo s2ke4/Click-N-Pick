@@ -270,10 +270,15 @@
                             }
                         p+=`</div></a>`
                     let disable = user?"":"disabled"
-                    p+=`<button class="cart-btn btn btn-primary" onclick="addToCart(this,${results[i].id},${user?user.id:-1})" ${disable} >
-                        <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
-                    </button>
-                </div>`
+                    if(results[i].num_of_items == 0){
+                        p+=`<p class="text-center" style="color: red; font-size: 18px;">Out Of Stock</p>`
+                    }else{
+                        p+=`<button class="cart-btn btn btn-primary" onclick="addToCart(this,${results[i].id},${user?user.id:-1})" ${disable} >
+                                <span class="add-to-cart">Add To Cart </span><span class="added">Item Added</span><i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i>
+                            </button>`
+                    }
+                    
+                    p+= `</div>`
 
             }
             document.getElementsByClassName("wrapper")[0].innerHTML = p;
