@@ -1,5 +1,6 @@
 ## E-Commerce
 
+![Visitor count](https://visitor-badge.laobi.icu/badge?page_id=s2ke4.Click-N-Pick)
 ## End users and their expectations
 
 
