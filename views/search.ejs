@@ -45,7 +45,7 @@
                 <div class="card">
                     <a href="buyer/productinfo/<%=results[i].id%>">
                         <div class="in-card">
-                            <img src="/uploads/<%= results[i].img %>" alt={title} class="img"></img>
+                            <img src="<%= results[i].img %>" alt={title} class="img"></img>
                             <h5 class="product-name"><%= results[i].product_name %></h5>
                             <% if(results[i].discount > 0){ %>
                                 <h5 style='color:black'>
@@ -257,7 +257,7 @@
                 p += `<div class="card">
                     <a href="buyer/productinfo/${results[i].id}">
                         <div class="in-card">
-                            <img src="/uploads/${results[i].img}" alt={title} class="img"></img>
+                            <img src="${results[i].img}" alt={title} class="img"></img>
                             <h5 class="product-name">${results[i].product_name}</h5>`
                             if(results[i].discount > 0){
                             p += `<h5 style='color:black'>

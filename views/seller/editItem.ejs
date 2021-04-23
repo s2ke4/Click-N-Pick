@@ -11,7 +11,7 @@
                     <% attachments.forEach((img)=>{ %>
                         <div class="slide fade">
                             <abbr class="del" onclick="removeImg('<%=img%>',this)" title="Remove This Image" style="text-decoration: none; cursor: pointer;">X</abbr>
-                            <img src="/uploads/<%=img%>" alt="product image">
+                            <img src="<%=img%>" alt="product image">
                         </div>
                     <% }) %>
                 </div>

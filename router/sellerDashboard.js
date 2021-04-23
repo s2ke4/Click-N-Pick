@@ -4,8 +4,14 @@ const multer = require("multer");
 const conn = require("../connection");
 const util = require('util');
 const db = util.promisify(conn.query).bind(conn);
+var admin = require("firebase-admin");
+const {Storage} = require('@google-cloud/storage');
+var serviceAccount = require("../serviceAccountKey.json");
 let seller;
 const fs = require("fs");
+
+const projectId ="clicknpick-e193d";
+const keyFilename ="serviceAccountKey.json";
 
 //multer options
 var storage = multer.diskStorage({
@@ -27,6 +33,53 @@ var storage = multer.diskStorage({
 var upload = multer({
     storage: storage,
 });
+
+const firebaseStorage = new Storage({projectId,keyFilename});
+
+// function to upload file in firebase
+const uploadInFirebase = async(filename)=>{
+
+    if (!admin.apps.length){
+        admin.initializeApp({
+          credential: admin.credential.cert(serviceAccount),
+          storageBucket: "clicknpick-e193d.appspot.com"
+      });
+    }
+    
+    var bucket = admin.storage().bucket();
+    const uploadFile = async()=>{
+      try {
+        const metadata = {
+          metadata: {
+            // This line is very important. It's to create a download token.
+            firebaseStorageDownloadTokens: filename
+          },
+          contentType: 'image/png',
+        //   cacheControl: 'public, max-age=31536000',
+        };
+        // Uploads a local file to the bucket
+        await bucket.upload(`public/uploads/${filename}` , {
+          // Support for HTTP requests made with `Accept-Encoding: gzip`
+          destination:filename,
+          gzip: true,
+          metadata: metadata,
+        });
+      
+        console.log(`${filename} uploaded successfully.`);
+        fs.unlink(`public/uploads/${filename}`,(err)=>{
+          if(err){
+            console.log("error while deleting image ",err);
+          }else{
+            console.log("Image Deleted Successfully :) ");
+          }
+        })
+      } catch (error) {
+         console.log("Error in uploading picture ",error);
+      }
+    }
+    // console.log(bucket)
+    await uploadFile();
+}
 
 //seller dashboard route
 router.get("/",async(req,res)=>{
@@ -67,7 +120,7 @@ router.get("/orders",async(req,res)=>{
             obj.name = response[0].name;
             orders.push(obj);
         }
-        res.render("seller/orders",{path:'/seller/orders',orders});
+        res.render("seller/orders",{path:'/seller/orders',orders,filter:false});
     } catch (error) {
         console.log("Error While Fetching Order : ",error)
     }
@@ -140,11 +193,17 @@ router.post("/addItem",upload.array("photos",100),async(req,res)=>{
     // console.log(req.files)
     try {
         const {productName,brandName,price,discount,numberOfItems,productColour,category,description} = req.body;
+        let images = [];
+        for(let i=0;i<req.files.length;i++){
+            await uploadInFirebase(req.files[i].filename);
+            let url = `https://firebasestorage.googleapis.com/v0/b/clicknpick-e193d.appspot.com/o/${req.files[i].filename}?alt=media&token=${req.files[i].filename}`;
+            images.push(url);
+        }
         let query = `INSERT INTO items(product_name,brand_name,price,discount,num_of_items,product_color,category,prod_description,seller_id) VALUES("${productName}","${brandName}",${price},${discount},${numberOfItems},"${productColour}","${category}","${description}",${seller.id});`;
         let result = await db(query);
         let itemId = result.insertId;
-        for(let i=0;i<req.files.length;i++){
-            query = `INSERT INTO attachment(item_id,imgPath) VALUES(${itemId},"${req.files[i].filename}");`
+        for(let i=0;i<images.length;i++){
+            query = `INSERT INTO attachment(item_id,imgPath) VALUES(${itemId},"${images[i]}");`
             await db(query);
         }
         console.log("ITEM ADDED successfully")
@@ -216,13 +275,12 @@ router.delete("/deleteItem/:id",async(req,res)=>{
         let result = await db(query);
         for(let i=0;i<result.length;i++)
         {
-            fs.unlink(`public/uploads/${result[i].imgPath}`,(err)=>{
-                if(err){
-                  console.log("error while deleting image ",err);
-                }else{
-                  console.log("Image Deleted Successfully :) ");
-                }
-              })
+            let name ="";
+            let temUrl = result[i].imgPath;
+            for(let j= temUrl.length - 1;temUrl[j]!='=';j--){
+                name = temUrl[j] + name;
+            }
+            await firebaseStorage.bucket("clicknpick-e193d.appspot.com").file(name).delete();
         }
         query = `DELETE FROM items WHERE items.id = ${req.params.id};`;
         await db(query);
@@ -289,21 +347,28 @@ router.put("/confirmOrder",async(req,res)=>{
 router.put("/editItem/:id",upload.array("photos",100),async(req,res)=>{
     try {
         const removeImages= req.body.remove;
-        const {productName,brandName,price,discount,numberOfItems,productColour,category,description} = req.body;
-
-        
+        const {productName,brandName,price,discount,numberOfItems,productColour,category,description} = req.body;        
         let query;
+        // adding new images in attachment table
+        for(let i=0;i<req.files.length;i++){
+            await uploadInFirebase(req.files[i].filename);
+            let url = `https://firebasestorage.googleapis.com/v0/b/clicknpick-e193d.appspot.com/o/${req.files[i].filename}?alt=media&token=${req.files[i].filename}`;
+            query = `INSERT INTO attachment(item_id,imgPath) VALUES(${req.params.id},"${url}");`
+            await db(query);
+        }
+        // update in item table
+        query = `UPDATE items SET product_name="${productName}",brand_name="${brandName}",price=${price},discount=${discount},num_of_items=${numberOfItems},product_color="${productColour}",category="${category}",prod_description="${description}" WHERE items.id=${req.params.id} AND items.seller_id=${seller.id};`;
+        await db(query);
         if(removeImages){
-            // deleting images from local folder
+            // deleting images from firebase storage
             for(let i=0;i<removeImages.length;i++)
             {
-                fs.unlink(`public/uploads/${removeImages[i]}`,(err)=>{
-                    if(err){
-                    console.log("error while deleting image ",err);
-                    }else{
-                    console.log("Image Deleted Successfully :) ");
-                    }
-                })
+                let name ="";
+                let temUrl =removeImages[i];
+                for(let j= temUrl.length - 1;temUrl[j]!='=';j--){
+                    name = temUrl[j] + name;
+                }
+                await firebaseStorage.bucket("clicknpick-e193d.appspot.com").file(name).delete();
             }
             // deleting image row from attachment table
             removeImages.forEach(async(img)=>{
@@ -311,14 +376,7 @@ router.put("/editItem/:id",upload.array("photos",100),async(req,res)=>{
                 await db(query);
             })
         }
-        // adding new images in attachment table
-        for(let i=0;i<req.files.length;i++){
-            query = `INSERT INTO attachment(item_id,imgPath) VALUES(${req.params.id},"${req.files[i].filename}");`
-            await db(query);
-        }
-        // update in item table
-        query = `UPDATE items SET product_name="${productName}",brand_name="${brandName}",price=${price},discount=${discount},num_of_items=${numberOfItems},product_color="${productColour}",category="${category}",prod_description="${description}" WHERE items.id=${req.params.id} AND items.seller_id=${seller.id};`;
-        await db(query);
+        
         console.log("Item updated successfully")
     } catch (error) {
         console.log("Error While Updating ",error);
