@@ -9,7 +9,7 @@
                 <div class="slide-cont">
                     <% attachments.forEach((img)=>{ %>
                         <div class="slide fade">
-                            <img src="/uploads/<%=img%>" alt="product image">
+                            <img src="<%=img%>" alt="product image">
                         </div>
                     <% }) %>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="card">
                     <a href="/buyer/productinfo/<%=similarItem[i].id%>">
                         <div class="in-card">
-                            <img src="/uploads/<%= similarImg[i] %>" alt={title} class="img"></img>
+                            <img src="<%= similarImg[i] %>" alt={title} class="img"></img>
                             <h5 class="prod-name"><%= similarItem[i].product_name.substring(0, 20) %></h5>
                             <% if(similarItem[i].discount > 0){ %>
                                 <h5 style='color:black'>

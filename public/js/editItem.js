@@ -50,10 +50,10 @@ const updateItem = (id)=>{
         return;
     }
     if(productName!="" && brandName!="" && price!="" && discount!="" && numOfItem!="" && prodColor!="" && category!="" && des !=""){
-        // for(let i=0;i<uploadedFiles.length;i++)
-        // {
-        //     formData.append("photos",uploadedFiles[i],uploadedFiles[i].name);
-        // }
+        for(let i=0;i<uploadedFiles.length;i++)
+        {
+            formData.append("photos",uploadedFiles[i],uploadedFiles[i].name);
+        }
         for(let i=0;i<removedFiles.length;i++)
         {
             formData.append("remove",removedFiles[i]);
