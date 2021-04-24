@@ -361,20 +361,32 @@ router.put("/editItem/:id",upload.array("photos",100),async(req,res)=>{
         await db(query);
         if(removeImages){
             // deleting images from firebase storage
-            for(let i=0;i<removeImages.length;i++)
-            {
-                let name ="";
-                let temUrl =removeImages[i];
-                for(let j= temUrl.length - 1;temUrl[j]!='=';j--){
-                    name = temUrl[j] + name;
+            if(Array.isArray(removeImages)){
+                for(let i=0;i<removeImages.length;i++)
+                {
+                    let name ="";
+                    let temUrl =removeImages[i];
+                    for(let j= temUrl.length - 1;temUrl[j]!='=' && j>=0;j--){
+                        name = temUrl[j] + name;
+                        // console.log(name);
+                    }
+                    // await firebaseStorage.bucket("clicknpick-e193d.appspot.com").file(name).delete();
                 }
-                await firebaseStorage.bucket("clicknpick-e193d.appspot.com").file(name).delete();
-            }
-            // deleting image row from attachment table
-            removeImages.forEach(async(img)=>{
-                query = `DELETE FROM attachment WHERE attachment.item_id=${req.params.id} attachment.imgPath=${img};`;
+                // deleting image row from attachment table
+                removeImages.forEach(async(img)=>{
+                    query = `DELETE FROM attachment WHERE attachment.item_id=${req.params.id} AND attachment.imgPath='${img}';`;
+                    await db(query);
+                })
+            }else{
+                let name ="";
+                let temUrl =removeImages;
+                for(let j= temUrl.length - 1;temUrl[j]!='=' && j>=0;j--){
+                    name = temUrl[j] + name;
+                    // console.log(name);
+                }
+                query = `DELETE FROM attachment WHERE attachment.item_id=${req.params.id} AND attachment.imgPath='${removeImages}';`;
                 await db(query);
-            })
+            }
         }
         
         console.log("Item updated successfully")
