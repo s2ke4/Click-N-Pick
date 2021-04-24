@@ -193,3 +193,10 @@ Here the buyer can see details of an order.
 
 
 
+## Ways to Setup this Project Locally
+
+- You need to have the latest version of Node.js installed on your device.
+- Clone this Repository.
+- Open cmd and go to the root Directory.
+- Run `npm i` to install all the dependencies.
+- Now, run `npm start` to start the website on `https://localhost:3000`
