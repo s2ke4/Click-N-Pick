@@ -43,7 +43,7 @@ router.delete("/deleteFromCart",async(req,res)=>{
 router.delete("/deleteFromWishlist",async(req,res)=>{
     try {
         const {itemId,userId} = req.body;
-        let query = `DELETE FROM wishlist WHERE user_id=${userId} AND item_id=${itemId};`;
+        let query = `DELETE FROM wishList WHERE user_id=${userId} AND item_id=${itemId};`;
         await db(query); 
         console.log("Item Deleted From wishlist Successfully")
     } catch (error) {
@@ -102,7 +102,7 @@ router.get("/productinfo/:id",async(req,res)=>{
         let item = result[0];
         let inWishList =false;
         if(res.locals.user){
-            query = `SELECT * FROM wishlist WHERE item_id=${item.id} AND user_id = ${res.locals.user.id};`;
+            query = `SELECT * FROM wishList WHERE item_id=${item.id} AND user_id = ${res.locals.user.id};`;
             let result2 = await db(query);
             inWishList = result2.length > 0;
         }
@@ -191,7 +191,7 @@ router.get("/yourOrders/yourOrderDetails/:id",ensureBuyer,async(req,res)=>{
 //route for wishlist
 router.get("/wishlist",ensureBuyer,async(req,res)=>{
     try {
-        let query = `SELECT * FROM wishlist WHERE user_id = ${res.locals.user.id};`;
+        let query = `SELECT * FROM wishList WHERE user_id = ${res.locals.user.id};`;
         let result = await db(query);
         let items = [],price,name,img,id;
         for(let i=0;i<result.length;i++)
@@ -338,7 +338,7 @@ router.post("/addToCart",ensureBuyer,async(req,res)=>{
 router.post("/addToWishlist",async(req,res)=>{
     try {
         const {itemId,userId} = req.body;
-        let query = `INSERT INTO wishlist VALUES (${userId},${itemId});`;
+        let query = `INSERT INTO wishList VALUES (${userId},${itemId});`;
         await db(query);
         console.log("Item Added To wishlist Successfully")
     } catch (error) {
@@ -351,7 +351,7 @@ router.post("/addToWishlist",async(req,res)=>{
 router.post("/moveToWishListFromCart",async(req,res)=>{
     try {
         const {itemId,userId} = req.body;
-        let query = `REPLACE INTO wishlist VALUES (${userId},${itemId});`;
+        let query = `REPLACE INTO wishList VALUES (${userId},${itemId});`;
         await db(query);
         query = `DELETE FROM cart WHERE user_id=${userId} AND item_id=${itemId};`;
         await db(query); 
@@ -368,7 +368,7 @@ router.post("/moveToCartFromWishList",async(req,res)=>{
         const {itemId,userId} = req.body;
         let query = `INSERT INTO cart VALUES (${userId},${itemId},1) ON DUPLICATE KEY UPDATE quantity = quantity + 1;`;
         await db(query);
-        query = `DELETE FROM wishlist WHERE user_id=${userId} AND item_id=${itemId};`;
+        query = `DELETE FROM wishList WHERE user_id=${userId} AND item_id=${itemId};`;
         await db(query); 
         console.log("Item move To cart Successfully")
     } catch (error) {
