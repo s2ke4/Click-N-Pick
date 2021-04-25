@@ -1,6 +1,13 @@
 ## E-Commerce
 
 ![Visitor count](https://visitor-badge.laobi.icu/badge?page_id=s2ke4.Click-N-Pick)
+
+## Contents
+- [End users and their expectations](#end-users-and-their-expectations)
+- [ScreenShot](#screenshot)
+- [Ways to Setup this Project Locally](#ways-to-setup-this-project-locally)
+
+
 ## End users and their expectations
 
 
@@ -11,7 +18,8 @@ Above is the nav bar with login and signup option of buyer and seller. Cart opti
 The nav bar is followed by product cards from category showcasing few (4) products from every category from the database. The add to cart option will not be clickable till a user log in as a buyer.
 
 
-ScreenShot
+## ScreenShot
+
 ![image](https://user-images.githubusercontent.com/56155566/114715512-c439d100-9d50-11eb-99f2-87b94445fc3c.png)
 
 
@@ -198,5 +206,14 @@ Here the buyer can see details of an order.
 - You need to have the latest version of Node.js installed on your device.
 - Clone this Repository.
 - Open cmd and go to the root Directory.
+- Create a file with name `.env`
+- structure of .env should look like this
+```
+  DATABASE = YOUR_DATABASE_NAME
+  DATABASE_HOST  = YOUR_DATABASE_HOST
+  DATABASE_USER =  MYSQL_USER
+  DATABASE_PASSWORD  = DATABASE_PASSWORD
+  JWT_SECRET = write_any_secret_here (we can't tell our own secret due to security reason)
+```
 - Run `npm i` to install all the dependencies.
 - Now, run `npm start` to start the website on `https://localhost:3000`
