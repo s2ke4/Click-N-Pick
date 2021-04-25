@@ -4,14 +4,13 @@
 
 ## Contents
 - [End users and their expectations](#end-users-and-their-expectations)
-- [ScreenShot](#screenshot)
 - [Ways to Setup this Project Locally](#ways-to-setup-this-project-locally)
 
 
 ## End users and their expectations
 
 
-This is our home page. Which is showcasing few (4) products from every category from the database.
+This is our home page.
 
 Above is the nav bar with login and signup option of buyer and seller. Cart option which can be accessed only after login as buyer. Search option (general or in some specific category). (All these will be discussed later in pdf)
 
@@ -78,9 +77,9 @@ Let’s take a look at seller side ->
 
 The nav bar here have the options ->
 
-Add items which allows the seller to add items to sell on the website. (we will look more in the following pdf)
+Add items which allows the seller to add items to sell on the website. (we will look more below)
 
-Orders -> here the seller can see the orders details. All the orders that were made on his product he was selling. (we will look more in the following pdf)
+Orders -> here the seller can see the orders details. All the orders that were made on his product he was selling. (we will look more below)
 
 Home page / seller dashboard ->
 
