@@ -1,17 +1,24 @@
 ## E-Commerce
 
 ![Visitor count](https://visitor-badge.laobi.icu/badge?page_id=s2ke4.Click-N-Pick)
+
+## Contents
+- [End users and their expectations](#end-users-and-their-expectations)
+- [Ways to Setup this Project Locally](#ways-to-setup-this-project-locally)
+
+
 ## End users and their expectations
 
 
-This is our home page. Which is showcasing few (4) products from every category from the database.
+This is our home page.
 
 Above is the nav bar with login and signup option of buyer and seller. Cart option which can be accessed only after login as buyer. Search option (general or in some specific category). (All these will be discussed later in pdf)
 
 The nav bar is followed by product cards from category showcasing few (4) products from every category from the database. The add to cart option will not be clickable till a user log in as a buyer.
 
 
-ScreenShot
+## ScreenShot
+
 ![image](https://user-images.githubusercontent.com/56155566/114715512-c439d100-9d50-11eb-99f2-87b94445fc3c.png)
 
 
@@ -70,9 +77,9 @@ Let’s take a look at seller side ->
 
 The nav bar here have the options ->
 
-Add items which allows the seller to add items to sell on the website. (we will look more in the following pdf)
+Add items which allows the seller to add items to sell on the website. (we will look more below)
 
-Orders -> here the seller can see the orders details. All the orders that were made on his product he was selling. (we will look more in the following pdf)
+Orders -> here the seller can see the orders details. All the orders that were made on his product he was selling. (we will look more below)
 
 Home page / seller dashboard ->
 
@@ -198,5 +205,14 @@ Here the buyer can see details of an order.
 - You need to have the latest version of Node.js installed on your device.
 - Clone this Repository.
 - Open cmd and go to the root Directory.
+- Create a file with name `.env`
+- structure of .env should look like this
+```
+  DATABASE = YOUR_DATABASE_NAME
+  DATABASE_HOST  = YOUR_DATABASE_HOST
+  DATABASE_USER =  MYSQL_USER
+  DATABASE_PASSWORD  = DATABASE_PASSWORD
+  JWT_SECRET = write_any_secret_here (we can't tell our own secret due to security reason)
+```
 - Run `npm i` to install all the dependencies.
 - Now, run `npm start` to start the website on `https://localhost:3000`
